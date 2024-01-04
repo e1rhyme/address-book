@@ -4,12 +4,11 @@ class ContactsView extends View {
   _message = "";
   _searchErrorMessage =
     "We could not find that record. Please, check the name and try again";
+
   _landing = document.querySelector(".landing");
   _addressBook = document.querySelector(".address-book");
   _overlay = document.querySelector(".overlay");
   _newContact = document.querySelector(".new-contact");
-  _userProfileImg = document.querySelector(".user-profile-img");
-  _userProfileImgContainer = document.querySelector(".user-img__container");
   _parentEl = document.querySelector(".profile-container");
 
   // Call fnxs on page load

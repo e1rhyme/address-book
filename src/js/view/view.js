@@ -20,7 +20,7 @@ export default class View {
     else {
       this._data = data;
       const markup = this.getMarkup();
-      console.log(markup);
+
       contactsView._parentEl.insertAdjacentHTML("afterbegin", markup);
 
       contactsView._setElementsVisibility(true);
