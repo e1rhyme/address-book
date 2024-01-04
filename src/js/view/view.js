@@ -2,6 +2,7 @@ import contactsView from "./contactsView.js";
 
 export default class View {
   _data;
+  #markup;
   _dialogBox = document.querySelector(".dialog");
 
   // Get upload image URL
@@ -14,14 +15,21 @@ export default class View {
 
   loadContacts(data) {
     // debugger;
+
     // If false, visibility state is retained
     if (!data) contactsView._setElementsVisibility(false);
     // Generate markup and set elements visibility
     else {
       this._data = data;
-      const markup = this.getMarkup();
+      this.#markup = this.getMarkup();
 
-      contactsView._parentEl.insertAdjacentHTML("afterbegin", markup);
+      // data.map((contact) => {
+      //   const rec = this.getMarkup();
+      //   rec.join(",");
+      //   this.#markup = rec;
+      // });
+
+      contactsView._parentEl.insertAdjacentHTML("afterbegin", this.#markup);
 
       contactsView._setElementsVisibility(true);
     }
