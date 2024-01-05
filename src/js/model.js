@@ -70,30 +70,49 @@ export const uploadNewContact = function (data) {
     alert(message__emptyFields);
   else {
     const newContact = {
-      personalDetails: {
-        prefix: data.prefix,
-        firstName: data.firstName,
-        middleName: data.middleName,
-        lastName: data.lastName,
-        suffix: data.suffix,
-        dateOfBirth: data.dateOfBirth,
-        profileImage: data.profileImg,
-      },
-      contactDetails: {
-        emailAddress: data.emailAddress,
-        mobileNumber: phoneNumber,
-        website: data.website,
-      },
-      socialHandles: {
-        facebook: data.facebook,
-        instagram: data.instagram,
-        x: data.x,
-        tiktok: data.tiktok,
-        pinterest: data.pinterest,
-        linkedIn: data.linkedIn,
-        youtube: data.youtube,
-        snapchat: data.snapchat,
-      },
+      prefix: data.prefix,
+      firstName: data.firstName,
+      middleName: data.middleName,
+      lastName: data.lastName,
+      suffix: data.suffix,
+      dateOfBirth: data.dateOfBirth,
+      profileImage: data.profileImg,
+      emailAddress: data.emailAddress,
+      mobileNumber: phoneNumber,
+      website: data.website,
+      facebook: data.facebook,
+      instagram: data.instagram,
+      x: data.x,
+      tiktok: data.tiktok,
+      pinterest: data.pinterest,
+      linkedIn: data.linkedIn,
+      youtube: data.youtube,
+      snapchat: data.snapchat,
+      // const newContact = {
+      //   personalDetails: {
+      //     prefix: data.prefix,
+      //     firstName: data.firstName,
+      //     middleName: data.middleName,
+      //     lastName: data.lastName,
+      //     suffix: data.suffix,
+      //     dateOfBirth: data.dateOfBirth,
+      //     profileImage: data.profileImg,
+      //   },
+      //   contactDetails: {
+      //     emailAddress: data.emailAddress,
+      //     mobileNumber: phoneNumber,
+      //     website: data.website,
+      //   },
+      //   socialHandles: {
+      //     facebook: data.facebook,
+      //     instagram: data.instagram,
+      //     x: data.x,
+      //     tiktok: data.tiktok,
+      //     pinterest: data.pinterest,
+      //     linkedIn: data.linkedIn,
+      //     youtube: data.youtube,
+      //     snapchat: data.snapchat,
+      //   },
     };
 
     // Store new contact in state

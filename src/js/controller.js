@@ -11,8 +11,16 @@ function controlLoadContacts(status) {
 function controlUploadContact(data) {
   // debugger;
   model.uploadNewContact(data);
-  console.log(model.state.contact);
   contactsView.render(model.state.contact);
+}
+// Handles profile image upload
+function controlImageUpload() {
+  console.log("was I clicked");
+  newContactView.imgPath();
+}
+function controlImageContainerUpload() {
+  console.log("was I clicked 2");
+  newContactView.imgPath();
 }
 // App initialization function
 const init = function () {
@@ -26,8 +34,8 @@ const init = function () {
   newContactView.addHandlerExpandLess();
   newContactView.addHandlerShowMore();
   newContactView.addHandlerShowLess();
-  newContactView.addHandlerProfileImg();
-  newContactView.addHandlerProfileImgContainer();
+  newContactView.addHandlerProfileImg(controlImageUpload);
+  newContactView.addHandlerProfileImgContainer(controlImageContainerUpload);
   newContactView.addHandlerUploadContact(controlUploadContact);
 };
 

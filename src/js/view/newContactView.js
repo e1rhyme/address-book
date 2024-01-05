@@ -90,17 +90,17 @@ class NewContactView extends View {
     });
   }
   // Hanlder for upload of contact's profile image
-  addHandlerProfileImgContainer() {
+  addHandlerProfileImg(handler) {
+    Elements.profileImg.addEventListener("click", handler);
+  }
+  addHandlerProfileImgContainer(handler) {
     Elements.profileImgContainer.addEventListener("click", function (e) {
       const btn = e.target.closest(".circle-plus");
 
       if (!btn) return;
 
-      imgPath();
+      handler();
     });
-  }
-  addHandlerProfileImg() {
-    Elements.profileImg.addEventListener("click", () => this.imgPath());
   }
   // Handler for upload contact click event
   addHandlerUploadContact(handler) {

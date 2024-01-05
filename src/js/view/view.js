@@ -1,15 +1,16 @@
 import contactsView from "./contactsView.js";
+import { dialogBox, profileImg } from "../config.js";
 
 export default class View {
   _data;
-  #markup;
-  _dialogBox = document.querySelector(".dialog");
+  _markup;
 
   // Get upload image URL
   imgPath() {
-    this._dialogBox.click();
-    this._dialogBox.onchange = function () {
-      this._profileImg.src = URL.createObjectURL(this._dialogBox.files[0]);
+    console.log("I was clicked");
+    dialogBox.click();
+    dialogBox.onchange = function () {
+      profileImg.src = URL.createObjectURL(dialogBox.files[0]);
     };
   }
 
@@ -21,7 +22,7 @@ export default class View {
     // Generate markup and set elements visibility
     else {
       this._data = data;
-      this.#markup = this.getMarkup();
+      this._markup = this.getMarkup();
 
       // data.map((contact) => {
       //   const rec = this.getMarkup();
@@ -29,9 +30,9 @@ export default class View {
       //   this.#markup = rec;
       // });
 
-      contactsView._parentEl.insertAdjacentHTML("afterbegin", this.#markup);
+      contactsView._parentEl.insertAdjacentHTML("afterbegin", this._markup);
 
-      contactsView._setElementsVisibility(true);
+      // contactsView._setElementsVisibility(true);
     }
   }
   // Display contacts list
