@@ -24,7 +24,7 @@ class ContactsView extends View {
     // this._markup = Object.values(this._data);
     this._markup = this._data;
 
-    // console.log(this._markup[1][1]);
+    console.log(this._markup);
     // console.log(this._markup[2][1]);
     // console.log(this._markup);
 

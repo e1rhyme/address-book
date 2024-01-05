@@ -29,7 +29,6 @@
     <title>Address Book</title>
   </head>
   <body>
-    <header></header>
     <section class="landing">
       <div class="landing-home">
         <h2 class="no-records">No records found!</h2>
@@ -44,15 +43,14 @@
     </section>
     <!-- Exiting contacts interface -->
     <section class="address-book hidden">
-      <aside class="side-bar-container"></aside>
-      <div class="contacts-container">
+      <div class="contacts-display-container">
         <div class="header-container">
           <div class="header__left">
-            <span class="material-symbols-outlined"> menu </span>
+            <span class="material-symbols-outlined menu"> menu </span>
             <span class="material-symbols-outlined person"> person </span>
             <p class="contacts">Contacts</p>
-            <form>
-              <input type="search" placeholder="Search" />
+            <form name="search">
+              <input type="search" id="search" placeholder="Search" />
               <button type="submit">Search</button>
             </form>
           </div>
@@ -62,7 +60,15 @@
           </div>
         </div>
       </div>
-      <div class="user-container">
+      <aside class="side-bar-container">
+        <menu>
+          <a href="">Contacts</a>
+          <a href="">Trash</a>
+          <a href="">Labels</a>
+        </menu>
+      </aside>
+      <div class="contacts-container">
+        <div class="contacts-list-container"></div>
         <div class="profile-container">
           <!-- <div class="user-img__container">
             <img src="" alt="Profile Image" class="user-profile-img" />

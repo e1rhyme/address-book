@@ -1,9 +1,10 @@
 form {
-  /* color: #555; */
+  color: #555;
   padding: 2px;
   display: flex;
-  /* border-radius: 5px; */
-  /* border: 1px solid currentColor; */
+  border-radius: 5px;
+  background-color: var(--color-blue-menu);
+  border: 1px solid none;
 }
 input[type="search"] {
   margin: 0;
@@ -37,29 +38,68 @@ input[type="search"]:focus {
   box-shadow: 0 0 3px 0 #1183d6;
   outline: none;
 }
-.contacts-container {
+.contacts-display-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   gap: var(--flex-gap-small);
+  grid-area: a;
+  background-color: var(--color-blue-menu-2);
+  padding: 2rem;
 }
 section.address-book {
-  display: block;
+  display: grid;
   max-width: 100%;
-  margin: var(--flex-gap-small) var(--flex-gap-large);
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 75px 100px;
+  grid-template-areas:
+    "a a"
+    "b c";
+  margin: var(--flex-gap-small) var(--flex-gap-small);
+}
+aside {
+  padding: 2rem;
+  /* height: calc(100vh - 13rem); */
+  margin-top: 6rem;
+  background-color: var(--color-blue-menu-2);
+}
+aside menu {
+  gap: 2rem;
+  width: 40%;
+  grid-area: b;
+  display: flex;
+  flex-direction: column;
+}
+aside menu a {
+  text-decoration: none;
 }
 span.person {
   display: flex;
+  font-size: 3rem;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
-  width: var(--flex-gap-small);
-  height: var(--flex-gap-small);
-  background-color: lightgrey;
+}
+span.material-symbols-outlined.menu {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--flex-gap-large);
+  height: var(--flex-gap-large);
+  background-color: var(--color-blue-menu);
 }
 .header-container {
   display: grid;
+  gap: 13rem;
   align-items: center;
   grid-template-columns: 95% 5%;
+}
+.contacts-container .profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .header__left {
   display: flex;
@@ -80,11 +120,8 @@ form input:placeholder-shown {
   font-weight: var(--font-weight-medium);
 }
 .user-container {
-  display: grid;
-  align-items: center;
-  grid-template-rows: auto;
-  row-gap: var(--flex-gap-large);
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: 100%;
+  grid-area: c;
 }
 .profile-container {
   /* display: grid; */
@@ -103,9 +140,4 @@ form input:placeholder-shown {
   border-radius: 50%;
   margin-top: var(--margin-top-medium);
   /* transform: translate(0%, -50%); */
-}
-.user-container .profile-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }

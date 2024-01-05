@@ -28,7 +28,7 @@ export function loadAddressBook(handler) {
 
   handler(true);
 }
-
+//
 // Resolves default international call code to user's IP
 const getIp = function (callback) {
   fetch("https://ipinfo.io/json?token=5d4e92bd7304ea", {

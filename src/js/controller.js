@@ -15,11 +15,9 @@ function controlUploadContact(data) {
 }
 // Handles profile image upload
 function controlImageUpload() {
-  console.log("was I clicked");
   newContactView.imgPath();
 }
 function controlImageContainerUpload() {
-  console.log("was I clicked 2");
   newContactView.imgPath();
 }
 // App initialization function

@@ -7,7 +7,6 @@ export default class View {
 
   // Get upload image URL
   imgPath() {
-    console.log("I was clicked");
     dialogBox.click();
     dialogBox.onchange = function () {
       profileImg.src = URL.createObjectURL(dialogBox.files[0]);
@@ -32,7 +31,7 @@ export default class View {
 
       contactsView._parentEl.insertAdjacentHTML("afterbegin", this._markup);
 
-      // contactsView._setElementsVisibility(true);
+      contactsView._setElementsVisibility(true);
     }
   }
   // Display contacts list
