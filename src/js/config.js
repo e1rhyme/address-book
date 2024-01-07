@@ -50,3 +50,4 @@ export const userProfileImg = document.querySelector(".user-profile-img");
 export const userProfileImgContainer = document.querySelector(
   ".user-img__container"
 );
+export const contactsEl = document.querySelector(".contacts");

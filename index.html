@@ -48,7 +48,7 @@
           <div class="header__left">
             <span class="material-symbols-outlined menu"> menu </span>
             <span class="material-symbols-outlined person"> person </span>
-            <p class="contacts">Contacts</p>
+            <p>Contacts</p>
             <form name="search">
               <input type="search" id="search" placeholder="Search" />
               <button type="submit">Search</button>
@@ -62,13 +62,37 @@
       </div>
       <aside class="side-bar-container">
         <menu>
-          <a href="">Contacts</a>
-          <a href="">Trash</a>
-          <a href="">Labels</a>
+          <a href="#" class="add-contact"
+            ><p>Create Contact</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 -960 960 960"
+              width="24"
+            >
+              <path
+                d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"
+              /></svg
+          ></a>
+          <a href="#">Contacts</a>
+          <a href="#">Trash</a>
+          <a href="#">Labels</a>
         </menu>
       </aside>
       <div class="contacts-container">
-        <div class="contacts-list-container"></div>
+        <div class="contacts-list-container">
+          <table class="contacts-display">
+            <thead>
+              <tr>
+                <th colspan="1">SN</th>
+                <th colspan="2">Name</th>
+                <th colspan="1">Phone Number</th>
+                <th colspan="1">Email Address</th>
+              </tr>
+            </thead>
+            <tbody class="contacts"></tbody>
+          </table>
+        </div>
         <div class="profile-container">
           <!-- <div class="user-img__container">
             <img src="" alt="Profile Image" class="user-profile-img" />

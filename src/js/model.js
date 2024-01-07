@@ -13,6 +13,7 @@ export const state = {
     resultsPerPage: RES_PER_PAGE,
   },
   special: [],
+  userAccount: 1,
 };
 
 // Check if stored contacts exist
@@ -28,7 +29,6 @@ export function loadAddressBook(handler) {
 
   handler(true);
 }
-//
 // Resolves default international call code to user's IP
 const getIp = function (callback) {
   fetch("https://ipinfo.io/json?token=5d4e92bd7304ea", {
@@ -51,12 +51,9 @@ const phoneInput = window.intlTelInput(countryCode, {
   utilsScript:
     "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
 });
-
 // Save new contact to local storage
 export const uploadNewContact = function (data) {
-  // debugger;
-
-  // Get entered phone number
+  // Set user account number
   const phoneNumber = phoneInput.getNumber();
 
   // Check compulsory fields have data
@@ -70,24 +67,26 @@ export const uploadNewContact = function (data) {
     alert(message__emptyFields);
   else {
     const newContact = {
-      prefix: data.prefix,
-      firstName: data.firstName,
-      middleName: data.middleName,
-      lastName: data.lastName,
-      suffix: data.suffix,
-      dateOfBirth: data.dateOfBirth,
-      profileImage: data.profileImg,
-      emailAddress: data.emailAddress,
-      mobileNumber: phoneNumber,
-      website: data.website,
-      facebook: data.facebook,
-      instagram: data.instagram,
-      x: data.x,
-      tiktok: data.tiktok,
-      pinterest: data.pinterest,
-      linkedIn: data.linkedIn,
-      youtube: data.youtube,
-      snapchat: data.snapchat,
+      user: {
+        prefix: data.prefix,
+        firstName: data.firstName,
+        middleName: data.middleName,
+        lastName: data.lastName,
+        suffix: data.suffix,
+        dateOfBirth: data.dateOfBirth,
+        profileImage: data.profileImg,
+        emailAddress: data.emailAddress,
+        mobileNumber: phoneNumber,
+        website: data.website,
+        facebook: data.facebook,
+        instagram: data.instagram,
+        x: data.x,
+        tiktok: data.tiktok,
+        pinterest: data.pinterest,
+        linkedIn: data.linkedIn,
+        youtube: data.youtube,
+        snapchat: data.snapchat,
+      },
       // const newContact = {
       //   personalDetails: {
       //     prefix: data.prefix,

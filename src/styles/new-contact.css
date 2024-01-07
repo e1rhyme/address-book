@@ -69,8 +69,8 @@ section.address-book {
   justify-content: center;
 
   margin: 0 10rem;
-  font-weight: 700;
-  text-transform: uppercase;
+  /* font-weight: 700; */
+  /* text-transform: uppercase; */
 }
 .address-book,
 .new-contact {

@@ -23,22 +23,13 @@ export default class View {
       this._data = data;
       this._markup = this._getMarkupContacts();
 
-      // data.map((contact) => {
-      //   const rec = this.getMarkup();
-      //   rec.join(",");
-      //   this.#markup = rec;
-      // });
+      // contactsView._parentEl.insertAdjacentHTML("afterbegin", this._markup);
 
-      contactsView._parentEl.insertAdjacentHTML("afterbegin", this._markup);
-
-      contactsView._setElementsVisibility(true);
+      // contactsView._setElementsVisibility(true);
     }
   }
   // Display contacts list
   render(data) {
-    // debugger;
-    console.log(data);
-
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
 

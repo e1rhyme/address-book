@@ -1,4 +1,5 @@
 import View from "./view.js";
+import { contactsEl } from "../config.js";
 
 class ContactsView extends View {
   _message = "";
@@ -9,8 +10,6 @@ class ContactsView extends View {
   _addressBook = document.querySelector(".address-book");
   _overlay = document.querySelector(".overlay");
   _newContact = document.querySelector(".new-contact");
-  _parentEl = document.querySelector(".profile-container");
-  _markup;
 
   // Call fnxs on page load
   constructor() {
@@ -19,12 +18,26 @@ class ContactsView extends View {
   }
 
   _getMarkupContacts() {
-    // debugger;
-    console.log(this._data);
-    // return (this._markup = Object.entries(this._data));
-    // console.log(this._markup[2][1]);
-    // `
-    //    `;
+    const recs = Object.entries(this._data);
+
+    recs.forEach(function (ent, i, _) {
+      const markup = `
+        <tr>
+          <td colspan="1">${i + 1}.</td>
+          <td colspan="2">
+            <input type="checkbox" class="hidden" />
+            <div class="contact-name">
+              <img src="${ent[i + 1].profileImage}"/>
+              <p>${ent[i + 1].firstName} ${ent[i + 1].lastName}</p>
+            </div>
+          </td>
+          <td colspan="1">${ent[i + 1].mobileNumber}</td>
+          <td colspan="1">${ent[i + 1].emailAddress}</td>
+        </tr>`;
+
+      contactsEl.insertAdjacentHTML("afterend", markup);
+    });
+    this._setElementsVisibility(true);
   }
 
   // Set elements visiblity via toggle property
