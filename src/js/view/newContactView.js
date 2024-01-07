@@ -126,7 +126,7 @@ class NewContactView extends View {
         pinterest: Elements.pinterest.value,
         linkedIn: Elements.linkedIn.value,
         youtube: Elements.youtube.value,
-        snapchat: Elements.snapchat,
+        snapchat: Elements.snapchat.value,
       };
 
       handler(newContact);

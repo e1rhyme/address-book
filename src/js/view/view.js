@@ -21,7 +21,7 @@ export default class View {
     // Generate markup and set elements visibility
     else {
       this._data = data;
-      this._markup = this.getMarkup();
+      this._markup = this._getMarkupContacts();
 
       // data.map((contact) => {
       //   const rec = this.getMarkup();
