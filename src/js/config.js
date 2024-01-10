@@ -51,3 +51,5 @@ export const userProfileImgContainer = document.querySelector(
   ".user-img__container"
 );
 export const contactsEl = document.querySelector(".contacts");
+export const headerContactLink = document.querySelector(".header-contact-link");
+export const addContact = document.querySelector(".add-contact");

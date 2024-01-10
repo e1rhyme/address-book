@@ -2,37 +2,7 @@ import View from "./view.js";
 import * as Elements from "../config.js";
 
 class NewContactView extends View {
-  // overlay = document.querySelector(".overlay");
-  // // addRecordBtn = document.querySelector(".add-record");
-  // newContact = document.querySelector(".new-contact");
-  // // prefix = document.getElementById("prefix");
-  // prefixContainer = document.querySelector(".prefix");
-  // firstName = document.getElementById("fName");
-  // middleName = document.getElementById("mName");
-  // middleNameContainer = document.querySelector(".mName");
-  // lastName = document.getElementById("lName");
-  // suffix = document.getElementById("suffix");
-  // suffixContainer = document.querySelector(".suffix");
-  // emailAddress = document.getElementById("email");
-  // dateOfBirth = document.getElementById("birthday");
-  // website = document.getElementById("websiteURL");
-  // facebook = document.getElementById("facebook");
-  // instagram = document.getElementById("instagram");
-  // x = document.getElementById("x");
-  // tiktok = document.getElementById("tiktok");
-  // linkedIn = document.getElementById("linkedin");
-  // youtube = document.getElementById("youtube");
-  // pinterest = document.getElementById("pinterest");
-  // snapchat = document.getElementById("snapchat");
-  // socialInfo = document.querySelector(".social-info");
-  // closeModal = document.querySelector(".btn--close-modal");
-  // expandMore = document.querySelector(".expand_more");
-  // expandLess = document.querySelector(".expand_less");
-  // showMore = document.querySelector(".show-more");
-  // showLess = document.querySelector(".show-less");
-  // profileImg = document.querySelector(".profile-img");
-  // profileImgContainer = document.querySelector(".img__container");
-  // contactUpload = document.querySelector(".upload__btn");
+  _parentEl = document.querySelector(".profile-container");
 
   // Display add new contact modal
   addHandlerAddContact() {
@@ -83,7 +53,7 @@ class NewContactView extends View {
     });
   }
   addHandlerShowLess() {
-    Elements.showMore.addEventListener("click", () => {
+    Elements.showLess.addEventListener("click", () => {
       Elements.socialInfo.classList.toggle("extra");
       Elements.showMore.classList.toggle("hidden");
       Elements.showLess.classList.toggle("hidden");
@@ -107,8 +77,12 @@ class NewContactView extends View {
     Elements.contactUpload.addEventListener("click", function (e) {
       e.preventDefault();
 
-      // Create an object of entered values
+      const getIndex = Elements.profileImg.src.indexOf("src") - 1;
 
+      console.log(Elements.profileImg.src);
+      console.log(Elements.profileImg.src.slice(getIndex));
+
+      // Create an object of entered values
       const newContact = {
         prefix: Elements.prefix.value,
         firstName: Elements.firstName.value,
@@ -117,6 +91,7 @@ class NewContactView extends View {
         suffix: Elements.suffix.value,
         dateOfBirth: Elements.dateOfBirth.value,
         profileImg: Elements.profileImg.src,
+        // profileImg: Elements.profileImg.src.slice(getIndex),
         emailAddress: Elements.emailAddress.value,
         website: Elements.website.value,
         facebook: Elements.facebook.value,
@@ -128,9 +103,58 @@ class NewContactView extends View {
         youtube: Elements.youtube.value,
         snapchat: Elements.snapchat.value,
       };
+      console.log(Elements.profileImg);
 
       handler(newContact);
     });
+  }
+  addHandlerCreateNewContact() {
+    Elements.addContact.addEventListener("click", () => {
+      Elements.overlay.classList.remove("hidden");
+      Elements.newContact.classList.toggle("hidden");
+    });
+  }
+  // Set markup for display of contacts
+  _getMarkup() {
+    return this._data
+      .map((rec, i) => this._generateMarkupPreview(rec))
+      .join("");
+  }
+  _generateMarkupPreview(rec) {
+    return `
+      <div class="user-img__container">
+        <img src="/img/image.png" alt="Profile Image" />
+        <input
+          type="file"
+          accept="image/jpeg, image/png, image/jpg"
+          name="dialog"
+          id="dialog"
+        />
+        <div class="add-contact--icon">
+          <svg
+            viewBox="0 0 1024 1024"
+            xmlns="http://www.w3.org/2000/svg"
+            class="user-circle-plus"
+          >
+            <path d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm-38.4 409.6H326.4a38.4 38.4 0 1 0 0 76.8h147.2v147.2a38.4 38.4 0 0 0 76.8 0V550.4h147.2a38.4 38.4 0 0 0 0-76.8H550.4V326.4a38.4 38.4 0 1 0-76.8 0v147.2z" />
+          </svg>
+        </div>
+        <p class="name-container">
+          <label class="contact-name">${rec.firstName} ${rec.lastName}</label>
+        </p>
+    </div>
+    `;
+  }
+  // Set visibility of elements based on data
+  _setElementsVisibility(state) {
+    if (!state) return this._message;
+
+    this._overlay.classList.toggle("hidden");
+    this._landing.classList.toggle("hidden");
+    this._newContact.classList.toggle("hidden");
+    this._addressBook.classList.toggle("hidden");
+    this._parentEl.classList.toggle("hidden");
+    state = false;
   }
 }
 

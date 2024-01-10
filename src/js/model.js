@@ -18,8 +18,6 @@ export const state = {
 
 // Check if stored contacts exist
 export function loadAddressBook(handler) {
-  // debugger;
-
   const contacts = localStorage.getItem("myContacts");
 
   if (!contacts) return handler(false);
@@ -53,6 +51,8 @@ const phoneInput = window.intlTelInput(countryCode, {
 });
 // Save new contact to local storage
 export const uploadNewContact = function (data) {
+  // debugger;
+
   // Set user account number
   const phoneNumber = phoneInput.getNumber();
 
@@ -66,6 +66,7 @@ export const uploadNewContact = function (data) {
   )
     alert(message__emptyFields);
   else {
+    console.log(data.profileImg);
     const newContact = {
       user: {
         prefix: data.prefix,
@@ -87,38 +88,13 @@ export const uploadNewContact = function (data) {
         youtube: data.youtube,
         snapchat: data.snapchat,
       },
-      // const newContact = {
-      //   personalDetails: {
-      //     prefix: data.prefix,
-      //     firstName: data.firstName,
-      //     middleName: data.middleName,
-      //     lastName: data.lastName,
-      //     suffix: data.suffix,
-      //     dateOfBirth: data.dateOfBirth,
-      //     profileImage: data.profileImg,
-      //   },
-      //   contactDetails: {
-      //     emailAddress: data.emailAddress,
-      //     mobileNumber: phoneNumber,
-      //     website: data.website,
-      //   },
-      //   socialHandles: {
-      //     facebook: data.facebook,
-      //     instagram: data.instagram,
-      //     x: data.x,
-      //     tiktok: data.tiktok,
-      //     pinterest: data.pinterest,
-      //     linkedIn: data.linkedIn,
-      //     youtube: data.youtube,
-      //     snapchat: data.snapchat,
-      //   },
     };
 
     // Store new contact in state
     state.contact = newContact;
 
     // Upload new contact to local storage
-    localStorage.setItem("myContacts", JSON.stringify(newContact));
+    localStorage.setItem("myContacts", JSON.stringify(state.contact));
   }
 };
 

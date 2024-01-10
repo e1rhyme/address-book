@@ -62,16 +62,16 @@ input.upload__btn {
   z-index: 100;
   transition: all 0.5s;
 }
-section.address-book {
+/* section.address-book {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 
   margin: 0 10rem;
-  /* font-weight: 700; */
-  /* text-transform: uppercase; */
-}
+  font-weight: 700;
+  text-transform: uppercase;
+} */
 .address-book,
 .new-contact {
   transition: all 0.4s 0.2s ease-in-out;

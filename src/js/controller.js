@@ -4,14 +4,15 @@ import newContactView from "./view/newContactView.js";
 
 // Handles loading of contacts in the view
 function controlLoadContacts(status) {
-  if (!status) contactsView.loadContacts(false);
-  else contactsView.loadContacts(model.state.contact);
+  if (!status) contactsView.render(false);
+  else contactsView.render(model.state.contact);
+  // if (!status) contactsView.loadContacts(false);
+  // else contactsView.loadContacts(model.state.contact);
 }
 // Handles upload of a new contact
 function controlUploadContact(data) {
-  // debugger;
   model.uploadNewContact(data);
-  contactsView.render(model.state.contact);
+  newContactView.render(model.state.contact);
 }
 // Handles profile image upload
 function controlImageUpload() {
@@ -35,6 +36,7 @@ const init = function () {
   newContactView.addHandlerProfileImg(controlImageUpload);
   newContactView.addHandlerProfileImgContainer(controlImageContainerUpload);
   newContactView.addHandlerUploadContact(controlUploadContact);
+  newContactView.addHandlerCreateNewContact();
 };
 
 // App initialization call

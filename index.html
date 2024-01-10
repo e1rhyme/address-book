@@ -48,7 +48,7 @@
           <div class="header__left">
             <span class="material-symbols-outlined menu"> menu </span>
             <span class="material-symbols-outlined person"> person </span>
-            <p>Contacts</p>
+            <a href="#" class="header-contact-link"> Contacts </a>
             <form name="search">
               <input type="search" id="search" placeholder="Search" />
               <button type="submit">Search</button>
@@ -60,25 +60,27 @@
           </div>
         </div>
       </div>
-      <aside class="side-bar-container">
-        <menu>
-          <a href="#" class="add-contact"
-            ><p>Create Contact</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24"
-              viewBox="0 -960 960 960"
-              width="24"
-            >
-              <path
-                d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"
-              /></svg
-          ></a>
-          <a href="#">Contacts</a>
-          <a href="#">Trash</a>
-          <a href="#">Labels</a>
-        </menu>
-      </aside>
+      <div class="side-bar-container">
+        <aside>
+          <menu>
+            <a href="#" class="add-contact"
+              ><p>Create Contact</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"
+                /></svg
+            ></a>
+            <a href="#">Contacts</a>
+            <a href="#">Trash</a>
+            <a href="#">Labels</a>
+          </menu>
+        </aside>
+      </div>
       <div class="contacts-container">
         <div class="contacts-list-container">
           <table class="contacts-display">
@@ -93,7 +95,7 @@
             <tbody class="contacts"></tbody>
           </table>
         </div>
-        <div class="profile-container">
+        <div class="profile-container hidden">
           <!-- <div class="user-img__container">
             <img src="" alt="Profile Image" class="user-profile-img" />
             <input
@@ -139,7 +141,6 @@
             id="dialog"
           />
           <div class="add-contact--icon">
-            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
             <svg
               viewBox="0 0 1024 1024"
               xmlns="http://www.w3.org/2000/svg"

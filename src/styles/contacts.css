@@ -39,14 +39,17 @@ input[type="search"]:focus {
   outline: none;
 }
 section.address-book {
+  gap: 1rem;
   display: grid;
   max-width: 100%;
-  grid-template-columns: 15% 85%;
-  grid-template-rows: 75px 100px;
   grid-template-areas:
     "a a"
     "b c";
   margin: var(--flex-gap-small) var(--flex-gap-small);
+}
+.header__left a {
+  color: inherit;
+  text-decoration: none;
 }
 .contacts-display-container {
   display: flex;
@@ -58,14 +61,18 @@ section.address-book {
   background-color: var(--color-blue-menu-2);
   padding: 2rem;
 }
-aside {
-  padding: 2rem;
-  margin-top: 10rem;
+.side-bar-container,
+.contacts-container {
+  height: calc(100vh - 15rem);
   background-color: var(--color-blue-menu-2);
 }
+aside {
+  padding: 2rem;
+}
 aside menu {
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
+  height: 50%;
   grid-area: b;
   display: flex;
   flex-direction: column;
@@ -118,7 +125,7 @@ span.material-symbols-outlined.menu {
   width: 100%;
   grid-area: c;
 }
-.contacts {
+.header-contact-link {
   margin-right: var(--flex-gap-large);
 }
 form input[type="search"] {
@@ -145,22 +152,16 @@ form input:placeholder-shown {
   margin-top: var(--margin-top-medium);
   /* transform: translate(0%, -50%); */
 }
-
 .contacts-list-container {
-  background-color: var(--color-blue-menu);
-  margin: 4rem 0 0 1rem;
-  padding: 1.5rem 0 0.25rem 1rem;
+  padding: 1.5rem 1rem 0.25rem 1rem;
 }
 .contacts-list-container a {
-  gap: 1.5rem;
-  display: flex;
-  cursor: pointer;
-  flex-direction: row;
-  text-decoration: none;
+   cursor: pointer;
+   text-decoration: none;
 }
-.contacts-display {
+/* .contacts-display {
   margin-bottom: 2rem;
-}
+} */
 .contact-name {
   display: flex;
   gap: 1.2rem;
@@ -198,6 +199,3 @@ td img {
 thead tr {
   border-bottom: 1px solid #000;
 }
-/* tbody tr:nth-child(odd) {
-  background: var(--color-grey-0);
-} */
