@@ -1,3 +1,7 @@
+.blank-slate {
+  height: 100vh;
+  background-color: #fefefe;
+}
 .address-book form {
   color: #555;
   padding: 2px;
@@ -80,7 +84,8 @@ aside menu {
 aside menu a {
   text-decoration: none;
 }
-.add-contact {
+.menu-item {
+  gap: 1rem;
   display: flex;
   align-items: center;
 }
@@ -92,8 +97,9 @@ span.person {
   justify-content: center;
 }
 span.material-symbols-outlined.menu {
-  border-radius: 50%;
   display: flex;
+  cursor: pointer;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
   width: var(--flex-gap-large);
@@ -101,8 +107,8 @@ span.material-symbols-outlined.menu {
   background-color: var(--color-blue-menu);
 }
 .header-container {
-  display: grid;
   gap: 20rem;
+  display: grid;
   align-items: center;
   grid-template-columns: 95% 5%;
 }
@@ -156,12 +162,9 @@ form input:placeholder-shown {
   padding: 1.5rem 1rem 0.25rem 1rem;
 }
 .contacts-list-container a {
-   cursor: pointer;
-   text-decoration: none;
+  cursor: pointer;
+  text-decoration: none;
 }
-/* .contacts-display {
-  margin-bottom: 2rem;
-} */
 .contact-name {
   display: flex;
   gap: 1.2rem;
@@ -198,4 +201,151 @@ td img {
 }
 thead tr {
   border-bottom: 1px solid #000;
+}
+
+/* Preview New Contact */
+.new--contact-window {
+  top: 50%;
+  left: 50%;
+  width: 75rem;
+  height: 85%;
+  position: fixed;
+  overflow-y: auto;
+  border-radius: 9px;
+  background-color: white;
+  transform: translate(-50%, -50%);
+
+  z-index: 1000;
+  padding: 4rem 6rem;
+  transition: all 0.5s;
+  box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hidden {
+  display: none;
+}
+.new--btn--close-modal {
+  top: 0.5rem;
+  border: none;
+  right: 1.6rem;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  font-size: 3.5rem;
+  position: absolute;
+  font-family: inherit;
+}
+.new--overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(190, 190, 190, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+}
+input[id="new--dialog"] {
+  display: none;
+}
+.new--profile-container {
+  gap: 2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem;
+  flex-direction: column;
+}
+.new--img__container {
+  width: 12rem;
+  height: 12rem;
+  cursor: pointer;
+  grid-column: 1/-1;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+  border: solid 1px var(--color-grey-100);
+}
+.new--img__container:hover {
+  background-color: var(--color-grey-100);
+}
+.new--img__container .new--profile-img,
+.new--img__container img {
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(0%, -50%);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+.new--add-contact-icon {
+  top: 70%;
+  left: 70%;
+  z-index: 120;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  position: relative;
+  background-color: var(--color-grey-0);
+  border: solid 4px var(--color-grey-0);
+}
+.new--circle-plus {
+  width: 3.5rem;
+  height: 3.5rem;
+  cursor: pointer;
+  font-size: 3.5rem;
+  position: absolute;
+  transition: all 0.2s;
+  transform: translate(-10%, -10%);
+  fill: var(--color-secondary-light);
+}
+.new--circle-plus:hover {
+  color: var(--color-secondary);
+}
+div[id="new--contact-name"] label {
+  font-weight: 600;
+  font-family: inherit;
+  font-size: var(--font-size-24);
+}
+.personal-info-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#preview-email-address,
+#preview-mobile-number,
+#preview-website {
+  font-weight: 600;
+  padding-right: 1rem;
+  /* text-transform: lowercase; */
+  font-size: 1.2rem !important;
+}
+.personal-info-block label:not(:first-child) {
+  color: var(--color-grey-600);
+  font-size: var(--font-size-default) !important;
+}
+.new--personal-info-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: space-between;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+.new--contact-window .social-handles img {
+  margin: 0;
+}
+.new--social-handles {
+  display: grid;
+  gap: 1rem;
+  grid-auto-rows: max-content;
+  grid-template-columns: repeat(4, 1fr);
+}
+.new--social-handles-header {
+  text-align: center;
+  margin: 3.6rem 0 2.4rem 0;
+  font-size: var(--font-size-h3);
 }

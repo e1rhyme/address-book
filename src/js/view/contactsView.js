@@ -1,56 +1,84 @@
 import View from "./view.js";
-// import { contactsEl } from "../config.js";
 
 class ContactsView extends View {
-  _message = "No records found!";
-  _searchErrorMessage =
-    "We could not find that record. Please, check the name and try again";
-  _data;
+  // _data;
   _overlay = document.querySelector(".overlay");
   _landing = document.querySelector(".landing");
-  _newContact = document.querySelector(".new-contact");
   _addressBook = document.querySelector(".address-book");
   _parentEl = document.querySelector(".contacts");
+  _menu = document.querySelector(".menu");
+  _sidebar = document.querySelector(".side-bar-container");
+  _contactsContainer = document.querySelector(".contacts-container");
 
   // Call fnxs on page load
   constructor() {
     super();
+    this._menuVisibility(true);
     this._setElementsVisibility();
   }
 
   // Set markup for display of contacts
   _getMarkup() {
     return this._data
-      .map((rec, i) => this._generateMarkupPreview(rec, i))
+      .map((rec, i) => this._generateMarkupPreview(rec, i, this._contactId))
       .join("");
   }
-  _generateMarkupPreview(rec, i) {
+  _generateMarkupPreview(rec, i, contactId) {
     return `
         <tr>
           <td colspan="1">${i + 1}.</td>
           <td colspan="2">
             <input type="checkbox" class="hidden" />
             <a href="#">
-            <div class="contact-name">
-              <img src="${rec.profileImage}"/>
-              <p>${rec.firstName} ${rec.lastName}</p>
+            <div class="contact-name" id="${contactId[i]}">
+              <img src="${rec[0].profileImage}"/>
+              <p>${rec[0].firstName} ${rec[0].lastName}</p>
             </div>
             </a>
           </td>
-          <td colspan="1">${rec.mobileNumber}</td>
-          <td colspan="1">${rec.emailAddress}</td>
+          <td colspan="1">${rec[0].phoneNumber}</td>
+          <td colspan="1">${rec[0].emailAddress}</td>
         </tr>
       `;
   }
+  // Show or hide sidebar
+  _menuVisibility(state) {
+    this._menu.addEventListener("click", () => {
+      if (state) {
+        this._sidebar.classList.toggle("hidden");
+        this._contactsContainer.style.gridColumn = "span 2";
+        state = false;
+      } else {
+        this._sidebar.classList.toggle("hidden");
+        this._contactsContainer.style.gridColumn = "span 1";
 
+        state = true;
+      }
+    });
+  }
   // Set elements visiblity via toggle property
-  _setElementsVisibility(state) {
-    if (!state) return this._message;
-
-    this._overlay.classList.toggle("hidden");
-    this._landing.classList.toggle("hidden");
-    this._addressBook.classList.toggle("hidden");
-    state = false;
+  _setElementsVisibility(condition, status) {
+    // Element visibility request from load contacts
+    if (status === "load") this._setElVisibilityOnLoad(condition);
+    // Element visibility request from create contact
+    else if (condition === "create") this._setElVisibilityOnCreateContact();
+  }
+  // Set element visibility for contact load request
+  _setElVisibilityOnLoad(condition) {
+    // No contact exists
+    if (!condition) {
+      this._landing.classList.remove("hidden");
+      this._addressBook.classList.add("hidden");
+    } // Contacts exist
+    else if (condition) {
+      this._landing.classList.add("hidden");
+      this._addressBook.classList.remove("hidden");
+    }
+  }
+  // Set element visiblity for create contact request
+  _setElVisibilityOnCreateContact() {
+    this._landing.classList.add("hidden");
+    this._addressBook.classList.remove("hidden");
   }
 }
 

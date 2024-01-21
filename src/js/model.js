@@ -1,8 +1,5 @@
 import { RES_PER_PAGE, countryCode } from "/src/js/config.js";
 
-const message__emptyFields = "Please fill the required fields";
-const message__noRecords = "No records found";
-
 // State object: holds all contacts' info
 export const state = {
   contact: {},
@@ -14,6 +11,7 @@ export const state = {
   },
   special: [],
   userAccount: 1,
+  userID: 1,
 };
 
 // Check if stored contacts exist
@@ -22,11 +20,23 @@ export function loadAddressBook(handler) {
 
   if (!contacts) return handler(false);
 
+  // Call to retrieve current userID
+  const currentUserID = +getUserID(contacts);
+  // Set new userID in the state
+  state.userID = currentUserID + 1;
   // Convert JSON string back to an object
   state.contact = JSON.parse(contacts);
 
   handler(true);
 }
+// Retrieve contact userID
+function getUserID(user) {
+  const userID = Object.entries(JSON.parse(user));
+  const id = userID.pop()[0];
+
+  return id;
+}
+
 // Resolves default international call code to user's IP
 const getIp = function (callback) {
   fetch("https://ipinfo.io/json?token=5d4e92bd7304ea", {
@@ -49,52 +59,41 @@ const phoneInput = window.intlTelInput(countryCode, {
   utilsScript:
     "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
 });
+// Set unique user IDs
+function newUserID(id) {
+  id = id.padStart(3, "0");
+
+  state.userID = (+state.userID + 1).toString();
+
+  return id;
+}
+
 // Save new contact to local storage
-export const uploadNewContact = function (data) {
-  // debugger;
-
+export const uploadNewContact = function (newUser) {
   // Set user account number
-  const phoneNumber = phoneInput.getNumber();
+  let phoneNumber = phoneInput.getNumber();
+  phoneNumber = phoneNumber ? phoneNumber : "N/A";
 
-  // Check compulsory fields have data
+  // Check compulsory fields have newUser
   if (
-    phoneNumber === "" ||
-    data.lastName === "" ||
-    data.firstName === "" ||
-    data.dateOfBirth === "" ||
-    data.emailAddress === ""
+    newUser.firstName === "" ||
+    newUser.lastName === ""
+    // ||
+    // newUser.emailAddress === ""
   )
-    alert(message__emptyFields);
+    return message__emptyFields;
   else {
-    console.log(data.profileImg);
-    const newContact = {
-      user: {
-        prefix: data.prefix,
-        firstName: data.firstName,
-        middleName: data.middleName,
-        lastName: data.lastName,
-        suffix: data.suffix,
-        dateOfBirth: data.dateOfBirth,
-        profileImage: data.profileImg,
-        emailAddress: data.emailAddress,
-        mobileNumber: phoneNumber,
-        website: data.website,
-        facebook: data.facebook,
-        instagram: data.instagram,
-        x: data.x,
-        tiktok: data.tiktok,
-        pinterest: data.pinterest,
-        linkedIn: data.linkedIn,
-        youtube: data.youtube,
-        snapchat: data.snapchat,
-      },
-    };
+    // Set user phone number and profile image path
+    newUser.phoneNumber = phoneNumber;
+    // Get unique userID
+    const id = newUserID(state.userID.toString());
 
-    // Store new contact in state
-    state.contact = newContact;
+    state.contact[id] = newUser;
 
     // Upload new contact to local storage
     localStorage.setItem("myContacts", JSON.stringify(state.contact));
+
+    return newUser;
   }
 };
 

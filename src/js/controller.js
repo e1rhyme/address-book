@@ -1,42 +1,25 @@
 import * as model from "./model.js";
 import contactsView from "./view/contactsView.js";
 import newContactView from "./view/newContactView.js";
+import displayContactView from "./view/newContactView.js";
 
 // Handles loading of contacts in the view
-function controlLoadContacts(status) {
-  if (!status) contactsView.render(false);
-  else contactsView.render(model.state.contact);
-  // if (!status) contactsView.loadContacts(false);
-  // else contactsView.loadContacts(model.state.contact);
+function controlLoadContacts(condition) {
+  // No contact exist
+  if (!condition) contactsView.render(undefined, condition, "load");
+  // contacts exist
+  else contactsView.render(model.state.contact, condition, "load");
 }
 // Handles upload of a new contact
 function controlUploadContact(data) {
   model.uploadNewContact(data);
-  newContactView.render(model.state.contact);
-}
-// Handles profile image upload
-function controlImageUpload() {
-  newContactView.imgPath();
-}
-function controlImageContainerUpload() {
-  newContactView.imgPath();
+  contactsView.render(model.state.contact, true, "create");
+  newContactView.render(model.state.contact, false);
 }
 // App initialization function
 const init = function () {
-  // debugger;
-
   model.loadAddressBook(controlLoadContacts);
-  newContactView.addHandlerAddContact();
-  newContactView.addHandlerCloseModal();
-  newContactView.addHandlerCloseOverlay();
-  newContactView.addHandlerExpandMore();
-  newContactView.addHandlerExpandLess();
-  newContactView.addHandlerShowMore();
-  newContactView.addHandlerShowLess();
-  newContactView.addHandlerProfileImg(controlImageUpload);
-  newContactView.addHandlerProfileImgContainer(controlImageContainerUpload);
   newContactView.addHandlerUploadContact(controlUploadContact);
-  newContactView.addHandlerCreateNewContact();
 };
 
 // App initialization call

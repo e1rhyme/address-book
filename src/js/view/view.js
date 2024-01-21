@@ -1,69 +1,29 @@
-import contactsView from "./contactsView.js";
-import { dialogBox, profileImg } from "../config.js";
-
 export default class View {
   _data;
+  _contactId;
 
-  // Get upload image URL
-  imgPath() {
-    dialogBox.click();
-    dialogBox.onchange = function () {
-      profileImg.src = URL.createObjectURL(dialogBox.files[0]);
-    };
-  }
   // Display contacts list
-  render(data) {
+  render(data, condition, status) {
     if (!data || (Array.isArray(data) && data.length === 0))
-      return this._setElementsVisibility(false);
+      return this._setElementsVisibility(condition, status);
 
     // Convert the object to an array and slice the first index out; index 0 has no value
-    this._data = Object.entries(data)[0].slice(1);
+    // this._data = Object.entries(data)[0].slice(1);
+    this._contactId = Object.entries(data).map((rec) => rec.shift());
 
+    this._data = Object.entries(data).map((rec) => rec.slice(1));
+    // If new contact is being rendered (single object) or just one contact object exists in local storage
+    if (!condition || Object.keys(this._data).length === 1)
+      this._data = this._data.slice(-1);
+
+    // Get required markup for rendering
     const markup = this._getMarkup();
     // Clear the parent element of any content
     this._clear();
-
+    // Insert markup into parent element
     this._parentEl.insertAdjacentHTML("afterbegin", markup);
-
-    this._setElementsVisibility(true);
-  }
-  // Render Success Message
-  renderMessage(message = this._message) {
-    alert(message);
-    // const markup = `
-    //   <div class="message">
-    //         <div>
-    //           <svg>
-    //             <use href="${icons}#icon-smile"></use>
-    //           </svg>
-    //         </div>
-    //         <p>${message}</p>
-    //       </div>
-    // `;
-
-    // // Clear any existing content in element
-    // this._clear();
-
-    // // Render recipe in element
-    // this._parentEl.insertAdjacentHTML("afterbegin", markup);
-  }
-  // Render Error Message
-  renderError(message = this._errorMessage) {
-    alert(message);
-    // const markup = `
-    //   <div class="error">
-    //         <div>
-    //           <svg>
-    //             <use href="${icons}#icon-alert-triangle"></use>
-    //           </svg>
-    //         </div>
-    //         <p>${message}</p>
-    //       </div>
-    // `;
-    // // Clear any existing content in element
-    // this._clear();
-    // // Render recipe in element
-    // this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    // Determine visibility of page elements
+    this._setElementsVisibility(condition, status);
   }
   // Private method(): Clear parent element content
   _clear() {

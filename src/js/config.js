@@ -2,12 +2,18 @@
 export const RES_PER_PAGE = 10;
 export const countryCode = document.querySelector("#phone");
 
+// Elements for no records
 export const landing = document.querySelector(".landing");
 export const addressBook = document.querySelector(".address-book");
 export const overlay = document.querySelector(".overlay");
-export const newContact = document.querySelector(".new-contact");
-export const addRecordBtn = document.querySelector(".add-record");
-// Form Elements
+// export const newContact = document.querySelector(".new-contact");
+// export const addRecordBtn = document.querySelector(".add-record");
+
+// New user form modal
+export const dialogBox = document.getElementById("dialog");
+export const closeModal = document.querySelector(".btn--close-modal");
+export const profileImg = document.querySelector(".profile-img");
+export const profileImgContainer = document.querySelector(".circle-plus");
 export const prefix = document.getElementById("prefix");
 export const prefixContainer = document.querySelector(".prefix");
 export const firstName = document.getElementById("fName");
@@ -31,25 +37,23 @@ export const snapchat = document.getElementById("snapchat");
 export const socialInfo = document.querySelector(".social-info");
 export const url = document.querySelector("url");
 export const contactUpload = document.querySelector(".upload__btn");
-
-export const closeModal = document.querySelector(".btn--close-modal");
+export const emailContainer = document.querySelector(".email-container");
+export const mobileContainer = document.querySelector(".mobile-container");
 export const expandMore = document.querySelector(".expand_more");
 export const expandLess = document.querySelector(".expand_less");
 export const showMore = document.querySelector(".show-more");
 export const showLess = document.querySelector(".show-less");
 export const addEmail = document.querySelector(".add-email");
 export const addMobile = document.querySelector(".add-mobile");
-export const emailContainer = document.querySelector(".email-container");
-export const mobileContainer = document.querySelector(".mobile-container");
 
-export const dialogBox = document.getElementById("dialog");
+// Contacts list view
+export const headerContactLink = document.querySelector(".header-contact-link");
+export const contactsListContainer = document.querySelector(
+  ".contacts-list-container"
+);
 
-export const profileImg = document.querySelector(".profile-img");
-export const profileImgContainer = document.querySelector(".img__container");
+// New User Preview
 export const userProfileImg = document.querySelector(".user-profile-img");
 export const userProfileImgContainer = document.querySelector(
   ".user-img__container"
 );
-export const contactsEl = document.querySelector(".contacts");
-export const headerContactLink = document.querySelector(".header-contact-link");
-export const addContact = document.querySelector(".add-contact");
