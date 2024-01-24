@@ -49,6 +49,19 @@ const getIp = function (callback) {
       };
     })
     .then((resp) => callback(resp.country));
+
+  //   try {
+  //   const data = await fetch("https://ipinfo.io/json?token=5d4e92bd7304ea", {
+  //     headers: { Accept: "application/json" },
+  //   })
+  //     .then((resp) => resp.json())
+  //     .catch(() => {
+  //       return {
+  //         country: "us",
+  //       };
+  //     })
+  //     .then((resp) => callback(resp.country));
+  // } catch {}
 };
 
 // Load the international code list
@@ -91,7 +104,7 @@ export const uploadNewContact = function (newUser) {
     state.contact[id] = newUser;
 
     // Upload new contact to local storage
-    localStorage.setItem("myContacts", JSON.stringify(state.contact));
+    // localStorage.setItem("myContacts", JSON.stringify(state.contact));
 
     return newUser;
   }

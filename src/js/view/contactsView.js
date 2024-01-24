@@ -1,7 +1,7 @@
+import displayContactView from "./displayContactView.js";
 import View from "./view.js";
 
 class ContactsView extends View {
-  // _data;
   _overlay = document.querySelector(".overlay");
   _landing = document.querySelector(".landing");
   _addressBook = document.querySelector(".address-book");
@@ -25,12 +25,12 @@ class ContactsView extends View {
   }
   _generateMarkupPreview(rec, i, contactId) {
     return `
-        <tr>
+        <tr id="${contactId[i]}">
           <td colspan="1">${i + 1}.</td>
           <td colspan="2">
             <input type="checkbox" class="hidden" />
             <a href="#">
-            <div class="contact-name" id="${contactId[i]}">
+            <div class="contact-name" >
               <img src="${rec[0].profileImage}"/>
               <p>${rec[0].firstName} ${rec[0].lastName}</p>
             </div>

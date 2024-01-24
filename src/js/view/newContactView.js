@@ -4,10 +4,13 @@ import * as Elements from "../config.js";
 class NewContactView extends View {
   _parentEl = document.querySelector(".new--contact-window");
   _addRecordBtn = document.querySelector(".add-record");
+  _landing = document.querySelector(".landing");
+  _addressBook = document.querySelector(".address-book");
   _newOverlay = document.querySelector(".new--overlay");
   _newContactContainer = document.querySelector(".new-contact-container");
   _addContactLink = document.querySelector(".add-contact-link");
   _addContactWindow = document.querySelector(".add-contact-window");
+  _contactEl;
 
   constructor() {
     super();
@@ -143,9 +146,11 @@ class NewContactView extends View {
             </div>
           </div>
           <div id="new--contact-name">
-            <label>${this._data[0].prefix ? this._data[0].prefix : ""} ${
-      this._data[0].firstName ? this._data[0].firstName : ""
-    } ${this._data[0].lastName ? this._data[0].lastName : ""}</label>
+            <label>${
+              this._data[0].prefix === "N/A" ? "" : this._data[0].prefix
+            } ${this._data[0].firstName ? this._data[0].firstName : ""} ${
+      this._data[0].lastName ? this._data[0].lastName : ""
+    }</label>
           </div>
         </div>
             
@@ -283,9 +288,19 @@ class NewContactView extends View {
   }
   // Set visibility of elements based on data
   _setElementsVisibility() {
+    this._landing.classList.add("hidden");
     this._newContactContainer.classList.add("hidden");
-    this._newOverlay.classList.remove("hidden");
     this._parentEl.classList.remove("hidden");
+    this._newOverlay.classList.remove("hidden");
+    this._addressBook.classList.remove("hidden");
+
+    document.onreadystatechange = () => {
+      if (document.readyState === "complete") {
+        document
+          .getElementsByTagName("tr")
+          .addEventListener("click", () => console.log("CLICKEd"));
+      }
+    };
   }
   // Handler for upload contact click event
   addHandlerUploadContact(handler) {
@@ -324,7 +339,7 @@ class NewContactView extends View {
   _createContact() {
     this._addContactLink.addEventListener("click", () => {
       this._newContactContainer.classList.remove("hidden");
-      Elements.overlay.classList.remove("hidden");
+      // Elements.overlay.classList.remove("hidden");
       this._resetFormElements();
     });
   }

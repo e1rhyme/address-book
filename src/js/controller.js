@@ -1,7 +1,7 @@
 import * as model from "./model.js";
 import contactsView from "./view/contactsView.js";
 import newContactView from "./view/newContactView.js";
-import displayContactView from "./view/newContactView.js";
+import displayContactView from "./view/displayContactView.js";
 
 // Handles loading of contacts in the view
 function controlLoadContacts(condition) {
@@ -9,12 +9,14 @@ function controlLoadContacts(condition) {
   if (!condition) contactsView.render(undefined, condition, "load");
   // contacts exist
   else contactsView.render(model.state.contact, condition, "load");
+  displayContactView.getThisData(model.state.contact);
 }
 // Handles upload of a new contact
 function controlUploadContact(data) {
   model.uploadNewContact(data);
   contactsView.render(model.state.contact, true, "create");
-  newContactView.render(model.state.contact, false);
+  displayContactView.getThisData(model.state.contact);
+  newContactView.render(model.state.contact, false, "view");
 }
 // App initialization function
 const init = function () {

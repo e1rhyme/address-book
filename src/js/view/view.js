@@ -1,16 +1,18 @@
 export default class View {
   _data;
   _contactId;
+  _insertedHTML;
 
   // Display contacts list
   render(data, condition, status) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this._setElementsVisibility(condition, status);
 
-    // Convert the object to an array and slice the first index out; index 0 has no value
-    // this._data = Object.entries(data)[0].slice(1);
+    // Extract the id of the creted user(s)
     this._contactId = Object.entries(data).map((rec) => rec.shift());
 
+    // Convert the object to an array and slice the first index out; index 0 has no value
+    // Remove userID from array
     this._data = Object.entries(data).map((rec) => rec.slice(1));
     // If new contact is being rendered (single object) or just one contact object exists in local storage
     if (!condition || Object.keys(this._data).length === 1)
@@ -21,7 +23,8 @@ export default class View {
     // Clear the parent element of any content
     this._clear();
     // Insert markup into parent element
-    this._parentEl.insertAdjacentHTML("afterbegin", markup);
+    this._parentEl.innerHTML = markup;
+
     // Determine visibility of page elements
     this._setElementsVisibility(condition, status);
   }

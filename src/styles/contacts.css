@@ -349,3 +349,9 @@ div[id="new--contact-name"] label {
   margin: 3.6rem 0 2.4rem 0;
   font-size: var(--font-size-h3);
 }
+tbody tr {
+  cursor: pointer;
+}
+tbody tr:hover {
+  background: var(--color-blue-menu);
+}

@@ -6,8 +6,6 @@ export const countryCode = document.querySelector("#phone");
 export const landing = document.querySelector(".landing");
 export const addressBook = document.querySelector(".address-book");
 export const overlay = document.querySelector(".overlay");
-// export const newContact = document.querySelector(".new-contact");
-// export const addRecordBtn = document.querySelector(".add-record");
 
 // New user form modal
 export const dialogBox = document.getElementById("dialog");
