@@ -293,14 +293,6 @@ class NewContactView extends View {
     this._parentEl.classList.remove("hidden");
     this._newOverlay.classList.remove("hidden");
     this._addressBook.classList.remove("hidden");
-
-    document.onreadystatechange = () => {
-      if (document.readyState === "complete") {
-        document
-          .getElementsByTagName("tr")
-          .addEventListener("click", () => console.log("CLICKEd"));
-      }
-    };
   }
   // Handler for upload contact click event
   addHandlerUploadContact(handler) {

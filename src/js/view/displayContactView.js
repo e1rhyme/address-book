@@ -28,9 +28,8 @@ class DisplayView extends View {
     Array.from(el).forEach((rec) => {
       rec.addEventListener(
         "click",
-        (e) => {
-          console.log(rec.id);
-        }
+        (e) => console.log("Clicked")
+
         // this._getContactDetails(e.currentTarget.id)
       );
     });
