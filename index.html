@@ -24,6 +24,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.3.3/js/intlTelInput.min.js"></script>
 
+    <script
+      defer
+      type="module"
+      src="src/js/view/displayContactView.js"
+    ></script>
+
+    <script defer type="module" src="src/js/controller.js"></script>
+
     <title>Address Book</title>
   </head>
   <body>
@@ -51,7 +59,7 @@
             <a href="#" class="header-contact-link"> Contacts </a>
             <form name="search" id="search">
               <input type="search" placeholder="Search" />
-              <button type="submit">Search</button>
+              <button id="submit" type="submit">Search</button>
             </form>
           </div>
           <div class="header__right">
@@ -656,9 +664,7 @@
                 </svg>
               </div>
             </div>
-            <!-- <button class="btn upload__btn">
-              <span>Upload</span>
-            </button> -->
+
             <input type="submit" class="btn upload__btn" value="Upload" />
           </div>
         </form>
@@ -666,6 +672,16 @@
     </section>
     <footer></footer>
 
-    <script defer type="module" src="src/js/controller.js"></script>
+    <!-- <script defer type="module">
+      import displayContactView from "/src/js/view/displayContactView.js";
+
+      const parentEl = document.querySelector(".contacts");
+
+      parentEl.addEventListener("click", (e) => {
+        const el = e.target.closest("tr");
+
+        displayContactView.getContactDetails(el.id);
+      });
+    </script> -->
   </body>
 </html>

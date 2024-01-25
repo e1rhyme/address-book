@@ -88,7 +88,17 @@ export const uploadNewContact = function (newUser) {
   phoneNumber = phoneNumber ? phoneNumber : "N/A";
 
   // Check compulsory fields have newUser
+<<<<<<< HEAD
   if (newUser.firstName === "" || newUser.lastName === "") return;
+=======
+  if (
+    newUser.firstName === "" ||
+    newUser.lastName === ""
+    // ||
+    // newUser.emailAddress === ""
+  )
+    return;
+>>>>>>> viewContact
   else {
     // Set user phone number and profile image path
     newUser.phoneNumber = phoneNumber;
@@ -98,7 +108,7 @@ export const uploadNewContact = function (newUser) {
     state.contact[id] = newUser;
 
     // Upload new contact to local storage
-    // localStorage.setItem("myContacts", JSON.stringify(state.contact));
+    localStorage.setItem("myContacts", JSON.stringify(state.contact));
 
     return newUser;
   }

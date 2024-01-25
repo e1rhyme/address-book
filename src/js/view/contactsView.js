@@ -1,4 +1,3 @@
-import displayContactView from "./displayContactView.js";
 import View from "./view.js";
 
 class ContactsView extends View {
@@ -23,6 +22,7 @@ class ContactsView extends View {
       .map((rec, i) => this._generateMarkupPreview(rec, i, this._contactId))
       .join("");
   }
+
   _generateMarkupPreview(rec, i, contactId) {
     return `
         <tr id="${contactId[i]}">
@@ -61,7 +61,7 @@ class ContactsView extends View {
     // Element visibility request from load contacts
     if (status === "load") this._setElVisibilityOnLoad(condition);
     // Element visibility request from create contact
-    else if (condition === "create") this._setElVisibilityOnCreateContact();
+    else if (status === "create") this._setElVisibilityOnCreateContact();
   }
   // Set element visibility for contact load request
   _setElVisibilityOnLoad(condition) {

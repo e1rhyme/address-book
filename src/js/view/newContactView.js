@@ -10,7 +10,6 @@ class NewContactView extends View {
   _newContactContainer = document.querySelector(".new-contact-container");
   _addContactLink = document.querySelector(".add-contact-link");
   _addContactWindow = document.querySelector(".add-contact-window");
-  _contactEl;
 
   constructor() {
     super();
@@ -32,6 +31,7 @@ class NewContactView extends View {
     this._addRecordBtn.addEventListener("click", () => {
       this._newContactContainer.classList.remove("hidden");
       // this._newContactContainer.classList.toggle("hidden");
+      this._resetFormElements();
     });
   }
   // Handler to close modal on click of X
