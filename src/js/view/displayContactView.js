@@ -22,19 +22,9 @@ class DisplayView extends View {
     this._getContactId(this._contentEl);
   }
   _getContactId(el) {
-<<<<<<< HEAD
-    Array.from(el).forEach((rec) => {
-      rec.addEventListener(
-        "click",
-        (e) => console.log("Clicked")
-
-        // this._getContactDetails(e.currentTarget.id)
-      );
-=======
     el.addEventListener("click", (e) => {
       const targetEl = e.target.closest("tr");
       this._getContactDetails(targetEl.id);
->>>>>>> viewContact
     });
   }
   _getContactDetails(id) {
@@ -204,3 +194,4 @@ class DisplayView extends View {
   }
 }
 export default new DisplayView();
+//

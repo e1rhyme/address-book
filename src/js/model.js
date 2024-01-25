@@ -87,10 +87,7 @@ export const uploadNewContact = function (newUser) {
   let phoneNumber = phoneInput.getNumber();
   phoneNumber = phoneNumber ? phoneNumber : "N/A";
 
-  // Check compulsory fields have newUser
-<<<<<<< HEAD
-  if (newUser.firstName === "" || newUser.lastName === "") return;
-=======
+  // Check compulsory fields have newUse
   if (
     newUser.firstName === "" ||
     newUser.lastName === ""
@@ -98,7 +95,6 @@ export const uploadNewContact = function (newUser) {
     // newUser.emailAddress === ""
   )
     return;
->>>>>>> viewContact
   else {
     // Set user phone number and profile image path
     newUser.phoneNumber = phoneNumber;
