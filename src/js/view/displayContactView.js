@@ -1,38 +1,30 @@
-import newContactView from "./newContactView.js";
 import View from "./view.js";
+import newContactView from "./newContactView.js";
 class DisplayView extends View {
   _contactDetails;
   _parentEl = document.querySelector(".new--contact-window");
-  _contentEl = document.getElementsByTagName("tr");
+  _contentEl;
 
   constructor() {
     super();
     this._readEl();
-    // this._createContact();
   }
 
   // Retrieve contacts object
   getThisData(data) {
     this._data = Object.entries(data);
   }
+
   //  Read the element
-  _readEl() {
-    document.onreadystatechange = () => {
-      if (document.readyState === "complete") {
-        this._contentEl = document.getElementsByTagName("tr");
-      }
-      this._getContactId(this._contentEl);
-    };
+  _readEl(el) {
+    this._contentEl = document.querySelector(".contacts");
+
+    this._getContactId(this._contentEl);
   }
   _getContactId(el) {
-    Array.from(el).forEach((rec) => {
-      rec.addEventListener(
-        "click",
-        (e) => {
-          console.log(rec.id);
-        }
-        // this._getContactDetails(e.currentTarget.id)
-      );
+    el.addEventListener("click", (e) => {
+      const targetEl = e.target.closest("tr");
+      this._getContactDetails(targetEl.id);
     });
   }
   _getContactDetails(id) {

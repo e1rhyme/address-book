@@ -94,7 +94,7 @@ export const uploadNewContact = function (newUser) {
     // ||
     // newUser.emailAddress === ""
   )
-    return message__emptyFields;
+    return;
   else {
     // Set user phone number and profile image path
     newUser.phoneNumber = phoneNumber;
@@ -104,7 +104,7 @@ export const uploadNewContact = function (newUser) {
     state.contact[id] = newUser;
 
     // Upload new contact to local storage
-    // localStorage.setItem("myContacts", JSON.stringify(state.contact));
+    localStorage.setItem("myContacts", JSON.stringify(state.contact));
 
     return newUser;
   }

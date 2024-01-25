@@ -35,6 +35,7 @@ export const snapchat = document.getElementById("snapchat");
 export const socialInfo = document.querySelector(".social-info");
 export const url = document.querySelector("url");
 export const contactUpload = document.querySelector(".upload__btn");
+export const uploadForm = document.getElementById("contact-from");
 export const emailContainer = document.querySelector(".email-container");
 export const mobileContainer = document.querySelector(".mobile-container");
 export const expandMore = document.querySelector(".expand_more");
