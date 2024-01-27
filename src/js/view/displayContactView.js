@@ -1,6 +1,8 @@
 import View from "./view.js";
 import newContactView from "./newContactView.js";
-class DisplayView extends View {
+import manageContactView from "./manageContactView.js";
+
+class DisplayContactView extends View {
   _contactDetails;
   _parentEl = document.querySelector(".new--contact-window");
   _contentEl;
@@ -14,34 +16,55 @@ class DisplayView extends View {
   getThisData(data) {
     this._data = Object.entries(data);
   }
-
-  //  Read the element
+  //  Read clicked element
   _readEl(el) {
     this._contentEl = document.querySelector(".contacts");
 
     this._getContactId(this._contentEl);
   }
+  // Extract id of clicked element
   _getContactId(el) {
     el.addEventListener("click", (e) => {
       const targetEl = e.target.closest("tr");
       this._getContactDetails(targetEl.id);
     });
   }
+  // Retrieve user details based on selected id
   _getContactDetails(id) {
     for (let i = 0; i < Object.keys(this._data).length; i++) {
-      if (this._data[i][0] === id)
+      if (this._data[i][0] === id) {
         this._contactDetails = this._getMarkup(this._data[i][1]);
+        // manageContactView._displayContactDetails(this._data[i][1]);
+        manageContactView.addHandlerEditContact(this._data[i][1]);
+        // manageContactView._editContact(this._data[i][1]);
+      }
+
       this._clear();
       this._parentEl.innerHTML = this._contactDetails;
       newContactView._setElementsVisibility();
     }
   }
-  _getMarkup(user) {
+  _getMarkup(profile) {
     return `
+      <button id="btn--edit">
+        <svg id="svg-edit--icon"
+          xmlns="http://www.w3.org/2000/svg"
+          height="24"
+          viewBox="0 -960 960 960"
+          width="24"
+        >
+          <path
+            d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"
+          />
+        </svg>
+      </button>
+      <div class="hover-text hidden">
+        <span class="tooltip-text fade" id="bottom">Click to edit contact</span>
+      </div>
       <div class="new--profile-container">
         <div class="new--img__container">
           <img src="${
-            user.profileImage ? user.profileImage : "/src/img/profile.png"
+            profile.profileImage ? profile.profileImage : "/src/img/profile.png"
           }" alt="Profile Image" class="new--profile-img" />
           <input
             type="file"
@@ -62,9 +85,12 @@ class DisplayView extends View {
             </div>
           </div>
           <div id="new--contact-name">
-            <label>${user.prefix === "N/A" ? "" : user.prefix} ${
-      user.firstName ? user.firstName : ""
-    } ${user.lastName ? user.lastName : ""}</label>
+            <label>${profile.prefix === "N/A" ? "" : profile.prefix} ${
+      profile.firstName === "N/A" ? "" : profile.firstName
+    } ${profile.middleName === "N/A" ? "" : profile.middleName} ${
+      profile.lastName === "N/A" ? "" : profile.lastName
+    }
+            </label>
           </div>
         </div>
             
@@ -73,25 +99,32 @@ class DisplayView extends View {
           <!-- KEY PERSONAL INFORMATION -->
             <div class="personal-info-block pib-email">
             <label id="preview-email-address">
-                    ${user.emailAddress ? user.emailAddress : ""}
+                    ${profile.emailAddress ? profile.emailAddress : ""}
             </label>
             <label> Email </label>
           </div>
           
           <div class="personal-info-block pib-mobile">
             <label id="preview-mobile-number"> ${
-              user.phoneNumber ? user.phoneNumber : ""
+              profile.phoneNumber ? profile.phoneNumber : ""
             } </label>
             <label> Mobile </label>
           </div>
                 
           <div class="personal-info-block pib-website">
             <label id="preview-website"> ${
-              user.website ? user.website : ""
+              profile.website ? profile.website : ""
             }</label>
             <label> Web address </label>
           </div>
         </div>
+
+        <div class="personal-info-block pib-dob">
+            <label id="preview-dob">
+                    ${profile.dateOfBirth ? profile.dateOfBirth : ""}
+            </label>
+            <label> Birthday </label>
+          </div>
             
         <div class="new--social-handles-header">
           <h2>Social Handles</h2>
@@ -106,7 +139,7 @@ class DisplayView extends View {
             alt="facebook"
           />
           <label id="preview-facebook"> ${
-            user.facebook ? user.facebook : ""
+            profile.facebook ? profile.facebook : ""
           } </label>
         </div>
 
@@ -118,7 +151,7 @@ class DisplayView extends View {
             alt="instagram-new"
           />
           <label id="preview-instagram"> ${
-            user.instagram ? user.instagram : ""
+            profile.instagram ? profile.instagram : ""
           } </label>
         </div>
 
@@ -129,7 +162,7 @@ class DisplayView extends View {
             src="https://img.icons8.com/ios-filled/50/twitterx--v1.png"
             alt="twitterx--v1"
           />
-          <label id="preview-x"> ${user.x ? user.x : ""} </label>
+          <label id="preview-x"> ${profile.x ? profile.x : ""} </label>
         </div>
 
         <div class="social-handles personal-info-block">
@@ -139,7 +172,9 @@ class DisplayView extends View {
             src="https://img.icons8.com/ios-filled/50/tiktok--v1.png"
             alt="tiktok--v1"
           />
-          <label id="preview-tiktok"> ${user.tiktok ? user.tiktok : ""} </label>
+          <label id="preview-tiktok"> ${
+            profile.tiktok ? profile.tiktok : ""
+          } </label>
         </div>
 
         <div class="social-handles personal-info-block">
@@ -150,7 +185,7 @@ class DisplayView extends View {
             alt="linkedin"
           />
           <label id="preview-linkedin"> ${
-            user.linkedIn ? user.linkedIn : ""
+            profile.linkedIn ? profile.linkedIn : ""
           } </label>
         </div>
 
@@ -162,7 +197,7 @@ class DisplayView extends View {
             alt="pinterest--v1"
           />
           <label id="preview-pinterest"> ${
-            user.pinterest ? user.pinterest : ""
+            profile.pinterest ? profile.pinterest : ""
           } </label>
         </div>
 
@@ -174,7 +209,7 @@ class DisplayView extends View {
             alt="youtube-play"
           />
           <label id="preview-youtube"> ${
-            user.youtube ? user.youtube : ""
+            profile.youtube ? profile.youtube : ""
           } </label>
         </div>
 
@@ -186,12 +221,12 @@ class DisplayView extends View {
             alt="snapchat"
           />
           <label id="preview-snapchat"> ${
-            user.snapchat ? user.snapchat : ""
+            profile.snapchat ? profile.snapchat : ""
           } </label>
         </div>
       </div>
     `;
   }
 }
-export default new DisplayView();
+export default new DisplayContactView();
 //

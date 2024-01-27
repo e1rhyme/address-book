@@ -30,8 +30,12 @@ button {
   cursor: pointer;
   transition: all 0.2s;
 }
-button:hover {
+/* button:hover {
   transform: scale(1.15);
+} */
+button#btn--edit {
+  background: none;
+  text-align: right;
 }
 button:focus {
   outline: none;

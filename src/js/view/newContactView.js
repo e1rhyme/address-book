@@ -30,15 +30,14 @@ class NewContactView extends View {
   _addContact() {
     this._addRecordBtn.addEventListener("click", () => {
       this._newContactContainer.classList.remove("hidden");
-      // this._newContactContainer.classList.toggle("hidden");
       this._resetFormElements();
+      this._escKeyPress();
     });
   }
   // Handler to close modal on click of X
   _closeModal() {
     Elements.closeModal.addEventListener("click", () => {
       this._newContactContainer.classList.toggle("hidden");
-      // this._newContactContainer.classList.add("hidden");
       this._resetFormElements();
     });
   }
@@ -46,7 +45,6 @@ class NewContactView extends View {
   _closeOverlay() {
     Elements.overlay.addEventListener("click", () => {
       this._newContactContainer.classList.toggle("hidden");
-      // this._newContactContainer.classList.add("hidden");
       this._resetFormElements();
     });
   }
@@ -146,18 +144,16 @@ class NewContactView extends View {
             </div>
           </div>
           <div id="new--contact-name">
-            <label>${
-              this._data[0].prefix === "N/A" ? "" : this._data[0].prefix
-            } ${this._data[0].firstName ? this._data[0].firstName : ""} ${
-      this._data[0].lastName ? this._data[0].lastName : ""
-    }</label>
+            <label>${this._data[0].firstName ? this._data[0].firstName : ""} ${
+      this._data[0].firstName ? this._data[0].firstName : ""
+    } ${this._data[0].lastName ? this._data[0].lastName : ""}</label>
           </div>
         </div>
             
         <!-- NEW USER INFORMATION -->
         <div class="new--personal-info-container">
           <!-- KEY PERSONAL INFORMATION -->
-            <div class="personal-info-block pib-email">
+          <div class="personal-info-block pib-email">
             <label id="preview-email-address">
                     ${
                       this._data[0].emailAddress
@@ -293,6 +289,8 @@ class NewContactView extends View {
     this._parentEl.classList.remove("hidden");
     this._newOverlay.classList.remove("hidden");
     this._addressBook.classList.remove("hidden");
+
+    this._escKeyPress();
   }
   // Handler for upload contact click event
   addHandlerUploadContact(handler) {
@@ -331,7 +329,7 @@ class NewContactView extends View {
   _createContact() {
     this._addContactLink.addEventListener("click", () => {
       this._newContactContainer.classList.remove("hidden");
-      // Elements.overlay.classList.remove("hidden");
+      this._escKeyPress();
       this._resetFormElements();
     });
   }

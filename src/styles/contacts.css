@@ -212,10 +212,11 @@ thead tr {
   position: fixed;
   overflow-y: auto;
   border-radius: 9px;
+  overflow-y: hidden;
   background-color: white;
   transform: translate(-50%, -50%);
 
-  z-index: 1000;
+  z-index: 100;
   padding: 4rem 6rem;
   transition: all 0.5s;
   box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.25);
@@ -246,7 +247,7 @@ thead tr {
   height: 100%;
   background-color: rgba(190, 190, 190, 0.4);
   backdrop-filter: blur(4px);
-  z-index: 100;
+  z-index: 99;
   transition: all 0.5s;
 }
 input[id="new--dialog"] {
@@ -285,7 +286,7 @@ input[id="new--dialog"] {
 .new--add-contact-icon {
   top: 70%;
   left: 70%;
-  z-index: 120;
+  z-index: 110;
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
@@ -316,12 +317,13 @@ div[id="new--contact-name"] label {
   flex-direction: column;
   align-items: center;
 }
+#preview-dob,
+#preview-website,
 #preview-email-address,
-#preview-mobile-number,
-#preview-website {
+#preview-mobile-number {
   font-weight: 600;
   padding-right: 1rem;
-  /* text-transform: lowercase; */
+  text-transform: lowercase;
   font-size: 1.2rem !important;
 }
 .personal-info-block label:not(:first-child) {
@@ -354,4 +356,51 @@ tbody tr {
 }
 tbody tr:hover {
   background: var(--color-blue-menu);
+}
+.icon--edit,
+.icon--delete {
+  width: 2rem;
+  height: 2rem;
+  padding-top: 0.5rem;
+}
+/* .tooltip-text {
+  opacity: 0;
+  z-index: 1200;
+  color: inherit;
+  font-size: 1rem;
+  text-align: right;
+  visibility: hidden;
+  transition: opacity 0.5s;
+  transition-delay: 0.5s;
+} */
+
+.tooltip-text {
+  position: absolute;
+  top: -40px;
+  left: -50%;
+  z-index: 2;
+  width: 100px;
+  color: white;
+  font-size: 12px;
+  background-color: #192733;
+  border-radius: 10px;
+  padding: 10px 15px 10px 15px;
+}
+.fade {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.hover-text {
+  position: relative;
+  display: inline-block;
+  /* margin: 40px; */
+  font-family: Arial;
+  text-align: center;
+}
+#bottom {
+  top: 25px;
+  left: -50%;
+}
+.hover-text:hover .tooltip-text {
+  visibility: visible;
 }

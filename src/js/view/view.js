@@ -28,6 +28,15 @@ export default class View {
     // Determine visibility of page elements
     this._setElementsVisibility(condition, status);
   }
+  _escKeyPress(option) {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        this._newContactContainer.classList.add("hidden");
+        this._parentEl.classList.add("hidden");
+        this._newOverlay.classList.add("hidden");
+      }
+    });
+  }
   // Private method(): Clear parent element content
   _clear() {
     this._parentEl.innerHTML = "";

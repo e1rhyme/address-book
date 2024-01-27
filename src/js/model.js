@@ -10,7 +10,6 @@ export const state = {
     resultsPerPage: RES_PER_PAGE,
   },
   special: [],
-  userAccount: 1,
   userID: 1,
 };
 
@@ -36,7 +35,6 @@ function getUserID(user) {
 
   return id;
 }
-
 // Resolves default international call code to user's IP
 const getIp = function (callback) {
   fetch("https://ipinfo.io/json?token=5d4e92bd7304ea", {
@@ -63,10 +61,9 @@ const getIp = function (callback) {
   //     .then((resp) => callback(resp.country));
   // } catch {}
 };
-
 // Load the international code list
 const phoneInput = window.intlTelInput(countryCode, {
-  preferredCountries: ["ng", "gb", "us"],
+  // preferredCountries: ["ng", "gb", "us"],
   initialCountry: "auto",
   geoIpLookup: getIp,
   utilsScript:
@@ -80,7 +77,17 @@ function newUserID(id) {
 
   return id;
 }
-
+export const getContactNumber = function (number) {
+  // Set user account number
+  const userNumber = window.intlTelInput(countryCode, {
+    formatOnDisplay: false,
+    separateDialCode: true,
+    utilsScript: "build/js/utils.js",
+  });
+  setTimeout(() => {
+    userNumber.setNumber(number);
+  }, 2000);
+};
 // Save new contact to local storage
 export const uploadNewContact = function (newUser) {
   // Set user account number
@@ -109,7 +116,9 @@ export const uploadNewContact = function (newUser) {
     return newUser;
   }
 };
+export const updateExistingContact = function (contact) {};
 
+// Temp fnx
 function clearStorage() {
   localStorage.clear();
 }
