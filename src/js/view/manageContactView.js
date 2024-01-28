@@ -4,11 +4,10 @@ import displayContactView from "./displayContactView.js";
 import newContactView from "./newContactView.js";
 
 class manageContactView extends View {
-  _editBtnParent = document.querySelector(".new--contact-window");
-  _itiArrow = document.querySelector(".iti__arrow");
   _editBtn;
   _contentEl;
   _contactDetails;
+  _editBtnParent = document.querySelector(".new--contact-window");
 
   constructor() {
     super();
@@ -25,14 +24,11 @@ class manageContactView extends View {
   }
   // Parse the contact's records into the input fields
   _displayContactDetails(profile) {
-    this._contactDetails = profile;
-
     Elements.firstName.value = profile.firstName;
     Elements.firstName.value = profile.firstName;
     Elements.middleName.value = profile.middleName;
     Elements.lastName.value = profile.lastName;
     Elements.dateOfBirth.value = profile.dateOfBirth;
-    // Elements.countryCode = profile.phoneNumber;
     Elements.emailAddress.value = profile.emailAddress;
     Elements.website.value = profile.website;
     Elements.facebook.value = profile.facebook;
@@ -45,8 +41,6 @@ class manageContactView extends View {
     Elements.snapchat.value = profile.snapchat;
     Elements.prefix.value = profile.prefix;
     Elements.profileImg.src = profile.profileImage;
-
-    document.querySelector(".upload__btn").value = "Update Contact";
   }
   // Display selected contact details for editing
   _editContact(contact) {
@@ -55,9 +49,12 @@ class manageContactView extends View {
         .querySelector("#svg-edit--icon")
         .addEventListener("click", (e) => {
           newContactView._newContactContainer.classList.remove("hidden");
+          document.querySelector(".upload__btn").classList.add("hidden");
+          document.querySelector(".update__btn").classList.remove("hidden");
 
           newContactView._escKeyPress();
         });
+      this._contactDetails = contact;
       this._displayContactDetails(contact);
     });
   }
@@ -69,11 +66,21 @@ class manageContactView extends View {
       for (let i = 0; i < Object.keys(this._data).length; i++) {
         if (this._data[i][0] === targetEl.id) {
           number = this._data[i][1].phoneNumber;
-          this._itiArrow.classList.add(".hidden");
         }
       }
       handler(number);
     });
+  }
+  addHandlerUpdateContact(handler, contact) {
+    document.querySelector(".update__btn").addEventListener("click", (e) => {
+      console.log("UPLOAD btn clicked");
+
+      console.log(this._contactDetails);
+      contact = this._contactDetails;
+      console.log(contact);
+    });
+
+    handler(contact);
   }
 
   _deleteContact() {}

@@ -30,6 +30,8 @@ class NewContactView extends View {
   _addContact() {
     this._addRecordBtn.addEventListener("click", () => {
       this._newContactContainer.classList.remove("hidden");
+      document.querySelector(".upload__btn").classList.remove("hidden");
+      document.querySelector(".update__btn").classList.add("hidden");
       this._resetFormElements();
       this._escKeyPress();
     });
@@ -329,6 +331,9 @@ class NewContactView extends View {
   _createContact() {
     this._addContactLink.addEventListener("click", () => {
       this._newContactContainer.classList.remove("hidden");
+      document.querySelector(".upload__btn").classList.remove("hidden");
+      document.querySelector(".update__btn").classList.add("hidden");
+
       this._escKeyPress();
       this._resetFormElements();
     });

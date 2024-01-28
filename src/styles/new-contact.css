@@ -44,7 +44,9 @@ button > *:first-child {
   margin-right: 1rem;
 }
 button.upload__btn,
-input.upload__btn {
+input.upload__btn,
+input.update__btn,
+input.update__btn {
   float: right;
   cursor: pointer;
   font-weight: bolder;
@@ -101,7 +103,8 @@ input {
   border: 1px solid var(--color-accent-dark);
   background-color: var(--color-accent-light);
 }
-.upload__btn {
+.upload__btn,
+.update__btn {
   width: 50%;
   margin-right: 3.2rem;
   padding: var(--padding-tblr-large);
