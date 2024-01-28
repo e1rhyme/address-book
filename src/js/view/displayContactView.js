@@ -17,7 +17,7 @@ class DisplayContactView extends View {
     this._data = Object.entries(data);
   }
   //  Read clicked element
-  _readEl(el) {
+  _readEl() {
     this._contentEl = document.querySelector(".contacts");
 
     this._getContactId(this._contentEl);
@@ -34,9 +34,8 @@ class DisplayContactView extends View {
     for (let i = 0; i < Object.keys(this._data).length; i++) {
       if (this._data[i][0] === id) {
         this._contactDetails = this._getMarkup(this._data[i][1]);
-        // manageContactView._displayContactDetails(this._data[i][1]);
-        manageContactView.addHandlerEditContact(this._data[i][1]);
-        // manageContactView._editContact(this._data[i][1]);
+
+        manageContactView._editContact(this._data[i][1]);
       }
 
       this._clear();

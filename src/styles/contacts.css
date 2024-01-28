@@ -404,3 +404,6 @@ tbody tr:hover {
 .hover-text:hover .tooltip-text {
   visibility: visible;
 }
+.iti__arrow.hidden {
+  display: hidden;
+}

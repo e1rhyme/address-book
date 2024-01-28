@@ -4,16 +4,29 @@ import displayContactView from "./displayContactView.js";
 import newContactView from "./newContactView.js";
 
 class manageContactView extends View {
-  _parentEl = document.querySelector(".contacts");
   _editBtnParent = document.querySelector(".new--contact-window");
+  _itiArrow = document.querySelector(".iti__arrow");
   _editBtn;
+  _contentEl;
   _contactDetails;
 
   constructor() {
     super();
+    this._readEl();
   }
 
+  // Retrieve contacts object
+  getThisData(data) {
+    this._data = Object.entries(data);
+  }
+  // Read in element to get contact number
+  _readEl() {
+    this._contentEl = document.querySelector(".contacts");
+  }
+  // Parse the contact's records into the input fields
   _displayContactDetails(profile) {
+    this._contactDetails = profile;
+
     Elements.firstName.value = profile.firstName;
     Elements.firstName.value = profile.firstName;
     Elements.middleName.value = profile.middleName;
@@ -35,26 +48,9 @@ class manageContactView extends View {
 
     document.querySelector(".upload__btn").value = "Update Contact";
   }
-  // _editContact(contact) {
-  //   this._editBtnParent.addEventListener("mouseover", (event) => {
-  //     document
-  //       .querySelector("#svg-edit--icon")
-  //       .addEventListener("click", (e) => {
-  //         newContactView._newContactContainer.classList.remove("hidden");
-
-  //         newContactView._escKeyPress();
-  //       });
-  //     this._displayContactDetails(contact);
-  //   });
-  // }
-
-  /*
-  load event from controller and send through handler the user phone details
-    - check if the phone number available
-  controller call the model to set the phone number
-  */
-  addHandlerEditContact(contact) {
-    this._editBtnParent.addEventListener("mouseover", (event) => {
+  // Display selected contact details for editing
+  _editContact(contact) {
+    this._editBtnParent.addEventListener("mouseover", () => {
       document
         .querySelector("#svg-edit--icon")
         .addEventListener("click", (e) => {
@@ -63,6 +59,20 @@ class manageContactView extends View {
           newContactView._escKeyPress();
         });
       this._displayContactDetails(contact);
+    });
+  }
+  // Listen to click event of select contact and retrieve phone number
+  addHandlerGetNumber(handler, number) {
+    this._contentEl.addEventListener("click", (e) => {
+      const targetEl = e.target.closest("tr");
+
+      for (let i = 0; i < Object.keys(this._data).length; i++) {
+        if (this._data[i][0] === targetEl.id) {
+          number = this._data[i][1].phoneNumber;
+          this._itiArrow.classList.add(".hidden");
+        }
+      }
+      handler(number);
     });
   }
 

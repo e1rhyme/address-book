@@ -62,13 +62,40 @@ const getIp = function (callback) {
   // } catch {}
 };
 // Load the international code list
-const phoneInput = window.intlTelInput(countryCode, {
-  // preferredCountries: ["ng", "gb", "us"],
-  initialCountry: "auto",
-  geoIpLookup: getIp,
-  utilsScript:
-    "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-});
+function initializeTel() {
+  const iti = window.intlTelInput(countryCode, {
+    preferredCountries: ["ng", "gb", "us"],
+    geoIpLookup: getIp,
+    nationalMode: true,
+    allowDropdown: false,
+    formatOnDisplay: false,
+    initialCountry: "auto",
+    separateDialCode: false,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.15/build/js/utils.js",
+  });
+  window.iti = iti;
+}
+export const getContactNumber = function (number) {
+  // Set user account number
+  if (window.iti != null || window.iti !== "") {
+    window.iti.destroy();
+  }
+  iti = window.intlTelInput(countryCode, {
+    preferredCountries: ["ng", "gb", "us"],
+    geoIpLookup: getIp,
+    nationalMode: true,
+    allowDropdown: false,
+    formatOnDisplay: false,
+    initialCountry: "auto",
+    separateDialCode: false,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@19.2.15/build/js/utils.js",
+  });
+  setTimeout(() => {
+    iti.setNumber(number);
+  }, 2000);
+};
 // Set unique user IDs
 function newUserID(id) {
   id = id.padStart(3, "0");
@@ -77,21 +104,10 @@ function newUserID(id) {
 
   return id;
 }
-export const getContactNumber = function (number) {
-  // Set user account number
-  const userNumber = window.intlTelInput(countryCode, {
-    formatOnDisplay: false,
-    separateDialCode: true,
-    utilsScript: "build/js/utils.js",
-  });
-  setTimeout(() => {
-    userNumber.setNumber(number);
-  }, 2000);
-};
 // Save new contact to local storage
 export const uploadNewContact = function (newUser) {
   // Set user account number
-  let phoneNumber = phoneInput.getNumber();
+  let phoneNumber = iti.getNumber();
   phoneNumber = phoneNumber ? phoneNumber : "N/A";
 
   // Check compulsory fields have newUse
@@ -123,3 +139,5 @@ function clearStorage() {
   localStorage.clear();
 }
 // clearStorage();
+
+initializeTel();
