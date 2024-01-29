@@ -25,6 +25,7 @@ export function loadAddressBook(handler) {
   state.userID = currentUserID + 1;
   // Convert JSON string back to an object
   state.contact = JSON.parse(contacts);
+  // console.log(state.contact);
 
   handler(true);
 }
@@ -132,12 +133,21 @@ export const uploadNewContact = function (newUser) {
     return newUser;
   }
 };
-export const updateExistingContact = function (contact) {};
+export const updateExistingContact = function (id, contact) {
+  Object.keys(state.contact).forEach((item, key, index) => {
+    if (!index[key] === id) return;
+
+    state.contact[item] = contact;
+    console.log(state.contact);
+    // Upload new contact to local storage
+    // localStorage.setItem("myContacts", JSON.stringify(state.contact));
+  });
+};
 
 // Temp fnx
 function clearStorage() {
   localStorage.clear();
 }
-// clearStorage();
+clearStorage();
 
 initializeTel();

@@ -8,6 +8,7 @@ class ContactsView extends View {
   _menu = document.querySelector(".menu");
   _sidebar = document.querySelector(".side-bar-container");
   _contactsContainer = document.querySelector(".contacts-container");
+  _contactDetails;
 
   // Call fnxs on page load
   constructor() {
@@ -18,8 +19,12 @@ class ContactsView extends View {
 
   // Set markup for display of contacts
   _getMarkup() {
-    return this._data
-      .map((rec, i) => this._generateMarkupPreview(rec, i, this._contactId))
+    this._contactDetails = this._data.shift().slice(1);
+
+    return this._contactDetails
+      .map((rec, i) => {
+        this._generateMarkupPreview(rec, i, this._contactId);
+      })
       .join("");
   }
   _generateMarkupPreview(rec, i, contactId) {
@@ -29,13 +34,13 @@ class ContactsView extends View {
           <td colspan="2">
             <a href="#">
             <div class="contact-name" >
-              <img src="${rec[0].profileImage}"/>
-              <p>${rec[0].firstName} ${rec[0].lastName}</p>
+              <img class="contact--profile-img" src="${rec.profileImage}"/>
+              <p>${rec.firstName} ${rec.lastName}</p>
             </div>
             </a>
           </td>
-          <td colspan="1">${rec[0].phoneNumber}</td>
-          <td colspan="1">${rec[0].emailAddress}
+          <td colspan="1">${rec.phoneNumber}</td>
+          <td colspan="1">${rec.emailAddress}
            <svg class="icon--edit hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 -960 960 960"

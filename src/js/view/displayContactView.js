@@ -3,9 +3,9 @@ import newContactView from "./newContactView.js";
 import manageContactView from "./manageContactView.js";
 
 class DisplayContactView extends View {
-  _contactDetails;
   _parentEl = document.querySelector(".new--contact-window");
   _contentEl;
+  _contactDetails;
 
   constructor() {
     super();
@@ -13,7 +13,7 @@ class DisplayContactView extends View {
   }
 
   // Retrieve contacts object
-  getThisData(data) {
+  getThisData(data, id) {
     this._data = Object.entries(data);
   }
   //  Read clicked element
@@ -26,20 +26,24 @@ class DisplayContactView extends View {
   _getContactId(el) {
     el.addEventListener("click", (e) => {
       const targetEl = e.target.closest("tr");
+
       this._getContactDetails(targetEl.id);
     });
   }
   // Retrieve user details based on selected id
   _getContactDetails(id) {
+    console.log(id);
+    console.log(this._data);
+
     for (let i = 0; i < Object.keys(this._data).length; i++) {
       if (this._data[i][0] === id) {
         this._contactDetails = this._getMarkup(this._data[i][1]);
 
-        manageContactView._editContact(this._data[i][1]);
+        manageContactView._editContact(id, this._data[i][1]);
       }
 
-      this._clear();
-      this._parentEl.innerHTML = this._contactDetails;
+      this._setVisibility(this._contactDetails, false, "view");
+
       newContactView._setElementsVisibility();
     }
   }
@@ -65,23 +69,6 @@ class DisplayContactView extends View {
           <img src="${
             profile.profileImage ? profile.profileImage : "/src/img/profile.png"
           }" alt="Profile Image" class="new--profile-img" />
-          <input
-            type="file"
-            accept="image/jpeg, image/png, image/jpg"
-            name="dialog"
-            id="new--dialog"
-          />
-            <div class="new--add-contact-icon">
-              <svg
-                viewBox="0 0 1024 1024"
-                xmlns="http://www.w3.org/2000/svg"
-                class="new--circle-plus"
-                >
-                <path
-                  d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm-38.4 409.6H326.4a38.4 38.4 0 1 0 0 76.8h147.2v147.2a38.4 38.4 0 0 0 76.8 0V550.4h147.2a38.4 38.4 0 0 0 0-76.8H550.4V326.4a38.4 38.4 0 1 0-76.8 0v147.2z"
-                />
-              </svg>
-            </div>
           </div>
           <div id="new--contact-name">
             <label>${profile.prefix === "N/A" ? "" : profile.prefix} ${

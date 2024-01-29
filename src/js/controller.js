@@ -10,19 +10,25 @@ function controlLoadContacts(condition) {
   if (!condition) contactsView.render(undefined, condition, "load");
   // contacts exist
   else contactsView.render(model.state.contact, condition, "load");
-  displayContactView.getThisData(model.state.contact);
-  manageContactView.getThisData(model.state.contact);
+  getThisData();
 }
 // Handles upload of a new contact
 function controlUploadContact(data) {
   model.uploadNewContact(data);
+  getThisData();
   contactsView.render(model.state.contact, true, "create");
+  newContactView.render(model.state.contact, false, "view");
+}
+// Pushes contact object for content render
+function getThisData() {
   displayContactView.getThisData(model.state.contact);
   manageContactView.getThisData(model.state.contact);
-  newContactView.render(model.state.contact, false, "view");
 }
 function controlGetContactNumber(number) {
   model.getContactNumber(number);
+}
+function controlUpdateContact(id, contact) {
+  model.updateExistingContact(id, contact);
 }
 
 // App initialization function
@@ -30,6 +36,7 @@ const init = function () {
   model.loadAddressBook(controlLoadContacts);
   newContactView.addHandlerUploadContact(controlUploadContact);
   manageContactView.addHandlerGetNumber(controlGetContactNumber);
+  manageContactView.addHandlerUpdateContact(controlUpdateContact);
 };
 
 // App initialization call

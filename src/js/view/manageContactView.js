@@ -5,8 +5,8 @@ import newContactView from "./newContactView.js";
 
 class manageContactView extends View {
   _editBtn;
+  _contactId;
   _contentEl;
-  _contactDetails;
   _editBtnParent = document.querySelector(".new--contact-window");
 
   constructor() {
@@ -43,7 +43,7 @@ class manageContactView extends View {
     Elements.profileImg.src = profile.profileImage;
   }
   // Display selected contact details for editing
-  _editContact(contact) {
+  _editContact(id, contact) {
     this._editBtnParent.addEventListener("mouseover", () => {
       document
         .querySelector("#svg-edit--icon")
@@ -54,7 +54,7 @@ class manageContactView extends View {
 
           newContactView._escKeyPress();
         });
-      this._contactDetails = contact;
+      this._contactId = id;
       this._displayContactDetails(contact);
     });
   }
@@ -71,16 +71,36 @@ class manageContactView extends View {
       handler(number);
     });
   }
-  addHandlerUpdateContact(handler, contact) {
+  addHandlerUpdateContact(handler) {
     document.querySelector(".update__btn").addEventListener("click", (e) => {
-      console.log("UPLOAD btn clicked");
+      e.preventDefault();
 
-      console.log(this._contactDetails);
-      contact = this._contactDetails;
-      console.log(contact);
+      // Create an object of entered values
+      const contactUpdate = {
+        profileImage: Elements.profileImg.src,
+        prefix: Elements.prefix.value ? Elements.prefix.value : "N/A",
+        firstName: Elements.firstName.value,
+        middleName: Elements.middleName.value
+          ? Elements.middleName.value
+          : "N/A",
+        lastName: Elements.lastName.value,
+        suffix: Elements.suffix.value ? Elements.suffix.value : "N/A",
+        dateOfBirth: Elements.dateOfBirth.value,
+        emailAddress: Elements.emailAddress.value
+          ? Elements.emailAddress.value
+          : "N/A",
+        website: Elements.website.value ? Elements.website.value : "N/A",
+        facebook: Elements.facebook.value ? Elements.facebook.value : "N/A",
+        instagram: Elements.instagram.value ? Elements.instagram.value : "N/A",
+        x: Elements.x.value ? Elements.x.value : "N/A",
+        tiktok: Elements.tiktok.value ? Elements.tiktok.value : "N/A",
+        pinterest: Elements.pinterest.value ? Elements.pinterest.value : "N/A",
+        linkedIn: Elements.linkedIn.value ? Elements.linkedIn.value : "N/A",
+        youtube: Elements.youtube.value ? Elements.youtube.value : "N/A",
+        snapchat: Elements.snapchat.value ? Elements.snapchat.value : "N/A",
+      };
+      handler(this._contactId, contactUpdate);
     });
-
-    handler(contact);
   }
 
   _deleteContact() {}
