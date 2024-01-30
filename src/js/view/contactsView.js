@@ -26,19 +26,20 @@ class ContactsView extends View {
       .join("");
   }
   _generateMarkupPreview(rec, i, contactId) {
+    console.log(rec, i, contactId);
     return `
         <tr id="${contactId[i]}">
           <td colspan="1">${i + 1}.</td>
           <td colspan="2">
             <a href="#">
             <div class="contact-name" >
-              <img class="contact--profile-img" src="${rec.profileImage}"/>
-              <p>${rec.firstName} ${rec.lastName}</p>
+              <img class="contact--profile-img" src="${rec[0].profileImage}"/>
+              <p>${rec[0].firstName} ${rec[0].lastName}</p>
             </div>
             </a>
           </td>
-          <td colspan="1">${rec.phoneNumber}</td>
-          <td colspan="1">${rec.emailAddress}
+          <td colspan="1">${rec[0].phoneNumber}</td>
+          <td colspan="1">${rec[0].emailAddress}
            <svg class="icon--edit hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 -960 960 960"
