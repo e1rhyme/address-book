@@ -19,9 +19,7 @@ class ContactsView extends View {
 
   // Set markup for display of contacts
   _getMarkup() {
-    this._contactDetails = this._data.shift().slice(1);
-
-    return this._contactDetails
+    return this._data
       .map((rec, i) => {
         this._generateMarkupPreview(rec, i, this._contactId);
       })

@@ -17,8 +17,8 @@ export default class View {
     // Convert the object to an array
     this._data = Object.entries(this._data).map((rec) => rec);
     // If new contact is being rendered (single object) or just one contact object exists in local storage
-    // if (!condition || Object.keys(this._data).length === 1)
-    // this._data = this._data.slice(-1);
+    if (!condition || Object.keys(this._data).length === 1)
+      this._data = this._data.shift().slice(1);
 
     // Get required markup for rendering
     const markup = this._getMarkup();
