@@ -128,26 +128,37 @@ export const uploadNewContact = function (newUser) {
     state.contact[id] = newUser;
 
     // Upload new contact to local storage
-    localStorage.setItem("myContacts", JSON.stringify(state.contact));
+    // localStorage.setItem("myContacts", JSON.stringify(state.contact));
 
     return newUser;
   }
 };
 export const updateExistingContact = function (id, contact) {
-  Object.keys(state.contact).forEach((item, key, index) => {
-    if (!index[key] === id) return;
+  debugger;
+
+  Object.keys(state.contact).forEach((item) => {
+    if (item !== id) return;
 
     state.contact[item] = contact;
-    console.log(state.contact);
+
+    // Todo
+    /*
+1. Update record in local storage and reload on page
+2. Remove local storage reset and add a secon record, then repeat the editing of the new record to see how local storage is updated
+3. Check why phone number isn't added
+
+*/
+
     // Upload new contact to local storage
     // localStorage.setItem("myContacts", JSON.stringify(state.contact));
   });
+  return contact;
 };
 
 // Temp fnx
 function clearStorage() {
   localStorage.clear();
 }
-clearStorage();
+// clearStorage();
 
 initializeTel();

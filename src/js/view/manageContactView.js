@@ -16,7 +16,7 @@ class manageContactView extends View {
 
   // Retrieve contacts object
   getThisData(data) {
-    this._data = Object.entries(data);
+    if (!Array.isArray(data)) this._data = Object.entries(data);
   }
   // Read in element to get contact number
   _readEl() {
@@ -60,10 +60,18 @@ class manageContactView extends View {
   }
   // Listen to click event of select contact and retrieve phone number
   addHandlerGetNumber(handler, number) {
+    // debugger;
+
     this._contentEl.addEventListener("click", (e) => {
       const targetEl = e.target.closest("tr");
 
       for (let i = 0; i < Object.keys(this._data).length; i++) {
+        if (
+          this._data[i][1]?.phoneNumber === null ||
+          this._data[i][1]?.phoneNumber === undefined
+        )
+          return;
+
         if (this._data[i][0] === targetEl.id) {
           number = this._data[i][1].phoneNumber;
         }

@@ -13,8 +13,8 @@ class DisplayContactView extends View {
   }
 
   // Retrieve contacts object
-  getThisData(data, id) {
-    this._data = Object.entries(data);
+  getThisData(data) {
+    if (!Array.isArray(data)) this._data = Object.entries(data);
   }
   //  Read clicked element
   _readEl() {
@@ -32,22 +32,18 @@ class DisplayContactView extends View {
   }
   // Retrieve user details based on selected id
   _getContactDetails(id) {
-    console.log(id);
-    console.log(this._data);
-
     for (let i = 0; i < Object.keys(this._data).length; i++) {
-      if (this._data[i][0] === id) {
+      if (this._data[i][0] === id.toString()) {
+        // Parse contact details to generate markup
         this._contactDetails = this._getMarkup(this._data[i][1]);
-
         manageContactView._editContact(id, this._data[i][1]);
       }
-
       this._setVisibility(this._contactDetails, false, "view");
-
       newContactView._setElementsVisibility();
     }
   }
   _getMarkup(profile) {
+    console.log(profile);
     return `
       <button id="btn--edit">
         <svg id="svg-edit--icon"

@@ -12,7 +12,7 @@ class NewContactView extends View {
   _newContactContainer = document.querySelector(".new-contact-container");
   _addContactLink = document.querySelector(".add-contact-link");
   _addContactWindow = document.querySelector(".add-contact-window");
-  _contactEl;
+  _selectedId;
 
   constructor() {
     super();
@@ -120,195 +120,18 @@ class NewContactView extends View {
   }
   // Set markup for display of contacts
   _getMarkup() {
-    this._data = this._data.flat();
-    displayContactView.getThisData(this._data);
+    displayContactView.getThisData(this._fullContactDetails);
 
     const imgEl = document.querySelector(".contact--profile-img");
-    console.log(imgEl);
-    // imgEl.addEventListener("load", (e) => {
-    //   const el = e.target.closest("tr");
-    //   console.log(el.id);
-    //   displayContactView._getContactDetails(el.id);
-    // });
 
-    // return `
-    //   <button id="btn--edit">
-    //     <svg id="svg-edit--icon"
-    //       xmlns="http://www.w3.org/2000/svg"
-    //       height="24"
-    //       viewBox="0 -960 960 960"
-    //       width="24"
-    //     >
-    //       <path
-    //         d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"
-    //       />
-    //     </svg>
-    //   </button>
-    //   <div class="hover-text hidden">
-    //     <span class="tooltip-text fade" id="bottom">Click to edit contact</span>
-    //   </div>
-    //   <div class="new--profile-container">
-    //     <div class="new--img__container">
-    //       <img src="${
-    //         this._data[0].profileImage
-    //           ? this._data[0].profileImage
-    //           : "/src/img/profile.png"
-    //       }" alt="Profile Image" class="new--profile-img" />
-    //       </div>
-    //       <div id="new--contact-name">
-    //         <label>${
-    //           this._data[0].prefix === "N/A"
-    //             ? ""
-    //             : this._data[0].prefixContainer
-    //         } ${
-    //   this._data[0].firstName === "N/A" ? "" : this._data[0].firstName
-    // } ${this._data[0].middleName === "N/A" ? "" : this._data[0].middleName} ${
-    //   this._data[0].lastName === "N/A" ? "" : this._data[0].lastName
-    // }
-    //         </label>
-    //       </div>
-    //     </div>
-
-    //     <!-- NEW USER INFORMATION -->
-    //     <div class="new--personal-info-container">
-    //       <!-- KEY PERSONAL INFORMATION -->
-    //         <div class="personal-info-block pib-email">
-    //         <label id="preview-email-address">
-    //                 ${
-    //                   this._data[0].emailAddress
-    //                     ? this._data[0].emailAddress
-    //                     : ""
-    //                 }
-    //         </label>
-    //         <label> Email </label>
-    //       </div>
-
-    //       <div class="personal-info-block pib-mobile">
-    //         <label id="preview-mobile-number"> ${
-    //           this._data[0].phoneNumber ? this._data[0].phoneNumber : ""
-    //         } </label>
-    //         <label> Mobile </label>
-    //       </div>
-
-    //       <div class="personal-info-block pib-website">
-    //         <label id="preview-website"> ${
-    //           this._data[0].website ? this._data[0].website : ""
-    //         }</label>
-    //         <label> Web address </label>
-    //       </div>
-    //     </div>
-
-    //     <div class="personal-info-block pib-dob">
-    //         <label id="preview-dob">
-    //                 ${
-    //                   this._data[0].dateOfBirth ? this._data[0].dateOfBirth : ""
-    //                 }
-    //         </label>
-    //         <label> Birthday </label>
-    //       </div>
-
-    //     <div class="new--social-handles-header">
-    //       <h2>Social Handles</h2>
-    //     </div>
-
-    //     <div class="new--social-handles">
-    //       <div class="social-handles personal-info-block">
-    //       <img
-    //         width="24"
-    //         height="24"
-    //         src="https://img.icons8.com/color/48/facebook-new.png"
-    //         alt="facebook"
-    //       />
-    //       <label id="preview-facebook"> ${
-    //         this._data[0].facebook ? this._data[0].facebook : ""
-    //       } </label>
-    //     </div>
-
-    //     <div class="social-handles personal-info-block">
-    //       <img
-    //         width="24"
-    //         height="24"
-    //         src="https://img.icons8.com/fluency/48/instagram-new.png"
-    //         alt="instagram-new"
-    //       />
-    //       <label id="preview-instagram"> ${
-    //         this._data[0].instagram ? this._data[0].instagram : ""
-    //       } </label>
-    //     </div>
-
-    //     <div class="social-handles personal-info-block">
-    //       <img
-    //         width="25"
-    //         height="25"
-    //         src="https://img.icons8.com/ios-filled/50/twitterx--v1.png"
-    //         alt="twitterx--v1"
-    //       />
-    //       <label id="preview-x"> ${
-    //         this._data[0].x ? this._data[0].x : ""
-    //       } </label>
-    //     </div>
-
-    //     <div class="social-handles personal-info-block">
-    //       <img
-    //         width="25"
-    //         height="25"
-    //         src="https://img.icons8.com/ios-filled/50/tiktok--v1.png"
-    //         alt="tiktok--v1"
-    //       />
-    //       <label id="preview-tiktok"> ${
-    //         this._data[0].tiktok ? this._data[0].tiktok : ""
-    //       } </label>
-    //     </div>
-
-    //     <div class="social-handles personal-info-block">
-    //       <img
-    //         width="24"
-    //         height="24"
-    //         src="https://img.icons8.com/fluency/48/linkedin.png"
-    //         alt="linkedin"
-    //       />
-    //       <label id="preview-linkedin"> ${
-    //         this._data[0].linkedIn ? this._data[0].linkedIn : ""
-    //       } </label>
-    //     </div>
-
-    //     <div class="social-handles personal-info-block">
-    //       <img
-    //         width="24"
-    //         height="24"
-    //         src="https://img.icons8.com/color/48/pinterest--v1.png"
-    //         alt="pinterest--v1"
-    //       />
-    //       <label id="preview-pinterest"> ${
-    //         this._data[0].pinterest ? this._data[0].pinterest : ""
-    //       } </label>
-    //     </div>
-
-    //     <div class="social-handles personal-info-block">
-    //       <img
-    //         width="24"
-    //         height="24"
-    //         src="https://img.icons8.com/color/48/youtube-play.png"
-    //         alt="youtube-play"
-    //       />
-    //       <label id="preview-youtube"> ${
-    //         this._data[0].youtube ? this._data[0].youtube : ""
-    //       } </label>
-    //     </div>
-
-    //     <div class="social-handles personal-info-block">
-    //       <img
-    //         width="24"
-    //         height="24"
-    //         src="https://img.icons8.com/fluency/48/snapchat.png"
-    //         alt="snapchat"
-    //       />
-    //       <label id="preview-snapchat"> ${
-    //         this._data[0].snapchat ? this._data[0].snapchat : ""
-    //       } </label>
-    //     </div>
-    //   </div>
-    // `;
+    imgEl.addEventListener("load", (e) => {
+      const el = e.target.closest("tr");
+      // Retrieve ID of selected contact
+      this._selectedId = this._contactId.slice(this._contactId.length - 1);
+      // console.log(this._contactId);
+      // console.log(this._selectedId);
+      displayContactView._getContactDetails(this._selectedId);
+    });
   }
   // Set visibility of elements based on data
   _setElementsVisibility() {

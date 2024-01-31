@@ -15,8 +15,8 @@ function controlLoadContacts(condition) {
 // Handles upload of a new contact
 function controlUploadContact(data) {
   model.uploadNewContact(data);
-  getThisData();
   contactsView.render(model.state.contact, true, "create");
+  getThisData();
   newContactView.render(model.state.contact, false, "view");
 }
 // Pushes contact object for content render

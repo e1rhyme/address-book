@@ -2,14 +2,19 @@ export default class View {
   _data;
   _contactId;
   _insertedHTML;
+  _fullContactDetails;
 
   // Display contacts list
   render(data, condition, status) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this._setElementsVisibility(condition, status);
 
-    // Extract the id of the creted user(s)
-    this._contactId = Object.entries(this._data).map((rec) => rec.shift());
+    // Create array of contacts' IDs
+    this._contactId = Object.entries(data).map((rec) => rec.shift());
+    // this._contactId = Object.keys(data).slice(Object.keys(data).length - 1);
+
+    // Backup of raw contact details; required at displayContactView
+    this._fullContactDetails = data;
 
     // Convert the object to an array and slice the first index out; index 0 has no value
     // Remove userID from array

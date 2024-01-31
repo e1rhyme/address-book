@@ -20,13 +20,10 @@ class ContactsView extends View {
   // Set markup for display of contacts
   _getMarkup() {
     return this._data
-      .map((rec, i) => {
-        this._generateMarkupPreview(rec, i, this._contactId);
-      })
+      .map((rec, i) => this._generateMarkupPreview(rec, i, this._contactId))
       .join("");
   }
   _generateMarkupPreview(rec, i, contactId) {
-    console.log(rec, i, contactId);
     return `
         <tr id="${contactId[i]}">
           <td colspan="1">${i + 1}.</td>
