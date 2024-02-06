@@ -14,7 +14,7 @@ class DisplayContactView extends View {
 
   // Retrieve contacts object
   getThisData(data) {
-    if (!Array.isArray(data)) this._data = Object.entries(data);
+    if (!Array.isArray(data)) this._contactsObject = Object.entries(data);
   }
   //  Read clicked element
   _readEl() {
@@ -26,27 +26,49 @@ class DisplayContactView extends View {
   _getContactId(el) {
     el.addEventListener("click", (e) => {
       const targetEl = e.target.closest("tr");
+      const dataTitle = e.target.dataset["title"];
 
-      this._getContactDetails(targetEl.id);
+      this._contactId = targetEl.id;
+
+      this._getContactDetails(targetEl.id, dataTitle);
     });
   }
   // Retrieve user details based on selected id
-  _getContactDetails(id) {
-    for (let i = 0; i < Object.keys(this._data).length; i++) {
-      if (this._data[i][0] === id.toString()) {
-        // Parse contact details to generate markup
-        this._contactDetails = this._getMarkup(this._data[i][1]);
-        manageContactView._editContact(id, this._data[i][1]);
-      }
-      this._setVisibility(this._contactDetails, false, "view");
-      newContactView._setElementsVisibility();
+  _getContactDetails(id, title) {
+    for (let i = 0; i < Object.keys(this._contactsObject).length; i++) {
+      if (
+        title === "Name" ||
+        title === "Phone Number" ||
+        title === "Email Address" ||
+        title === "Image"
+      ) {
+        console.log(id);
+        if (this._contactsObject[i][0] === id.toString()) {
+          // Parse contact details to generate markup
+          this._contactDetails = this._getMarkup(this._contactsObject[i][1]);
+
+          this.#setElementsVisibility();
+
+          manageContactView._editContact(
+            this._contactsObject[i][0],
+            this._contactsObject[i][1]
+          );
+
+          return this._contactDetails;
+        }
+      } else return;
     }
   }
+  #setElementsVisibility() {
+    // Code below clashes with this._setVisibility call in View
+    this._setVisibility(this._contactDetails);
+    newContactView._setElementsVisibility();
+  }
+  // Full constact profile
   _getMarkup(profile) {
-    console.log(profile);
     return `
       <button id="btn--edit">
-        <svg id="svg-edit--icon"
+        <svg id="display-edit--icon"
           xmlns="http://www.w3.org/2000/svg"
           height="24"
           viewBox="0 -960 960 960"

@@ -4,15 +4,17 @@ import manageContactView from "./manageContactView.js";
 import displayContactView from "./displayContactView.js";
 
 class NewContactView extends View {
-  _parentEl = document.querySelector(".new--contact-window");
-  _addRecordBtn = document.querySelector(".add-record");
+  _img;
+  _selectedId;
+  _contactDetails;
   _landing = document.querySelector(".landing");
-  _addressBook = document.querySelector(".address-book");
+  _addRecordBtn = document.querySelector(".add-record");
   _newOverlay = document.querySelector(".new--overlay");
-  _newContactContainer = document.querySelector(".new-contact-container");
+  _addressBook = document.querySelector(".address-book");
+  _parentEl = document.querySelector(".new--contact-window");
   _addContactLink = document.querySelector(".add-contact-link");
   _addContactWindow = document.querySelector(".add-contact-window");
-  _selectedId;
+  _newContactContainer = document.querySelector(".new-contact-container");
 
   constructor() {
     super();
@@ -24,11 +26,23 @@ class NewContactView extends View {
     this._expandLess();
     this._profileImg();
     this._closeOverlay();
+    this._createContact();
     this._newCloseOverlay();
     this._profileImgContainer();
-    this._createContact();
   }
 
+  // Retrieve contacts object
+  getThisData(data) {
+    if (!Array.isArray(data))
+      this._contactsObject = Object.entries(data).map((rec) => rec.slice(1));
+    console.log(this._contactsObject);
+    this._contactId = Object.entries(this._contactIdList).map((rec) =>
+      rec.slice(1)
+    );
+
+    console.log(this._contactsObject);
+    console.log(this._contactIdList);
+  }
   // Display add new contact modal
   _addContact() {
     this._addRecordBtn.addEventListener("click", () => {
@@ -119,19 +133,18 @@ class NewContactView extends View {
     });
   }
   // Set markup for display of contacts
-  _getMarkup() {
-    displayContactView.getThisData(this._fullContactDetails);
+  _getMarkup(id) {
+    this._imgEl = document.querySelector(".contact--profile-img");
 
-    const imgEl = document.querySelector(".contact--profile-img");
+    console.log(this._contactsObject);
+    console.log(this._contactIdList);
 
-    imgEl.addEventListener("load", (e) => {
-      const el = e.target.closest("tr");
-      // Retrieve ID of selected contact
-      this._selectedId = this._contactId.slice(this._contactId.length - 1);
-      // console.log(this._contactId);
-      // console.log(this._selectedId);
-      displayContactView._getContactDetails(this._selectedId);
-    });
+    this._contactDetails = displayContactView._getContactDetails(
+      this._contactId,
+      "Name"
+    );
+
+    return this._contactDetails;
   }
   // Set visibility of elements based on data
   _setElementsVisibility() {

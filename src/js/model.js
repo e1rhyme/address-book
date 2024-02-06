@@ -1,5 +1,7 @@
 import { RES_PER_PAGE, countryCode } from "/src/js/config.js";
 
+let contactNumber;
+
 // State object: holds all contacts' info
 export const state = {
   contact: {},
@@ -25,7 +27,6 @@ export function loadAddressBook(handler) {
   state.userID = currentUserID + 1;
   // Convert JSON string back to an object
   state.contact = JSON.parse(contacts);
-  // console.log(state.contact);
 
   handler(true);
 }
@@ -48,19 +49,6 @@ const getIp = function (callback) {
       };
     })
     .then((resp) => callback(resp.country));
-
-  //   try {
-  //   const data = await fetch("https://ipinfo.io/json?token=5d4e92bd7304ea", {
-  //     headers: { Accept: "application/json" },
-  //   })
-  //     .then((resp) => resp.json())
-  //     .catch(() => {
-  //       return {
-  //         country: "us",
-  //       };
-  //     })
-  //     .then((resp) => callback(resp.country));
-  // } catch {}
 };
 // Load the international code list
 function initializeTel() {
@@ -134,20 +122,18 @@ export const uploadNewContact = function (newUser) {
   }
 };
 export const updateExistingContact = function (id, contact) {
-  debugger;
+  // Retrieve contact's phone number
+  let phoneNumber = iti.getNumber();
+  phoneNumber = phoneNumber ? phoneNumber : "N/A";
 
-  Object.keys(state.contact).forEach((item) => {
-    if (item !== id) return;
+  // Add key/ value pair to contact object
+  contact.phoneNumber = phoneNumber;
 
-    state.contact[item] = contact;
-
-    // Todo
-    /*
-1. Update record in local storage and reload on page
-2. Remove local storage reset and add a secon record, then repeat the editing of the new record to see how local storage is updated
-3. Check why phone number isn't added
-
-*/
+  Object.keys(state.contact).forEach((key, index, rec) => {
+    if (!rec[index] === id) return;
+    else if (rec[index] === id) {
+      state.contact[rec[index]] = contact;
+    }
 
     // Upload new contact to local storage
     // localStorage.setItem("myContacts", JSON.stringify(state.contact));

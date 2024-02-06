@@ -228,3 +228,8 @@ picture {
   display: block;
   max-width: 100%;
 }
+
+/* Set height for parent container */
+/* .root-container {
+  min-height: 100vh;
+} */

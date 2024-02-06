@@ -1,31 +1,27 @@
+// import contactsView from "./contactsView";
+
 export default class View {
   _data;
   _contactId;
   _insertedHTML;
-  _fullContactDetails;
+  _contactIdList;
+  _contactsObject;
 
   // Display contacts list
-  render(data, condition, status) {
+  render(data, condition, status, id) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this._setElementsVisibility(condition, status);
 
     // Create array of contacts' IDs
-    this._contactId = Object.entries(data).map((rec) => rec.shift());
-    // this._contactId = Object.keys(data).slice(Object.keys(data).length - 1);
+    this._contactIdList = Object.entries(data).map((rec) => rec.shift());
 
-    // Backup of raw contact details; required at displayContactView
-    this._fullContactDetails = data;
+    // Pass contacts object to global class fields
+    this._contactsObject = data;
 
-    // Convert the object to an array and slice the first index out; index 0 has no value
-    // Remove userID from array
-    this._data = Object.entries(data).map((rec) => rec.slice(1));
-    // If new contact is being rendered (single object) or just one contact object exists in local storage
-    if (!condition || Object.keys(this._data).length === 1)
-      this._data = this._data.slice(-1);
+    this.getThisData(this._contactsObject, this._contactIdList);
 
     // Get required markup for rendering
-    const markup = this._getMarkup();
-
+    const markup = this._getMarkup(id);
     // Handle display of contact details
     this._setVisibility(markup);
 
