@@ -116,7 +116,7 @@ export const uploadNewContact = function (newUser) {
     state.contact[id] = newUser;
 
     // Upload new contact to local storage
-    // localStorage.setItem("myContacts", JSON.stringify(state.contact));
+    localStorage.setItem("myContacts", JSON.stringify(state.contact));
 
     return newUser;
   }
@@ -136,7 +136,7 @@ export const updateExistingContact = function (id, contact) {
     }
 
     // Upload new contact to local storage
-    // localStorage.setItem("myContacts", JSON.stringify(state.contact));
+    localStorage.setItem("myContacts", JSON.stringify(state.contact));
   });
   return contact;
 };
