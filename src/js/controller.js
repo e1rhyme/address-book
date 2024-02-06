@@ -10,16 +10,16 @@ function controlLoadContacts(condition) {
   if (!condition) contactsView.render(undefined, condition, "load");
   // contacts exist
   else {
-    // getThisData();
+    getThisData();
     contactsView.render(model.state.contact, condition, "load");
   }
 }
 // Handles upload of a new contact
 function controlUploadContact(data) {
   model.uploadNewContact(data);
-  // getThisData();
+  getThisData();
   contactsView.render(model.state.contact, true, "create");
-  newContactView.render(model.state.contact, false, "view");
+  newContactView.render(model.state.contact, false, "view", "new");
 }
 // Pushes contact object for content render
 function getThisData() {

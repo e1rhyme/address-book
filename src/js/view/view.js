@@ -1,5 +1,3 @@
-// import contactsView from "./contactsView";
-
 export default class View {
   _data;
   _contactId;
@@ -8,20 +6,15 @@ export default class View {
   _contactsObject;
 
   // Display contacts list
-  render(data, condition, status, id) {
+  render(data, condition, status, action) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this._setElementsVisibility(condition, status);
-
-    // Create array of contacts' IDs
-    this._contactIdList = Object.entries(data).map((rec) => rec.shift());
 
     // Pass contacts object to global class fields
     this._contactsObject = data;
 
-    this.getThisData(this._contactsObject, this._contactIdList);
-
     // Get required markup for rendering
-    const markup = this._getMarkup(id);
+    const markup = this._getMarkup(action);
     // Handle display of contact details
     this._setVisibility(markup);
 

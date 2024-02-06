@@ -3,9 +3,9 @@ import newContactView from "./newContactView.js";
 import manageContactView from "./manageContactView.js";
 
 class DisplayContactView extends View {
-  _parentEl = document.querySelector(".new--contact-window");
   _contentEl;
   _contactDetails;
+  _parentEl = document.querySelector(".new--contact-window");
 
   constructor() {
     super();
@@ -14,7 +14,11 @@ class DisplayContactView extends View {
 
   // Retrieve contacts object
   getThisData(data) {
-    if (!Array.isArray(data)) this._contactsObject = Object.entries(data);
+    // Create array from object
+    if (!Array.isArray(data)) this._data = Object.entries(data);
+
+    // Create array of contacts' IDs
+    this._contactIdList = Object.entries(data).map((rec) => rec.shift());
   }
   //  Read clicked element
   _readEl() {
@@ -26,33 +30,37 @@ class DisplayContactView extends View {
   _getContactId(el) {
     el.addEventListener("click", (e) => {
       const targetEl = e.target.closest("tr");
+
+      const className = e.target.className;
       const dataTitle = e.target.dataset["title"];
 
       this._contactId = targetEl.id;
 
-      this._getContactDetails(targetEl.id, dataTitle);
+      this._getContactDetails(targetEl.id, dataTitle, className);
     });
   }
   // Retrieve user details based on selected id
-  _getContactDetails(id, title) {
-    for (let i = 0; i < Object.keys(this._contactsObject).length; i++) {
+  _getContactDetails(id, title, className) {
+    for (let i = 0; i < this._data.length; i++) {
       if (
         title === "Name" ||
         title === "Phone Number" ||
         title === "Email Address" ||
-        title === "Image"
+        title === "Image" ||
+        className === "contact-name"
       ) {
-        console.log(id);
-        if (this._contactsObject[i][0] === id.toString()) {
+        if (this._data[i][0] === id) {
           // Parse contact details to generate markup
-          this._contactDetails = this._getMarkup(this._contactsObject[i][1]);
+          this._contactDetails = this._getMarkup(
+            this._data[i][1],
+            this._data[i][0]
+          );
 
           this.#setElementsVisibility();
 
-          manageContactView._editContact(
-            this._contactsObject[i][0],
-            this._contactsObject[i][1]
-          );
+          this._contactId = this._data[i][0];
+
+          manageContactView._editContact(this._data[i][0], this._data[i][1]);
 
           return this._contactDetails;
         }
@@ -65,7 +73,7 @@ class DisplayContactView extends View {
     newContactView._setElementsVisibility();
   }
   // Full constact profile
-  _getMarkup(profile) {
+  _getMarkup(profile, id) {
     return `
       <button id="btn--edit">
         <svg id="display-edit--icon"
@@ -82,7 +90,7 @@ class DisplayContactView extends View {
       <div class="hover-text hidden">
         <span class="tooltip-text fade" id="bottom">Click to edit contact</span>
       </div>
-      <div class="new--profile-container">
+      <div class="new--profile-container" data-contactID="${id}">
         <div class="new--img__container">
           <img src="${
             profile.profileImage ? profile.profileImage : "/src/img/profile.png"

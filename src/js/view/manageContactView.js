@@ -7,6 +7,7 @@ class manageContactView extends View {
   _editIcon;
   _contentEl;
   _editBtnParent;
+  _addContactWindow = document.querySelector(".add-contact-window");
 
   constructor() {
     super();
@@ -16,7 +17,12 @@ class manageContactView extends View {
 
   // Retrieve contacts object
   getThisData(data) {
-    if (!Array.isArray(data)) this._contactsObject = Object.entries(data);
+    // Create array from object
+    if (!Array.isArray(data)) this._data = Object.entries(data);
+    // this._data = Object.entries(data).map((rec) => rec.slice(1));
+
+    // Create array of contacts' IDs
+    this._contactIdList = Object.entries(data).map((rec) => rec.shift());
   }
   // Read in element to get contact number
   _readEl() {
@@ -30,12 +36,33 @@ class manageContactView extends View {
       this._editIcon = document.querySelector("#display-edit--icon");
     });
   }
+  // Display selected contact details for editing
+  _editContact(id, contact) {
+    this._editBtnParent.addEventListener("mouseover", () => {
+      this._editIcon.addEventListener("click", (e) => {
+        const targetEl = e.target.closest("contact--profile-img");
+
+        newContactView._newContactContainer.classList.remove("hidden");
+        document.querySelector(".upload__btn").classList.add("hidden");
+        document.querySelector(".update__btn").classList.remove("hidden");
+
+        // If the expandLess/ showLess icons are active, reset them on contact edit load
+        this._expandLessShowLess();
+
+        newContactView._escKeyPress();
+      });
+      this._contactId = id;
+
+      this._displayContactDetails(contact, this._contactId);
+    });
+  }
   // Parse the contact's records into the input fields
-  _displayContactDetails(profile) {
-    Elements.firstName.value = profile.firstName;
+  _displayContactDetails(profile, id) {
+    Elements.prefix.value = profile.prefix;
     Elements.firstName.value = profile.firstName;
     Elements.middleName.value = profile.middleName;
     Elements.lastName.value = profile.lastName;
+    Elements.suffix.value = profile.suffix;
     Elements.dateOfBirth.value = profile.dateOfBirth;
     Elements.emailAddress.value = profile.emailAddress;
     Elements.website.value = profile.website;
@@ -49,24 +76,8 @@ class manageContactView extends View {
     Elements.snapchat.value = profile.snapchat;
     Elements.prefix.value = profile.prefix;
     Elements.profileImg.src = profile.profileImage;
-  }
-  // Display selected contact details for editing
-  _editContact(id, contact) {
-    this._editBtnParent.addEventListener("mouseover", () => {
-      this._editIcon.addEventListener("click", (e) => {
-        newContactView._newContactContainer.classList.remove("hidden");
-        document.querySelector(".upload__btn").classList.add("hidden");
-        document.querySelector(".update__btn").classList.remove("hidden");
 
-        // If the expandLess/ showLess icons are active, reset them on contact edit load
-        this._expandLessShowLess();
-
-        newContactView._escKeyPress();
-      });
-      this._contactId = id;
-
-      this._displayContactDetails(contact);
-    });
+    this._addContactWindow.dataset.contactid = id;
   }
   _expandLessShowLess() {
     if (!Elements.expandLess.classList.contains("hidden")) {
@@ -88,14 +99,14 @@ class manageContactView extends View {
     this._contentEl.addEventListener("click", (e) => {
       const targetEl = e.target.closest("tr");
 
-      for (let i = 0; i < Object.keys(this._contactsObject).length; i++) {
+      for (let i = 0; i < this._data.length; i++) {
         if (
-          this._contactsObject[i][1]?.phoneNumber === null ||
-          this._contactsObject[i][1]?.phoneNumber === undefined
+          this._data[i][1]?.phoneNumber === null ||
+          this._data[i][1]?.phoneNumber === undefined
         )
           return;
-        else if (this._contactsObject[i][0] === targetEl.id) {
-          number = this._contactsObject[i][1].phoneNumber;
+        else if (this._data[i][0] === targetEl.id) {
+          number = this._data[i][1].phoneNumber;
           return handler(number);
         }
       }
@@ -129,8 +140,10 @@ class manageContactView extends View {
         youtube: Elements.youtube.value ? Elements.youtube.value : "N/A",
         snapchat: Elements.snapchat.value ? Elements.snapchat.value : "N/A",
       };
+      const id = document.querySelector(".add-contact-window").dataset
+        .contactid;
 
-      handler(this._contactId, contactUpdate);
+      handler(id, contactUpdate);
     });
   }
 

@@ -4,8 +4,6 @@ import manageContactView from "./manageContactView.js";
 import displayContactView from "./displayContactView.js";
 
 class NewContactView extends View {
-  _img;
-  _selectedId;
   _contactDetails;
   _landing = document.querySelector(".landing");
   _addRecordBtn = document.querySelector(".add-record");
@@ -13,7 +11,6 @@ class NewContactView extends View {
   _addressBook = document.querySelector(".address-book");
   _parentEl = document.querySelector(".new--contact-window");
   _addContactLink = document.querySelector(".add-contact-link");
-  _addContactWindow = document.querySelector(".add-contact-window");
   _newContactContainer = document.querySelector(".new-contact-container");
 
   constructor() {
@@ -33,15 +30,12 @@ class NewContactView extends View {
 
   // Retrieve contacts object
   getThisData(data) {
+    // Create array from object
     if (!Array.isArray(data))
-      this._contactsObject = Object.entries(data).map((rec) => rec.slice(1));
-    console.log(this._contactsObject);
-    this._contactId = Object.entries(this._contactIdList).map((rec) =>
-      rec.slice(1)
-    );
+      this._data = Object.entries(data).map((rec) => rec.slice(1));
 
-    console.log(this._contactsObject);
-    console.log(this._contactIdList);
+    // Create array of contacts' IDs
+    this._contactIdList = Object.entries(data).map((rec) => rec.shift());
   }
   // Display add new contact modal
   _addContact() {
@@ -133,11 +127,12 @@ class NewContactView extends View {
     });
   }
   // Set markup for display of contacts
-  _getMarkup(id) {
-    this._imgEl = document.querySelector(".contact--profile-img");
-
-    console.log(this._contactsObject);
-    console.log(this._contactIdList);
+  _getMarkup(status) {
+    if (status === "new")
+      this._contactId = this._contactIdList.slice(-1).toString();
+    else {
+      this._contactId = status;
+    }
 
     this._contactDetails = displayContactView._getContactDetails(
       this._contactId,

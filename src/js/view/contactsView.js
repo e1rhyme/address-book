@@ -6,7 +6,6 @@ import displayContactView from "./displayContactView.js";
 class ContactsView extends View {
   _target;
   _targetEl;
-  // _contactId;
   _datasetTarget;
   _contactDetails;
   _targetContainer;
@@ -27,18 +26,18 @@ class ContactsView extends View {
   }
 
   // Retrieve contacts object
-  getThisData(data, idList) {
-    console.log(!Array.isArray(data));
+  getThisData(data) {
+    // Create array from object
     if (!Array.isArray(data))
       this._data = Object.entries(data).map((rec) => rec.slice(1));
-    this._contactIdList = idList;
+
+    // Create array of contacts' IDs
+    this._contactIdList = Object.entries(data).map((rec) => rec.shift());
   }
   // Set markup for display of contacts
   _getMarkup() {
     return this._data
-      .map((rec, i) => {
-        this._generateMarkupPreview(rec, i, this._contactIdList);
-      })
+      .map((rec, i) => this._generateMarkupPreview(rec, i, this._contactIdList))
       .join("");
   }
   // Contacts listing of brief profile
@@ -157,13 +156,14 @@ class ContactsView extends View {
   }
   // Extract contact's details from object using the ID
   _getContactDetails(id) {
-    for (let i = 0; i < Object.keys(this._contactsObject).length; i++) {
-      if (this._contactsObject[i][0] === id.toString()) {
+    const dataObj = Object.entries(this._contactsObject);
+
+    for (let i = 0; i < dataObj.length; i++) {
+      if (dataObj[i][0] === id) {
         // Parse contact details to generate markup
-        this._contactDetails = displayContactView._getMarkup(
-          this._contactsObject[i][1]
-        );
-        manageContactView._displayContactDetails(this._contactsObject[i][1]);
+        this._contactDetails = displayContactView._getMarkup(dataObj[i][1]);
+        manageContactView._displayContactDetails(dataObj[i][1], id);
+        return;
       }
     }
   }
