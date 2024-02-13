@@ -204,18 +204,30 @@ tbody tr {
 tbody tr:hover {
   background: var(--color-blue-menu);
 }
+tbody td {
+  position: relative;
+}
 .contacts--edit-icon,
 .contacts--delete-icon {
   width: 2rem;
   height: 2rem;
   margin-right: 0.5rem;
 }
+.contacts--delete-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+/* 
 td svg.contacts--edit-icon,
 td svg.contacts--delete-icon {
   display: none;
+} */
+.contacts--edit-icon,
+.contacts--delete-icon {
+  display: none;
 }
-tr:hover svg.contacts--edit-icon,
-tr:hover svg.contacts--delete-icon {
+tr:hover .contacts--edit-icon,
+tr:hover .contacts--delete-icon {
   display: inline-block;
 }
 /* Preview New Contact */

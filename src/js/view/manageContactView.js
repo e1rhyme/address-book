@@ -1,18 +1,26 @@
 import View from "./view.js";
 import * as Elements from "../config.js";
 import newContactView from "./newContactView.js";
+import deleteContactView from "./deleteContactView.js";
+import contactsView from "./contactsView.js";
 
-class manageContactView extends View {
+class ManageContactView extends View {
+  _target;
   _editBtn;
   _editIcon;
+  _targetEl;
   _contentEl;
+  _datasetTarget;
   _editBtnParent;
+  _targetContainer;
+  _parentEl = document.querySelector(".contacts");
   _addContactWindow = document.querySelector(".add-contact-window");
 
   constructor() {
     super();
     this._readEl();
     this._readEditIcon();
+    this._contactsEditIcon();
   }
 
   // Retrieve contacts object
@@ -54,6 +62,51 @@ class manageContactView extends View {
       this._contactId = id;
 
       this._displayContactDetails(contact, this._contactId);
+    });
+  }
+  // Display selected contact details for editing
+  _contactsEditIcon() {
+    this._parentEl.addEventListener("mouseover", (e) => {
+      // Injected DOM elements
+      this._targetContainer = e.target.closest("tr");
+      this._contactId = this._targetContainer.id;
+
+      if (!this._targetContainer) return;
+      else {
+        this._targetContainer.addEventListener("mouseover", (e) => {
+          this._targetEl = e.target.closest(`.manage-contact`);
+
+          if (!this._targetEl) return;
+          else {
+            this._targetEl.addEventListener("click", (e) => {
+              // this._target = document.querySelector(".contacts--edit-icon");
+              this._target = e.target.closest(".contacts--edit-icon");
+
+              if (!this._target) return;
+              else {
+                this._datasetTarget = this._target.dataset["action"];
+
+                if (!this._datasetTarget === "edit") return;
+                else {
+                  newContactView._newContactContainer.classList.remove(
+                    "hidden"
+                  );
+                  document
+                    .querySelector(".upload__btn")
+                    .classList.add("hidden");
+                  document
+                    .querySelector(".update__btn")
+                    .classList.remove("hidden");
+
+                  newContactView._escKeyPress();
+                  this._expandLessShowLess();
+                }
+              }
+            });
+          }
+        });
+      }
+      contactsView._getContactDetails(this._contactId);
     });
   }
   // Parse the contact's records into the input fields
@@ -101,8 +154,8 @@ class manageContactView extends View {
 
       for (let i = 0; i < this._data.length; i++) {
         if (
-          this._data[i][1]?.phoneNumber === null ||
-          this._data[i][1]?.phoneNumber === undefined
+          this._data[i][1].phoneNumber === null ||
+          this._data[i][1].phoneNumber === undefined
         )
           return;
         else if (this._data[i][0] === targetEl.id) {
@@ -146,9 +199,7 @@ class manageContactView extends View {
       handler(id, contactUpdate);
     });
   }
-
-  _deleteContact() {}
   _deleteAllContacts() {}
 }
 
-export default new manageContactView();
+export default new ManageContactView();

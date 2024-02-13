@@ -3,6 +3,7 @@ import contactsView from "./view/contactsView.js";
 import newContactView from "./view/newContactView.js";
 import displayContactView from "./view/displayContactView.js";
 import manageContactView from "./view/manageContactView.js";
+import deleteContactView from "./view/deleteContactView.js";
 
 // Handles loading of contacts in the view
 function controlLoadContacts(condition) {
@@ -37,6 +38,11 @@ function controlUpdateContact(id, contact) {
   contactsView.render(model.state.contact, true, "create");
   newContactView.render(model.state.contact, false, "view", id);
 }
+function controlDeleteContact(id) {
+  model.deleteSingleContact(id);
+  // getThisData();
+  // contactsView.render(model.state.contact, condition, "load");
+}
 
 // App initialization function
 const init = function () {
@@ -44,6 +50,7 @@ const init = function () {
   newContactView.addHandlerUploadContact(controlUploadContact);
   manageContactView.addHandlerGetNumber(controlGetContactNumber);
   manageContactView.addHandlerUpdateContact(controlUpdateContact);
+  deleteContactView.addHandlerDeleteContact(controlDeleteContact);
 };
 
 // App initialization call

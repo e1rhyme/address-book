@@ -4,11 +4,7 @@ import manageContactView from "./manageContactView.js";
 import displayContactView from "./displayContactView.js";
 
 class ContactsView extends View {
-  _target;
-  _targetEl;
-  _datasetTarget;
   _contactDetails;
-  _targetContainer;
   _menu = document.querySelector(".menu");
   _overlay = document.querySelector(".overlay");
   _landing = document.querySelector(".landing");
@@ -20,7 +16,6 @@ class ContactsView extends View {
   // Call fnxs on page load
   constructor() {
     super();
-    this._contactsEditIcon();
     this._menuVisibility(true);
     this._setElementsVisibility();
   }
@@ -59,14 +54,26 @@ class ContactsView extends View {
         <td data-title="Phone Number">${rec[0].phoneNumber}</td>
         <td data-title="Email Address">${rec[0].emailAddress}</td>
         <td data-title="Action">
-            <svg class="contacts--edit-icon" data-action="edit"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 -960 960 960">
-              <path
-                d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"
-                />
-            </svg>
-            <svg class="contacts--delete-icon" data-action="delete" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" ><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
+            <div class="manage-contact">
+              <div class="edit-delete-icons">
+                <svg class="contacts--edit-icon" data-action="edit"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960">
+                <path
+                  d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"
+                  />
+                </svg>
+                <svg class="contacts--delete-icon" data-action="delete" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m376-300 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Zm-96 180q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520Zm-400 0v520-520Z"/></svg>
+              </div>
+              <div class="delete-contact-container-${
+                contactId[i]
+              } hidden" data-id="${contactId[i]}">
+                <button class="confirm-btn-${
+                  contactId[i]
+                }">Confrim delete</button>
+                <button class="cancel-btn-${contactId[i]}">Cancel</button>
+              </div>
+            </div>
 	        </td>
         </tr>
       `;
@@ -109,50 +116,6 @@ class ContactsView extends View {
   _setElVisibilityOnCreateContact() {
     this._landing.classList.add("hidden");
     this._addressBook.classList.remove("hidden");
-  }
-  // Display selected contact details for editing
-  _contactsEditIcon() {
-    this._parentEl.addEventListener("mouseover", (e) => {
-      // Injected DOM elements
-      this._targetContainer = e.target.closest("tr");
-      this._contactId = this._targetContainer.id;
-
-      if (!this._targetContainer) return;
-      else {
-        this._targetContainer.addEventListener("mouseover", (e) => {
-          this._targetEl = e.target.closest("td");
-
-          if (!this._targetEl) return;
-          else {
-            this._targetEl.addEventListener("click", (e) => {
-              this._target = e.target.closest(".contacts--edit-icon");
-
-              if (!this._target) return;
-              else {
-                this._datasetTarget = this._target.dataset["action"];
-
-                if (!this._datasetTarget === "edit") return;
-                else {
-                  newContactView._newContactContainer.classList.remove(
-                    "hidden"
-                  );
-                  document
-                    .querySelector(".upload__btn")
-                    .classList.add("hidden");
-                  document
-                    .querySelector(".update__btn")
-                    .classList.remove("hidden");
-
-                  newContactView._escKeyPress();
-                  manageContactView._expandLessShowLess();
-                }
-              }
-            });
-          }
-        });
-      }
-      this._getContactDetails(this._contactId);
-    });
   }
   // Extract contact's details from object using the ID
   _getContactDetails(id) {

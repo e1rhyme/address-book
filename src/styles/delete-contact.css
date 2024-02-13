@@ -1,0 +1,42 @@
+.manage-contact {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+.edit-delete-icons {
+  gap: 1rem;
+  display: flex;
+  padding: 1.5rem;
+  font-size: 1rem;
+  position: relative;
+  align-items: center;
+  border-radius: 0.5rem;
+  justify-content: center;
+}
+/* .confirm-btn,
+.cancel-btn {
+  width: 5rem;
+  color: #fff;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.25);
+}
+.cancel-btn {
+  border: 1px solid blue;
+  background-color: blue;
+}
+.confirm-btn {
+  border: 1px solid red;
+  background-color: red;
+}
+.confirm-btn:hover,
+.cancel-btn:hover {
+  transform: scale(1.1);
+} */
+svg {
+  height: 2.5rem;
+}
+.hidden {
+  visibility: hidden;
+}

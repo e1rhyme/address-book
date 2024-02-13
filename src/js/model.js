@@ -141,6 +141,12 @@ export const updateExistingContact = function (id, contact) {
   return contact;
 };
 
+export const deleteSingleContact = function (id) {
+  const contactsArray = Object.entries(state.contact);
+
+  console.log(contactsArray);
+  console.log(contactsArray.indexOf(id));
+};
 // Temp fnx
 function clearStorage() {
   localStorage.clear();
