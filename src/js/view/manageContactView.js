@@ -1,7 +1,6 @@
 import View from "./view.js";
 import * as Elements from "../config.js";
 import newContactView from "./newContactView.js";
-import deleteContactView from "./deleteContactView.js";
 import contactsView from "./contactsView.js";
 
 class ManageContactView extends View {
@@ -67,47 +66,113 @@ class ManageContactView extends View {
   // Display selected contact details for editing
   _contactsEditIcon() {
     this._parentEl.addEventListener("mouseover", (e) => {
-      // Injected DOM elements
       this._targetContainer = e.target.closest("tr");
       this._contactId = this._targetContainer.id;
 
-      if (!this._targetContainer) return;
-      else {
-        this._targetContainer.addEventListener("mouseover", (e) => {
-          this._targetEl = e.target.closest(`.manage-contact`);
+      this._targetContainer
+        ? this._targetContainer.addEventListener("mouseover", (e) => {
+            this._targetEl = e.target.closest(".contacts--edit-icon");
 
-          if (!this._targetEl) return;
-          else {
-            this._targetEl.addEventListener("click", (e) => {
-              // this._target = document.querySelector(".contacts--edit-icon");
-              this._target = e.target.closest(".contacts--edit-icon");
+            if (!this._targetEl) return;
+            else {
+              const identifier = this._targetEl.dataset["action"];
+              identifier === "edit"
+                ? this._targetEl.addEventListener("click", () => {
+                    newContactView._newContactContainer.classList.remove(
+                      "hidden"
+                    );
+                    document
+                      .querySelector(".upload__btn")
+                      .classList.add("hidden");
+                    document
+                      .querySelector(".update__btn")
+                      .classList.remove("hidden");
 
-              if (!this._target) return;
-              else {
-                this._datasetTarget = this._target.dataset["action"];
+                    newContactView._escKeyPress();
+                    this._expandLessShowLess();
 
-                if (!this._datasetTarget === "edit") return;
-                else {
-                  newContactView._newContactContainer.classList.remove(
-                    "hidden"
-                  );
-                  document
-                    .querySelector(".upload__btn")
-                    .classList.add("hidden");
-                  document
-                    .querySelector(".update__btn")
-                    .classList.remove("hidden");
-
-                  newContactView._escKeyPress();
-                  this._expandLessShowLess();
-                }
-              }
-            });
-          }
-        });
-      }
-      contactsView._getContactDetails(this._contactId);
+                    contactsView._getContactDetails(this._contactId);
+                  })
+                : null;
+            }
+          })
+        : null;
     });
+  }
+  _contactsDeleteAll() {}
+  // Cancel delete action
+  _cancleDeleteAction(id, target) {
+    this._parentEl.addEventListener("click", (e) => {
+      this._cancelDelete = document.querySelector(`.cancel-btn-${id}`);
+
+      this._cancelDelete
+        ? this._cancelDelete.addEventListener("click", () => {
+            target.classList.add("hidden");
+          })
+        : null;
+
+      return;
+    });
+    return;
+  }
+  // Dynyamicall set elmeents styles when needed
+  _setButtonsElementStyle(confirm, cancel) {
+    confirm.addEventListener("mouseover", () => {
+      confirm.style.transform = "scale(1.1)";
+    });
+    confirm.addEventListener("mouseout", () => {
+      confirm.style.transform = "scale(1)";
+    });
+
+    cancel.addEventListener("mouseover", () => {
+      cancel.style.transform = "scale(1.1)";
+    });
+    cancel.addEventListener("mouseout", () => {
+      cancel.style.transform = "scale(1)";
+    });
+
+    if (!confirm) return;
+    else {
+      confirm.style.width = "5rem";
+      confirm.style.color = "#fff";
+      confirm.style.height = "3.5rem";
+      confirm.style.borderRadius = "0.5rem";
+      confirm.style.boxShadow = "2px 3px 5px rgba(0, 0, 0, 0.25)";
+      confirm.style.border = "1px solid var(--color-accent)";
+      confirm.style.backgroundColor = "var(--color-accent)";
+    }
+    if (!cancel) return;
+    else {
+      cancel.style.width = "5rem";
+      cancel.style.color = "#fff";
+      cancel.style.height = "3.5rem";
+      cancel.style.borderRadius = "0.5rem";
+      cancel.style.boxShadow = "2px 3px 5px rgba(0, 0, 0, 0.25)";
+      cancel.style.border = "1px solid var(--color-secondary)";
+      cancel.style.backgroundColor = "var(--color-secondary)";
+    }
+  }
+  _setDeleteContactContainerStyle(el) {
+    el.style.gap = "1rem";
+    el.style.display = "flex";
+    el.style.padding = "1.5rem";
+    el.style.fontSize = "1rem";
+    el.style.position = "relative";
+    el.style.alignItems = "center";
+    el.style.borderRadius = "0.5rem";
+    el.style.justifyContent = "center";
+  }
+  _setTrMouseoverState(id, tr) {
+    const target = document.querySelector(`.delete-contact-container-${id}`);
+
+    if (tr.id === id) {
+      tr.addEventListener("mouseleave", () => {
+        if (target.classList.contains("hidden")) return;
+        else {
+          target.style.display = "none";
+        }
+      });
+    }
   }
   // Parse the contact's records into the input fields
   _displayContactDetails(profile, id) {
@@ -132,6 +197,7 @@ class ManageContactView extends View {
 
     this._addContactWindow.dataset.contactid = id;
   }
+  // Set visiblity of elements if already active
   _expandLessShowLess() {
     if (!Elements.expandLess.classList.contains("hidden")) {
       Elements.prefixContainer.classList.toggle("extra");
@@ -199,7 +265,6 @@ class ManageContactView extends View {
       handler(id, contactUpdate);
     });
   }
-  _deleteAllContacts() {}
 }
 
 export default new ManageContactView();

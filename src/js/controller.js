@@ -40,8 +40,10 @@ function controlUpdateContact(id, contact) {
 }
 function controlDeleteContact(id) {
   model.deleteSingleContact(id);
-  // getThisData();
-  // contactsView.render(model.state.contact, condition, "load");
+  getThisData();
+  if (Object.keys(model.state.contact).length <= 0)
+    contactsView.render(undefined, false, "load");
+  else contactsView.render(model.state.contact, true, "load");
 }
 
 // App initialization function

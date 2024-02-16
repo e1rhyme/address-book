@@ -33,7 +33,11 @@
 .confirm-btn:hover,
 .cancel-btn:hover {
   transform: scale(1.1);
-} */
+} 
+tr:hover .confirm-btn, tr:hover .cancel-btn {
+  display: ;
+}
+*/
 svg {
   height: 2.5rem;
 }

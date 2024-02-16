@@ -11,6 +11,7 @@ export const state = {
     page: 1,
     resultsPerPage: RES_PER_PAGE,
   },
+  trash: {},
   special: [],
   userID: 1,
 };
@@ -130,22 +131,32 @@ export const updateExistingContact = function (id, contact) {
   contact.phoneNumber = phoneNumber;
 
   Object.keys(state.contact).forEach((key, index, rec) => {
-    if (!rec[index] === id) return;
-    else if (rec[index] === id) {
+    if (rec[index] === id) {
       state.contact[rec[index]] = contact;
-    }
+    } else return;
 
-    // Upload new contact to local storage
+    // Update existing contact in local storage
     localStorage.setItem("myContacts", JSON.stringify(state.contact));
   });
   return contact;
 };
 
 export const deleteSingleContact = function (id) {
-  const contactsArray = Object.entries(state.contact);
+  // Get updated contacts list
+  const updatedContacts = Object.entries(state.contact).filter((objKey) => {
+    if (objKey[0] !== id) return objKey;
+  });
+  // Get deleted contact and store in state object
+  const deletedContact = Object.entries(state.contact).filter((objKey) => {
+    if (objKey[0] == id) return objKey;
+  });
+  // Update contacts trash state object
+  state.trash = Object.fromEntries(deletedContact);
+  // Update contacts list state object
+  state.contact = Object.fromEntries(updatedContacts);
 
-  console.log(contactsArray);
-  console.log(contactsArray.indexOf(id));
+  // Update contacts list in local storage
+  localStorage.setItem("myContacts", JSON.stringify(state.contact));
 };
 // Temp fnx
 function clearStorage() {
