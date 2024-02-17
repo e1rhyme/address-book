@@ -1,5 +1,4 @@
 import View from "./view.js";
-import newContactView from "./newContactView.js";
 import manageContactView from "./manageContactView.js";
 import displayContactView from "./displayContactView.js";
 

@@ -116,8 +116,8 @@ class DeleteContactView extends View {
         chkbox.classList.add("hidden");
       });
       this._overlay.classList.add("hidden");
-      this._deleteContactContainer.style.display = "none";
       this._deleteContactContainer.style.visibility = "hidden";
+      this._deleteContactContainer.style.display = "none";
     });
   }
   addHandlerDeleteAllContacts(handler) {

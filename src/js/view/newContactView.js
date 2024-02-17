@@ -1,6 +1,5 @@
 import View from "./view.js";
 import * as Elements from "../config.js";
-import manageContactView from "./manageContactView.js";
 import displayContactView from "./displayContactView.js";
 
 class NewContactView extends View {
