@@ -73,6 +73,7 @@ section.address-book {
 }
 .contacts-container {
   grid-area: c;
+  position: relative;
 }
 aside {
   padding: 2rem;
@@ -266,7 +267,8 @@ tr:hover .contacts--delete-icon {
   position: absolute;
   font-family: inherit;
 }
-.new--overlay {
+.new--overlay,
+.delete--overlay {
   position: fixed;
   top: 0;
   left: 0;

@@ -140,7 +140,6 @@ export const updateExistingContact = function (id, contact) {
   });
   return contact;
 };
-
 export const deleteSingleContact = function (id) {
   // Get updated contacts list
   const updatedContacts = Object.entries(state.contact).filter((objKey) => {
@@ -157,6 +156,14 @@ export const deleteSingleContact = function (id) {
 
   // Update contacts list in local storage
   localStorage.setItem("myContacts", JSON.stringify(state.contact));
+};
+export const deleteAllContact = function () {
+  state.trash = state.contact;
+
+  // Mock delete of all contacts
+  state.contact = "";
+  // Delete all contacts
+  clearStorage();
 };
 // Temp fnx
 function clearStorage() {

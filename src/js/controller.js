@@ -45,6 +45,10 @@ function controlDeleteContact(id) {
     contactsView.render(undefined, false, "load");
   else contactsView.render(model.state.contact, true, "load");
 }
+function controlDeleteAllContacts() {
+  model.deleteAllContact();
+  contactsView.render(undefined, false, "load");
+}
 
 // App initialization function
 const init = function () {
@@ -53,6 +57,7 @@ const init = function () {
   manageContactView.addHandlerGetNumber(controlGetContactNumber);
   manageContactView.addHandlerUpdateContact(controlUpdateContact);
   deleteContactView.addHandlerDeleteContact(controlDeleteContact);
+  deleteContactView.addHandlerDeleteAllContacts(controlDeleteAllContacts);
 };
 
 // App initialization call

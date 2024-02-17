@@ -6,13 +6,19 @@ class DeleteContactView extends View {
   _target;
   _confirm;
   _targetEl;
+  _chkboxes;
   _contactId;
   _datasetTarget;
   _targetContainer;
+  _deleteContactContainer;
   _parentEl = document.querySelector(".contacts");
+  _tableContainer = document.querySelector(".tbl");
+  _overlay = document.querySelector(".delete--overlay");
 
   constructor() {
     super();
+    this._deleteAllContactsCheck();
+    this._cancelDeleteAllContacts();
   }
 
   addHandlerDeleteContact(handler) {
@@ -73,6 +79,57 @@ class DeleteContactView extends View {
           })
         : null;
     });
+  }
+  _deleteAllContactsCheck() {
+    this._tableContainer
+      ? this._tableContainer.addEventListener("click", (e) => {
+          this._target = e.target.closest("input[type='checkbox']");
+
+          this._chkboxes = document.querySelectorAll(".icon--checkbox");
+          this._deleteContactContainer = document.querySelector(
+            ".delete-contact-container"
+          );
+
+          if (!this._target?.checked) {
+            this._chkboxes.forEach((chkbox) => {
+              chkbox.checked = false;
+              chkbox.classList.add("hidden");
+            });
+          } else {
+            this._target.checked = true;
+            this._chkboxes.forEach((chkbox) => {
+              chkbox.checked = true;
+              chkbox.classList.remove("hidden");
+              this._overlay.classList.remove("hidden");
+              this._deleteContactContainer.classList.remove("hidden");
+            });
+          }
+        })
+      : null;
+  }
+  _cancelDeleteAllContacts() {
+    document.querySelector(".cancel-btn").addEventListener("click", () => {
+      this._target.checked = false;
+      this._chkboxes.forEach((chkbox) => {
+        chkbox.checked = false;
+        chkbox.classList.add("hidden");
+      });
+      this._overlay.classList.add("hidden");
+      this._deleteContactContainer.classList.add("hidden");
+    });
+  }
+  addHandlerDeleteAllContacts(handler) {
+    this._tableContainer
+      ? this._tableContainer.addEventListener("click", (e) => {
+          const confirmBtn = document.querySelector(".confirm-btn");
+
+          confirmBtn
+            ? confirmBtn.addEventListener("click", () => {
+                handler();
+              })
+            : null;
+        })
+      : null;
   }
 }
 
