@@ -101,7 +101,8 @@ class DeleteContactView extends View {
               chkbox.checked = true;
               chkbox.classList.remove("hidden");
               this._overlay.classList.remove("hidden");
-              this._deleteContactContainer.classList.remove("hidden");
+              this._deleteContactContainer.style.display = "flex";
+              this._deleteContactContainer.style.visibility = "visible";
             });
           }
         })
@@ -115,7 +116,8 @@ class DeleteContactView extends View {
         chkbox.classList.add("hidden");
       });
       this._overlay.classList.add("hidden");
-      this._deleteContactContainer.classList.add("hidden");
+      this._deleteContactContainer.style.display = "none";
+      this._deleteContactContainer.style.visibility = "hidden";
     });
   }
   addHandlerDeleteAllContacts(handler) {
