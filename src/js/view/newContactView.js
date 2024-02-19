@@ -1,6 +1,7 @@
 import View from "./view.js";
 import * as Elements from "../config.js";
 import displayContactView from "./displayContactView.js";
+import manageContactView from "./manageContactView.js";
 
 class NewContactView extends View {
   _contactDetails;
@@ -115,7 +116,7 @@ class NewContactView extends View {
 
     Elements.dialogBox.addEventListener("change", function () {
       Elements.profileImg.src = URL.createObjectURL(
-        Elements.dialogBox.files[0]
+        Elements.dialogBox?.files[0]
       );
       const reader = new FileReader();
 
@@ -159,12 +160,13 @@ class NewContactView extends View {
 
       this._escKeyPress();
       this._resetFormElements();
+      manageContactView._expandLessShowLess();
     });
   }
   // Reset form elements
   _resetFormElements() {
     document.getElementById("contact-form").reset();
-    Elements.profileImg.src = "/src/img/profile.png";
+    Elements.profileImg.src = require("/src/img/profile.png");
     Elements.countryCode.value = "";
     Elements.facebook.value = "";
     Elements.instagram.value = "";
@@ -183,27 +185,35 @@ class NewContactView extends View {
       // Create an object of entered values
       const newContact = {
         profileImage: Elements.profileImg.src,
-        prefix: Elements.prefix.value ? Elements.prefix.value : "N/A",
+        prefix: Elements.prefix.value ? Elements.prefix.value : "",
         firstName: Elements.firstName.value,
-        middleName: Elements.middleName.value
-          ? Elements.middleName.value
-          : "N/A",
+        middleName: Elements.middleName.value ? Elements.middleName.value : "",
         lastName: Elements.lastName.value,
-        suffix: Elements.suffix.value ? Elements.suffix.value : "N/A",
+        suffix: Elements.suffix.value ? Elements.suffix.value : "",
         dateOfBirth: Elements.dateOfBirth.value,
         emailAddress: Elements.emailAddress.value
           ? Elements.emailAddress.value
-          : "N/A",
-        website: Elements.website.value ? Elements.website.value : "N/A",
-        facebook: Elements.facebook.value ? Elements.facebook.value : "N/A",
-        instagram: Elements.instagram.value ? Elements.instagram.value : "N/A",
-        x: Elements.x.value ? Elements.x.value : "N/A",
-        tiktok: Elements.tiktok.value ? Elements.tiktok.value : "N/A",
-        pinterest: Elements.pinterest.value ? Elements.pinterest.value : "N/A",
-        linkedIn: Elements.linkedIn.value ? Elements.linkedIn.value : "N/A",
-        youtube: Elements.youtube.value ? Elements.youtube.value : "N/A",
-        snapchat: Elements.snapchat.value ? Elements.snapchat.value : "N/A",
+          : "",
+        website: Elements.website.value ? Elements.website.value : "",
+        facebook: Elements.facebook.value ? Elements.facebook.value : "",
+        instagram: Elements.instagram.value ? Elements.instagram.value : "",
+        x: Elements.x.value ? Elements.x.value : "",
+        tiktok: Elements.tiktok.value ? Elements.tiktok.value : "",
+        pinterest: Elements.pinterest.value ? Elements.pinterest.value : "",
+        linkedIn: Elements.linkedIn.value ? Elements.linkedIn.value : "",
+        youtube: Elements.youtube.value ? Elements.youtube.value : "",
+        snapchat: Elements.snapchat.value ? Elements.snapchat.value : "",
       };
+
+      // Find but and remove code to this hack
+      const deleteContactContainer = document.querySelector(
+        ".delete-contact-container"
+      );
+      deleteContactContainer.style.visibility = "hidden";
+      deleteContactContainer.style.display = "none";
+
+      document.querySelector("input[name='checkbox']").checked = false;
+      // hack end
 
       handler(newContact);
     });

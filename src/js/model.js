@@ -20,7 +20,9 @@ export const state = {
 export function loadAddressBook(handler) {
   const contacts = localStorage.getItem("myContacts");
 
-  if (!contacts) return handler(false);
+  // console.log(Object.keys(contacts));
+  // console.log(Object.keys(contacts).length === 0);
+  if (!contacts || Object.keys(contacts).length === 0) return handler(false);
 
   // Call to retrieve current userID
   const currentUserID = +getUserID(contacts);
@@ -98,16 +100,10 @@ function newUserID(id) {
 export const uploadNewContact = function (newUser) {
   // Set user account number
   let phoneNumber = iti.getNumber();
-  phoneNumber = phoneNumber ? phoneNumber : "N/A";
+  phoneNumber = phoneNumber ? phoneNumber : "";
 
   // Check compulsory fields have newUse
-  if (
-    newUser.firstName === "" ||
-    newUser.lastName === ""
-    // ||
-    // newUser.emailAddress === ""
-  )
-    return;
+  if (newUser.firstName === "") return null;
   else {
     // Set user phone number and profile image path
     newUser.phoneNumber = phoneNumber;
@@ -125,7 +121,7 @@ export const uploadNewContact = function (newUser) {
 export const updateExistingContact = function (id, contact) {
   // Retrieve contact's phone number
   let phoneNumber = iti.getNumber();
-  phoneNumber = phoneNumber ? phoneNumber : "N/A";
+  phoneNumber = phoneNumber ? phoneNumber : "";
 
   // Add key/ value pair to contact object
   contact.phoneNumber = phoneNumber;
@@ -138,7 +134,6 @@ export const updateExistingContact = function (id, contact) {
     // Update existing contact in local storage
     localStorage.setItem("myContacts", JSON.stringify(state.contact));
   });
-  return contact;
 };
 export const deleteSingleContact = function (id) {
   // Get updated contacts list
@@ -153,22 +148,29 @@ export const deleteSingleContact = function (id) {
   state.trash = Object.fromEntries(deletedContact);
   // Update contacts list state object
   state.contact = Object.fromEntries(updatedContacts);
+  // Check if this is last contact deleted
+  if (Object.keys(state.contact).length <= 0) {
+    clearLocalStorage();
+  }
 
   // Update contacts list in local storage
   localStorage.setItem("myContacts", JSON.stringify(state.contact));
 };
 export const deleteAllContact = function () {
-  state.trash = state.contact;
+  // state.trash = state.contact;
+  for (var rec in state.contact) {
+    if (state.contact.hasOwnProperty(rec)) {
+      delete state.contact[rec];
+    }
+  }
 
-  // Mock delete of all contacts
-  state.contact = "";
-  // Delete all contacts
-  clearStorage();
+  state.userID = 1;
+  clearLocalStorage();
 };
 // Temp fnx
-function clearStorage() {
+function clearLocalStorage() {
   localStorage.clear();
 }
-// clearStorage();
+// clearLocalStorage();
 
 initializeTel();

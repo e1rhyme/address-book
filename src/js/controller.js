@@ -1,4 +1,6 @@
+import "core-js/stable";
 import * as model from "./model.js";
+import "regenerator-runtime/runtime.js";
 import contactsView from "./view/contactsView.js";
 import newContactView from "./view/newContactView.js";
 import displayContactView from "./view/displayContactView.js";
@@ -16,11 +18,14 @@ function controlLoadContacts(condition) {
   }
 }
 // Handles upload of a new contact
-function controlUploadContact(data) {
-  model.uploadNewContact(data);
-  getThisData();
-  contactsView.render(model.state.contact, true, "create");
-  newContactView.render(model.state.contact, false, "view", "new");
+function controlUploadContact(contact) {
+  const val = model.uploadNewContact(contact);
+  if (val === null) alert("Please enter first name of contact");
+  else {
+    getThisData();
+    contactsView.render(model.state.contact, true, "create");
+    newContactView.render(model.state.contact, false, "view", "new");
+  }
 }
 // Pushes contact object for content render
 function getThisData() {

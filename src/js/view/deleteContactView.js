@@ -116,16 +116,19 @@ class DeleteContactView extends View {
         chkbox.classList.add("hidden");
       });
       this._overlay.classList.add("hidden");
+
       this._deleteContactContainer.style.visibility = "hidden";
       this._deleteContactContainer.style.display = "none";
     });
   }
   addHandlerDeleteAllContacts(handler) {
+    // debugger;
     this._tableContainer
       ? this._tableContainer.addEventListener("click", (e) => {
           const confirmBtn = document.querySelector(".confirm-btn");
+          const btnStatus = confirmBtn.dataset.status;
 
-          confirmBtn
+          btnStatus === "delete"
             ? confirmBtn.addEventListener("click", () => {
                 handler();
               })

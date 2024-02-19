@@ -27,7 +27,7 @@
 }
 .new-record {
   font-size: var(--font-size-24);
-  font-weight: var(-font-weight-bold);
+  font-weight: var(--font-weight-bold);
 }
 .add-record {
   border-radius: 0.5rem;

@@ -97,10 +97,10 @@ class DisplayContactView extends View {
           }" alt="Profile Image" class="new--profile-img" />
           </div>
           <div id="new--contact-name">
-            <label>${profile.prefix === "N/A" ? "" : profile.prefix} ${
-      profile.firstName === "N/A" ? "" : profile.firstName
-    } ${profile.middleName === "N/A" ? "" : profile.middleName} ${
-      profile.lastName === "N/A" ? "" : profile.lastName
+            <label>${profile.prefix === "" ? "" : profile.prefix} ${
+      profile.firstName === "" ? "" : profile.firstName
+    } ${profile.middleName === "" ? "" : profile.middleName} ${
+      profile.lastName === "" ? "" : profile.lastName
     }
             </label>
           </div>
