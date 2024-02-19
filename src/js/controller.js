@@ -1,6 +1,6 @@
-import "core-js/stable";
+// import "../../node_modules/core-js/stable/stable.js";
+// import "regenerator-runtime/runtime";
 import * as model from "./model.js";
-import "regenerator-runtime/runtime.js";
 import contactsView from "./view/contactsView.js";
 import newContactView from "./view/newContactView.js";
 import displayContactView from "./view/displayContactView.js";
