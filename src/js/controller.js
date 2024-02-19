@@ -1,5 +1,3 @@
-// import "../../node_modules/core-js/stable/stable.js";
-// import "regenerator-runtime/runtime";
 import * as model from "./model.js";
 import contactsView from "./view/contactsView.js";
 import newContactView from "./view/newContactView.js";
@@ -9,6 +7,7 @@ import deleteContactView from "./view/deleteContactView.js";
 
 // Handles loading of contacts in the view
 function controlLoadContacts(condition) {
+  console.log("We are live");
   // No contact exist
   if (!condition) contactsView.render(undefined, condition, "load");
   // contacts exist

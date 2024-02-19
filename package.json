@@ -4,7 +4,7 @@
   "description": "Online address book web app",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,5 @@
   "homepage": "https://github.com/e1rhyme/address-book#readme",
   "devDependencies": {
     "parcel": "^2.11.0"
-  },
-  "dependencies": {
-    "core-js": "^3.36.0",
-    "regenerator-runtime": "^0.14.1"
   }
 }
