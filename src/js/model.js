@@ -1,4 +1,4 @@
-import { RES_PER_PAGE, countryCode } from "/src/js/config.js";
+import { RES_PER_PAGE, countryCode } from "./src/js/config.js";
 
 let contactNumber;
 
