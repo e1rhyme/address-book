@@ -1,4 +1,4 @@
-import View from "/src/js/view/view.js";
+import View from "./src/js/view/view.js";
 import manageContactView from "./manageContactView.js";
 
 class DeleteContactView extends View {
