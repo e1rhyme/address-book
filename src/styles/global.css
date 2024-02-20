@@ -1,8 +1,8 @@
-@import "./src/styles/no-records.css";
-@import "./src/styles/new-contact.css";
-@import "./src/styles/style.css";
-@import "./src/styles/contacts.css";
-@import "./src/styles/delete-contact.css";
+@import "/src/styles/no-records.css";
+@import "/src/styles/new-contact.css";
+@import "/src/styles/style.css";
+@import "/src/styles/contacts.css";
+@import "/src/styles/delete-contact.css";
 
 /********************************************/
 /* VARIABLES DECLARATION */ /********************************************/

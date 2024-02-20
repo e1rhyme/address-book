@@ -93,9 +93,7 @@ class DisplayContactView extends View {
       <div class="new--profile-container" data-contactID="${id}">
         <div class="new--img__container">
           <img src="${
-            profile.profileImage
-              ? profile.profileImage
-              : "./src/img/profile.png"
+            profile.profileImage ? profile.profileImage : "/src/img/profile.png"
           }" alt="Profile Image" class="new--profile-img" />
           </div>
           <div id="new--contact-name">

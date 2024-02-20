@@ -166,7 +166,7 @@ class NewContactView extends View {
   // Reset form elements
   _resetFormElements() {
     document.getElementById("contact-form").reset();
-    Elements.profileImg.src = require("./src/img/profile.png");
+    Elements.profileImg.src = require("/src/img/profile.png");
     Elements.countryCode.value = "";
     Elements.facebook.value = "";
     Elements.instagram.value = "";
