@@ -179,7 +179,7 @@ span.material-symbols-outlined.menu {
   align-items: center;
   text-decoration: none;
   justify-content: center;
-  color: var(-color-accent);
+  color: var(--color-accent);
   background: var(--color-blue-menu);
 }
 
