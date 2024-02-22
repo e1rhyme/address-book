@@ -2,10 +2,54 @@
 
 1100px: show only 2 column, full top menu and side bar
 
-1021px: hide side bar; visible on clice of menu icon: disappears on click outside area
+1021px: hide side bar; visible on click of menu icon: disappears on click outside area
 
 700px: show only name
 
-600px: hide search box, only icon stays and search box pops up on icon click, sort of floating
+570px: only icon stays and onclick, search box pops up floating
 
 */
+
+@media screen and (max-width: 1100px) {
+  thead tr th:nth-child(5) {
+    display: none;
+  }
+  tbody tr td:nth-child(5) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1021px) {
+  .side-bar-container {
+    display: none;
+  }
+  .contacts-container {
+    grid-column: span 2 !important;
+  }
+}
+@media only screen and (max-width: 828px) {
+  .search-box:hover > .search-txt {
+    width: 12.5rem;
+  }
+}
+@media screen and (max-width: 700px) {
+  thead tr th:nth-child(4) {
+    display: none;
+  }
+  tbody tr td:nth-child(4) {
+    display: none;
+  }
+}
+@media screen and (max-width: 570px) {
+  .header__left,
+  .header__right {
+    gap: 1rem;
+  }
+}
+/* @media screen and (max-width: 500px) {
+  .search-box:hover {
+    left: 20;
+    width: 20rem;
+    position: absolute;
+  }
+} */

@@ -11,7 +11,8 @@ class ContactsView extends View {
   _addressBook = document.querySelector(".address-book");
   _sidebar = document.querySelector(".side-bar-container");
   _contactsContainer = document.querySelector(".contacts-container");
-
+  _mediaQuery = window.matchMedia("(max-width: 1021px)");
+  _floatingMenu = document.querySelector(".mobile-side-bar-container");
   // Call fnxs on page load
   constructor() {
     super();
@@ -78,17 +79,34 @@ class ContactsView extends View {
   }
   // Show or hide sidebar
   _menuVisibility(state) {
-    this._menu.addEventListener("click", () => {
-      if (state) {
-        this._sidebar.classList.toggle("hidden");
-        this._contactsContainer.style.gridColumn = "span 2";
-        state = false;
-      } else {
-        this._sidebar.classList.toggle("hidden");
-        this._contactsContainer.style.gridColumn = "span 1";
+    this._mediaQuery.addEventListener("change", () => {
+      this._menu.addEventListener("click", () => {
+        if (this._mediaQuery.matches === false) {
+          console.log(this._mediaQuery);
+          if (state) {
+            this._sidebar.classList.add("hidden");
+            this._contactsContainer.style.gridColumn = "span 2";
+            state = false;
+          } else {
+            this._sidebar.classList.remove("hidden");
+            this._contactsContainer.style.gridColumn = "span 1";
 
-        state = true;
-      }
+            state = true;
+          }
+        } else {
+          console.log(this._mediaQuery);
+          this._floatingMenu.classList.remove("hidden");
+
+          document.addEventListener("click", (e) => {
+            if (
+              !this._floatingMenu.contains(e.target) &&
+              !this._menu.contains(e.target)
+            ) {
+              this._floatingMenu.classList.add("hidden");
+            }
+          });
+        }
+      });
     });
   }
   // Set elements visiblity via toggle property

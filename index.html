@@ -58,10 +58,17 @@
               <span class="material-symbols-outlined menu"> menu </span>
               <span class="material-symbols-outlined person"> person </span>
               <a href="#" class="header-contact-link"> Contacts </a>
-              <form id="search">
-                <input type="search" name="search" placeholder="Search" />
-                <button id="submit" type="submit">Search</button>
-              </form>
+              <div class="search-box">
+                <input
+                  class="search-txt"
+                  type="text"
+                  name=""
+                  placeholder="Type to search"
+                />
+                <a class="search-btn" href="#">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
+              </div>
             </div>
             <div class="header__right">
               <span class="material-symbols-outlined"> help </span>
@@ -69,6 +76,7 @@
             </div>
           </div>
         </div>
+
         <div class="side-bar-container">
           <aside>
             <menu>
@@ -127,6 +135,67 @@
             </menu>
           </aside>
         </div>
+        <div class="mobile-side-bar-container hidden">
+          <menu>
+            <div class="side-bar-top menu-item">
+              <span class="material-symbols-outlined person"> person </span>
+              <a href="#" class="header-contact-link"> Contacts </a>
+            </div>
+            <a href="#" class="add-contact-link menu-item"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"
+                />
+              </svg>
+              <p>Create Contact</p></a
+            >
+            <a href="#" class="menu-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780Zm-455-80h311q-10-20-55.5-35T480-370q-55 0-100.5 15T325-320ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Zm0-80q17 0 28.5-11.5T520-600q0-17-11.5-28.5T480-640q-17 0-28.5 11.5T440-600q0 17 11.5 28.5T480-560Zm1 240Zm-1-280Z"
+                />
+              </svg>
+              <p>Contacts</p></a
+            >
+            <a href="#" class="menu-item"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+                />
+              </svg>
+              <p>Trash</p></a
+            >
+            <a href="#" class="menu-item"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M840-480 666-234q-11 16-28.5 25t-37.5 9H200q-33 0-56.5-23.5T120-280v-400q0-33 23.5-56.5T200-760h400q20 0 37.5 9t28.5 25l174 246Zm-98 0L600-680H200v400h400l142-200Zm-542 0v200-400 200Z"
+                />
+              </svg>
+              <p>Labels</p></a
+            >
+          </menu>
+        </div>
+
         <div class="contacts-container">
           <div class="contacts-list-container">
             <table class="tbl">
@@ -138,7 +207,7 @@
                   </th>
                   <th>Name</th>
                   <th>Phone Number</th>
-                  <th>Email Address</th>
+                  <th data-title="Email Header">Email Address</th>
                   <th class="hidden">Action</th>
                 </tr>
               </thead>
