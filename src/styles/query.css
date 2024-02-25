@@ -1,15 +1,3 @@
-/* Break points
-
-1100px: show only 2 column, full top menu and side bar
-
-1021px: hide side bar; visible on click of menu icon: disappears on click outside area
-
-700px: show only name
-
-570px: only icon stays and onclick, search box pops up floating
-
-*/
-
 @media screen and (max-width: 1100px) {
   thead tr th:nth-child(5) {
     display: none;
@@ -31,6 +19,25 @@
   .search-box:hover > .search-txt {
     width: 12.5rem;
   }
+  .add-contact-window,
+  .new--contact-window {
+    height: 90%;
+    max-width: 85%;
+  }
+}
+@media screen and (max-width: 780px) {
+  .name,
+  .prefix,
+  .mobile {
+    gap: 0.75rem;
+  }
+}
+@media screen and (max-width: 720px) {
+  .name,
+  .prefix,
+  .mobile {
+    gap: 1.25rem;
+  }
 }
 @media screen and (max-width: 700px) {
   thead tr th:nth-child(4) {
@@ -40,16 +47,109 @@
     display: none;
   }
 }
+@media screen and (max-width: 650px) {
+  .new--personal-info-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pib-website {
+    grid-column: span 2;
+  }
+  .new--social-handles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .add-contact-window,
+  .new--contact-window {
+    height: 90%;
+  }
+  button#btn--edit {
+    margin-top: 10rem;
+  }
+}
 @media screen and (max-width: 570px) {
+  .name,
+  .prefix,
+  .mobile {
+    gap: 2rem;
+  }
   .header__left,
   .header__right {
     gap: 1rem;
   }
-}
-/* @media screen and (max-width: 500px) {
-  .search-box:hover {
-    left: 20;
-    width: 20rem;
-    position: absolute;
+  .show-more-title {
+    font-size: 1.4rem;
   }
-} */
+  .show-more {
+    margin-right: 1rem;
+  }
+  .expand_more,
+  .expand_less {
+    margin-left: 0;
+  }
+  button#btn--edit {
+    margin-top: 15rem;
+  }
+  .add-contact-window,
+  .new--contact-window {
+    padding: 0 3rem;
+  }
+}
+@media screen and (max-width: 510px) {
+  .website.social {
+    align-items: center;
+    grid-template-columns: auto;
+  }
+  .social-handles,
+  .website {
+    align-items: center;
+  }
+  .social-handles:last-child:not(.social-handles.personal-info-block) {
+    margin-top: var(--margin-bottom-small);
+  }
+  input[id="x"],
+  input[id="tiktok"],
+  input[id="youtube"],
+  input[id="linkedin"],
+  input[id="facebook"],
+  input[id="snapchat"],
+  input[id="instagram"],
+  input[id="pinterest"] {
+    width: 100%;
+  }
+  div[id="new--contact-name"] label {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .new--social-handles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  button#btn--edit {
+    margin-top: 20rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .name,
+  .prefix,
+  .mobile {
+    gap: 2rem;
+  }
+  .no-records {
+    font-size: var(--font-size-48);
+  }
+  .new-record {
+    font-size: var(--font-size-18);
+  }
+  .add-record {
+    font-size: var(--font-size-18);
+  }
+  .new--personal-info-container {
+    line-height: 2rem;
+    display: inline-block;
+  }
+  button#btn--edit {
+    margin-top: 15rem;
+  }
+  .add-contact-window,
+  .new--contact-window {
+    height: 95%;
+  }
+}

@@ -37,11 +37,11 @@ export const url = document.querySelector("url");
 export const contactUpload = document.querySelector(".upload__btn");
 export const uploadForm = document.getElementById("contact-from");
 export const emailContainer = document.querySelector(".email-container");
-export const mobileContainer = document.querySelector(".mobile-container");
+// export const mobileContainer = document.querySelector(".mobile-container");
 export const expandMore = document.querySelector(".expand_more");
 export const expandLess = document.querySelector(".expand_less");
-export const showMore = document.querySelector(".show-more");
-export const showLess = document.querySelector(".show-less");
+export const showMore = document.querySelector(".show-more-title");
+export const showLess = document.querySelector(".show-less-title");
 export const addEmail = document.querySelector(".add-email");
 export const addMobile = document.querySelector(".add-mobile");
 
