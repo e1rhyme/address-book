@@ -7,7 +7,7 @@ import deleteContactView from "./view/deleteContactView.js";
 
 // Handles loading of contacts in the view
 function controlLoadContacts(condition) {
-  console.log("DebugginG");
+  console.log("debugginG");
   // No contact exist
   if (!condition) contactsView.render(undefined, condition, "load");
   // contacts exist
