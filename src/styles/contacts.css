@@ -232,6 +232,7 @@ form input:placeholder-shown {
 }
 .contact-name img {
   width: 4rem;
+  height: 4rem;
   margin-top: 1rem;
 }
 table {
