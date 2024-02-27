@@ -296,23 +296,24 @@ tr:hover .contacts--delete-icon {
 .new--contact-window {
   top: 50%;
   left: 50%;
+  width: 35%;
   height: 90%;
   z-index: 299;
   position: fixed;
   max-width: 100%;
-  padding: 0 4rem;
   overflow-y: auto;
   overflow-x: hidden;
   border-radius: 9px;
   transition: all 0.5s;
+  padding: 0 4.5rem 0 2rem;
   background-color: white;
   transform: translate(-50%, -50%);
   box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.25);
 }
 .btn--close-modal {
-  top: 0.5rem;
+  top: 2.5rem;
   border: none;
-  right: 1.6rem;
+  right: 3.5rem;
   color: inherit;
   cursor: pointer;
   background: none;
@@ -335,10 +336,9 @@ button:focus {
 button > *:first-child {
   margin-right: 1rem;
 }
-button.upload__btn,
 input.upload__btn,
-input.update__btn,
 input.update__btn {
+  width: 50%;
   float: right;
   cursor: pointer;
   font-weight: bolder;
@@ -384,12 +384,6 @@ input {
   outline: none;
   border: 1px solid var(--color-accent-dark);
   background-color: var(--color-accent-light);
-}
-.upload__btn,
-.update__btn {
-  width: 50%;
-  margin-right: 3.2rem;
-  padding: var(--padding-tblr-large);
 }
 .img__container {
   width: 12rem;
@@ -471,12 +465,6 @@ input {
   gap: 0;
   margin-top: 2rem;
 }
-.expand_more,
-.expand_less {
-  cursor: pointer;
-  margin-left: 1rem;
-  align-items: center;
-}
 .email,
 .dob {
   gap: 1.5rem;
@@ -484,7 +472,9 @@ input {
   align-items: center;
 }
 .name,
-.prefix {
+.prefix,
+.mobile {
+  gap: 1.5rem;
   display: grid;
   align-items: center;
   grid-template-areas: "x y z";
@@ -502,25 +492,29 @@ input[id="prefix"] {
 .expand_more,
 .expand_less {
   grid-area: z;
+  cursor: pointer;
+  margin-left: 1rem;
+  align-items: center;
 }
 .dob {
   gap: 0.55rem;
 }
-.mobile {
+/* .mobile {
+  gap: 1.5rem;
   display: grid;
   align-items: center;
   grid-template-areas: "v w x";
   grid-template-columns: 5% 90% 5%;
-}
+} */
 .mobile-icon {
   margin-right: 0.5rem;
-  grid-area: v;
+  grid-area: x;
 }
 .iti--inline-dropdown {
-  grid-area: w;
+  grid-area: y;
 }
 .iti__selected-flag {
-  grid-area: x;
+  grid-area: z;
 }
 /* .iti.iti--allow-dropdown {
   width: 10%;

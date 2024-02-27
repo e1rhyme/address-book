@@ -44,7 +44,6 @@
   transition: all 0.5s;
 }
 /* Used to control elements visibility state*/
-section.address-book.hidden,
-.hidden {
+section.address-book.hidden {
   display: none;
 }

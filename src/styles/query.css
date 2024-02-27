@@ -1,3 +1,12 @@
+@media screen and (min-width: 1285px) {
+  .new--personal-info-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pib-website {
+    grid-column: span 2;
+  }
+}
+
 @media screen and (max-width: 1100px) {
   thead tr th:nth-child(5) {
     display: none;
@@ -29,14 +38,21 @@
   .name,
   .prefix,
   .mobile {
-    gap: 0.75rem;
+    gap: 1.75rem;
   }
 }
-@media screen and (max-width: 720px) {
+@media screen and (min-width: 720px) {
   .name,
   .prefix,
   .mobile {
-    gap: 1.25rem;
+    gap: 1.5rem;
+  }
+}
+@media screen and (min-width: 720px) and (orientation: landscape) {
+  .name,
+  .prefix,
+  .mobile {
+    gap: 0;
   }
 }
 @media screen and (max-width: 700px) {
@@ -66,11 +82,6 @@
   }
 }
 @media screen and (max-width: 570px) {
-  .name,
-  .prefix,
-  .mobile {
-    gap: 2rem;
-  }
   .header__left,
   .header__right {
     gap: 1rem;
@@ -81,16 +92,9 @@
   .show-more {
     margin-right: 1rem;
   }
-  .expand_more,
-  .expand_less {
-    margin-left: 0;
-  }
+
   button#btn--edit {
     margin-top: 15rem;
-  }
-  .add-contact-window,
-  .new--contact-window {
-    padding: 0 3rem;
   }
 }
 @media screen and (max-width: 510px) {
@@ -151,5 +155,86 @@
   .add-contact-window,
   .new--contact-window {
     height: 95%;
+  }
+}
+/* iPhone 12s */
+@media only screen and (min-width: 390px) and (max-width: 844px) {
+  .add-contact-window,
+  .new--contact-window {
+    height: 75%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .form-footer {
+    margin: 3rem 0;
+  }
+  .header-contact-link {
+    margin-right: 0;
+  }
+  thead tr th:nth-child(1),
+  thead tr th:nth-child(2) {
+    width: 10%;
+  }
+}
+@media only screen and (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
+  .add-contact-window,
+  .new--contact-window {
+    height: 90%;
+    width: 75%;
+    max-width: 100%;
+  }
+  button > *:first-child {
+    margin-top: 40%;
+  }
+  .expand_more,
+  .expand_less {
+    margin-left: 1rem;
+  }
+  .form-footer {
+    margin: 3rem 0;
+  }
+  thead tr th:nth-child(1),
+  thead tr th:nth-child(2) {
+    width: 5%;
+  }
+}
+/* Samsung Galaxy S8 */
+@media only screen and (min-width: 360px) and (max-width: 740px) {
+  .add-contact-window,
+  .new--contact-window {
+    height: 75%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .form-footer {
+    margin: 3rem 0;
+  }
+  .header-contact-link {
+    margin-right: 0;
+  }
+  thead tr th:nth-child(1),
+  thead tr th:nth-child(2) {
+    width: 10%;
+  }
+  .header-contact-link {
+    display: none;
+  }
+}
+@media only screen and (min-width: 360px) and (max-width: 740px) and (orientation: landscape) {
+  .add-contact-window,
+  .new--contact-window {
+    height: 75%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .form-footer {
+    margin: 3rem 0;
+  }
+  .header-contact-link {
+    margin-right: 0;
+  }
+  thead tr th:nth-child(1),
+  thead tr th:nth-child(2) {
+    width: 5%;
   }
 }

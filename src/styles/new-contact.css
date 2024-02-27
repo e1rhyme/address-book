@@ -4,9 +4,9 @@
   flex-direction: column;
   justify-content: center;
 }
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 .new--btn--close-modal {
   top: 0.5rem;
   border: none;
