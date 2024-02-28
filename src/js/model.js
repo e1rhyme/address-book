@@ -103,7 +103,7 @@ export const uploadNewContact = function (newUser) {
   phoneNumber = phoneNumber ? phoneNumber : "";
 
   // Check compulsory fields have newUse
-  if (newUser.firstName === "") return null;
+  if (newUser.firstName === "" || newUser.firstName.length <= 1) return null;
   else {
     // Set user phone number and profile image path
     newUser.phoneNumber = phoneNumber;

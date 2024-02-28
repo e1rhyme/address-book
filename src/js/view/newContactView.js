@@ -8,10 +8,14 @@ class NewContactView extends View {
   _landing = document.querySelector(".landing");
   _addRecordBtn = document.querySelector(".add-record");
   _newOverlay = document.querySelector(".new--overlay");
+  _mediaQuery = window.matchMedia("(max-width: 1021px)");
   _addressBook = document.querySelector(".address-book");
   _parentEl = document.querySelector(".new--contact-window");
   _addContactLink = document.querySelector(".add-contact-link");
+  _sideBar = document.querySelector(".mobile-add-contact-link");
+  _floatingMenu = document.querySelector(".mobile-side-bar-container");
   _newContactContainer = document.querySelector(".new-contact-container");
+  _mobileAddContactLink = document.querySelector(".mobile-add-contact-link");
 
   constructor() {
     super();
@@ -25,6 +29,7 @@ class NewContactView extends View {
     this._closeOverlay();
     this._createContact();
     this._newCloseOverlay();
+    this._mobileCreateContact();
     this._profileImgContainer();
   }
 
@@ -154,20 +159,34 @@ class NewContactView extends View {
   // Create new user from address-book interface
   _createContact() {
     this._addContactLink.addEventListener("click", () => {
-      this._newContactContainer.classList.remove("hidden");
-      document.querySelector(".upload__btn").classList.remove("hidden");
-      document.querySelector(".update__btn").classList.add("hidden");
-
-      this._escKeyPress();
-      this._resetFormElements();
-      manageContactView._expandLessShowLess();
+      this._createContactAction();
     });
+  }
+  _mobileCreateContact() {
+    this._mediaQuery.addEventListener("change", () => {
+      this._mobileAddContactLink.addEventListener("click", () => {
+        if (this._mediaQuery.matches === true) {
+          this._createContactAction();
+          this._floatingMenu.classList.add("hidden");
+          // this._floatingMenu.style.display = "none";
+        }
+      });
+    });
+  }
+  _createContactAction() {
+    this._newContactContainer.classList.remove("hidden");
+    document.querySelector(".upload__btn").classList.remove("hidden");
+    document.querySelector(".update__btn").classList.add("hidden");
+
+    this._escKeyPress();
+    this._resetFormElements();
+    manageContactView._expandLessShowLess();
   }
   // Reset form elements
   _resetFormElements() {
     document.getElementById("contact-form").reset();
-    // Elements.profileImg.src = "/src/img/profile.png";
-    Elements.profileImg.src = require("/src/img/profile.png");
+    Elements.profileImg.src = "/src/img/profile.png";
+    // Elements.profileImg.src = require("/src/img/profile.png");
     Elements.countryCode.value = "";
     Elements.facebook.value = "";
     Elements.instagram.value = "";

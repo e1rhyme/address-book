@@ -7,7 +7,7 @@ import deleteContactView from "./view/deleteContactView.js";
 
 // Handles loading of contacts in the view
 function controlLoadContacts(condition) {
-  console.log("dEbugginG");
+  console.log("DEbugginG");
   // No contact exist
   if (!condition) contactsView.render(undefined, condition, "load");
   // contacts exist
@@ -19,7 +19,7 @@ function controlLoadContacts(condition) {
 // Handles upload of a new contact
 function controlUploadContact(contact) {
   const val = model.uploadNewContact(contact);
-  if (val === null) alert("Please enter first name of contact");
+  if (val === null) alert("Add a name for your contact");
   else {
     getThisData();
     contactsView.render(model.state.contact, true, "create");

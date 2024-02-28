@@ -2,7 +2,7 @@
 .new--contact-window {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 /* .hidden {
   display: none;
@@ -116,7 +116,12 @@ input[id="new--dialog"] {
   display: grid;
   margin-bottom: 2rem;
   align-content: space-between;
-  grid-template-columns: repeat(3, 1fr);
+  /* grid-template-columns: repeat(3, 1fr); */
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.pib-website {
+  grid-column: span 2;
 }
 .new--contact-window .social-handles img {
   margin: 0;

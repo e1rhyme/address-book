@@ -306,7 +306,7 @@ tr:hover .contacts--delete-icon {
   overflow-x: hidden;
   border-radius: 9px;
   transition: all 0.5s;
-  padding: 0 4.5rem 0 2rem;
+  padding: 0 4.5rem 0 3rem;
   background-color: white;
   transform: translate(-50%, -50%);
   box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.25);
@@ -314,7 +314,7 @@ tr:hover .contacts--delete-icon {
 .btn--close-modal {
   top: 2.5rem;
   border: none;
-  right: 3.5rem;
+  right: 2.5rem;
   color: inherit;
   cursor: pointer;
   background: none;
@@ -334,9 +334,9 @@ button#btn--edit {
 button:focus {
   outline: none;
 }
-button > *:first-child {
+/* button > *:first-child {
   margin-right: 1rem;
-}
+} */
 input.upload__btn,
 input.update__btn {
   width: 50%;
@@ -375,11 +375,15 @@ input[id="dialog"] {
 }
 input {
   font-size: 1.5rem;
-  width: 90%;
+  width: 100%;
+  max-width: 100%;
   transition: all 0.2s;
   padding: 0.8rem 1rem;
   border-radius: 0.5rem;
   border: 1px solid #ddd;
+}
+input[type="url"] {
+  width: 90%;
 }
 .personal-info:focus {
   outline: none;
@@ -459,20 +463,15 @@ input {
   display: flex;
   flex-direction: column;
 }
-.align-input {
-  margin-left: 3rem;
-}
 .name {
-  gap: 0;
   margin-top: 2rem;
 }
-.email,
-.dob {
-  gap: 1.5rem;
-  display: flex;
-  align-items: center;
-}
+.dob,
 .name,
+.email,
+.lName,
+.mName,
+.suffix,
 .prefix,
 .mobile {
   gap: 1.5rem;
@@ -481,25 +480,20 @@ input {
   grid-template-areas: "x y z";
   grid-template-columns: 5% 90% 5%;
 }
-.person-icon,
+/* .person-icon,
 .prefix.align-input {
   grid-area: x;
-}
-input[id="fName"],
-input[id="prefix"] {
-  width: 100%;
-  grid-area: y;
-}
+} */
 .expand_more,
 .expand_less {
   grid-area: z;
   cursor: pointer;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   align-items: center;
 }
-.dob {
+/* .dob {
   gap: 0.55rem;
-}
+} */
 /* .mobile {
   gap: 1.5rem;
   display: grid;

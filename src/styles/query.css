@@ -1,12 +1,12 @@
-@media screen and (min-width: 1285px) {
-  .new--personal-info-container {
-    grid-template-columns: repeat(2, 1fr);
+/* @media screen and (min-width: 1200px) and (orientation: landscape) {
+  .add-contact-window,
+  .new--contact-window {
+    width: 75%;
+    height: 90%;
+    max-width: 100%;
   }
-  .pib-website {
-    grid-column: span 2;
-  }
-}
-
+} */
+/* Hide email address column*/
 @media screen and (max-width: 1100px) {
   thead tr th:nth-child(5) {
     display: none;
@@ -15,99 +15,91 @@
     display: none;
   }
 }
-
 @media screen and (max-width: 1021px) {
+  /* Hide sidebar*/
   .side-bar-container {
     display: none;
   }
+  /* Reset contact info display column span*/
   .contacts-container {
     grid-column: span 2 !important;
   }
 }
-@media only screen and (max-width: 828px) {
-  .search-box:hover > .search-txt {
-    width: 12.5rem;
-  }
-  .add-contact-window,
-  .new--contact-window {
-    height: 90%;
-    max-width: 85%;
-  }
-}
-@media screen and (max-width: 780px) {
-  .name,
-  .prefix,
-  .mobile {
-    gap: 1.75rem;
-  }
-}
-@media screen and (min-width: 720px) {
-  .name,
-  .prefix,
-  .mobile {
-    gap: 1.5rem;
-  }
-}
-@media screen and (min-width: 720px) and (orientation: landscape) {
-  .name,
-  .prefix,
-  .mobile {
-    gap: 0;
-  }
-}
 @media screen and (max-width: 700px) {
+  /* Hide phone number column*/
   thead tr th:nth-child(4) {
     display: none;
   }
   tbody tr td:nth-child(4) {
     display: none;
   }
+  .new--contact-window {
+    justify-content: space-evenly;
+  }
 }
-@media screen and (max-width: 650px) {
-  .new--personal-info-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .pib-website {
-    grid-column: span 2;
-  }
-  .new--social-handles {
-    grid-template-columns: repeat(3, 1fr);
-  }
+@media only screen and (min-width: 260px) and (max-width: 600px) {
   .add-contact-window,
   .new--contact-window {
-    height: 90%;
+    width: 95%;
+    height: 85%;
+    max-width: 100%;
   }
-  button#btn--edit {
-    margin-top: 10rem;
+  .new-record,
+  .add-record {
+    font-size: 2rem;
   }
-}
-@media screen and (max-width: 570px) {
-  .header__left,
-  .header__right {
+  .action-required {
     gap: 1rem;
+    flex-direction: column;
   }
-  .show-more-title {
-    font-size: 1.4rem;
+  .form-footer {
+    margin: 2rem 0;
   }
-  .show-more {
-    margin-right: 1rem;
+  .search-box:hover > .search-txt {
+    width: 12.5rem;
   }
-
+  thead tr th:nth-child(1),
+  thead tr th:nth-child(2) {
+    width: 10%;
+  }
   button#btn--edit {
-    margin-top: 15rem;
+    margin-top: 3rem;
   }
 }
-@media screen and (max-width: 510px) {
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .add-contact-window,
+  .new--contact-window {
+    width: 95%;
+    height: 70%;
+    max-width: 100%;
+  }
+  .new-record,
+  .add-record {
+    font-size: 2rem;
+  }
+  .form-footer {
+    margin: 2rem 0;
+  }
+  button#btn--edit {
+    margin-top: 3rem;
+  }
+}
+
+/* @media only screen and (orientation: landscape) {
+  .add-contact-window,
+  .new--contact-window {
+    width: 85%;
+    height: 70%;
+    max-width: 100%;
+  }
+  .form-footer {
+    margin: 2rem 0;
+  }
+} */
+
+@media only screen and (min-width: 260px) and (max-width: 500px) {
   .website.social {
-    align-items: center;
-    grid-template-columns: auto;
-  }
-  .social-handles,
-  .website {
-    align-items: center;
-  }
-  .social-handles:last-child:not(.social-handles.personal-info-block) {
-    margin-top: var(--margin-bottom-small);
+    grid-template-columns: 1fr;
   }
   input[id="x"],
   input[id="tiktok"],
@@ -117,124 +109,28 @@
   input[id="snapchat"],
   input[id="instagram"],
   input[id="pinterest"] {
-    width: 100%;
+    width: 90%;
   }
-  div[id="new--contact-name"] label {
-    font-size: 2rem;
+  .social-handles:last-child:not(.social-handles.personal-info-block) {
+    margin-top: var(--margin-bottom-small);
+  }
+  .new--social-handles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (min-width: 260px) and (max-width: 400px) {
+  .new--personal-info-container {
+    line-height: 2rem;
     text-align: center;
+    display: inline-block;
   }
   .new--social-handles {
     grid-template-columns: repeat(2, 1fr);
   }
-  button#btn--edit {
-    margin-top: 20rem;
-  }
-}
-@media screen and (max-width: 450px) {
-  .name,
-  .prefix,
-  .mobile {
-    gap: 2rem;
-  }
-  .no-records {
-    font-size: var(--font-size-48);
-  }
-  .new-record {
-    font-size: var(--font-size-18);
-  }
-  .add-record {
-    font-size: var(--font-size-18);
-  }
-  .new--personal-info-container {
-    line-height: 2rem;
-    display: inline-block;
-  }
-  button#btn--edit {
-    margin-top: 15rem;
-  }
-  .add-contact-window,
-  .new--contact-window {
-    height: 95%;
-  }
-}
-/* iPhone 12s */
-@media only screen and (min-width: 390px) and (max-width: 844px) {
-  .add-contact-window,
-  .new--contact-window {
-    height: 75%;
-    width: 100%;
-    max-width: 100%;
-  }
-  .form-footer {
-    margin: 3rem 0;
-  }
-  .header-contact-link {
-    margin-right: 0;
-  }
-  thead tr th:nth-child(1),
-  thead tr th:nth-child(2) {
-    width: 10%;
-  }
-}
-@media only screen and (min-width: 390px) and (max-width: 844px) and (orientation: landscape) {
-  .add-contact-window,
-  .new--contact-window {
-    height: 90%;
-    width: 75%;
-    max-width: 100%;
-  }
-  button > *:first-child {
-    margin-top: 40%;
-  }
-  .expand_more,
-  .expand_less {
-    margin-left: 1rem;
-  }
-  .form-footer {
-    margin: 3rem 0;
-  }
-  thead tr th:nth-child(1),
-  thead tr th:nth-child(2) {
-    width: 5%;
-  }
-}
-/* Samsung Galaxy S8 */
-@media only screen and (min-width: 360px) and (max-width: 740px) {
-  .add-contact-window,
-  .new--contact-window {
-    height: 75%;
-    width: 100%;
-    max-width: 100%;
-  }
-  .form-footer {
-    margin: 3rem 0;
-  }
-  .header-contact-link {
-    margin-right: 0;
-  }
-  thead tr th:nth-child(1),
-  thead tr th:nth-child(2) {
-    width: 10%;
-  }
   .header-contact-link {
     display: none;
   }
-}
-@media only screen and (min-width: 360px) and (max-width: 740px) and (orientation: landscape) {
-  .add-contact-window,
-  .new--contact-window {
-    height: 75%;
-    width: 100%;
-    max-width: 100%;
-  }
-  .form-footer {
-    margin: 3rem 0;
-  }
-  .header-contact-link {
-    margin-right: 0;
-  }
-  thead tr th:nth-child(1),
-  thead tr th:nth-child(2) {
-    width: 5%;
+  button#btn--edit {
+    margin-top: 10rem;
   }
 }
