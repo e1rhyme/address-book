@@ -37,6 +37,11 @@
     justify-content: space-evenly;
   }
 }
+@media screen and (max-width: 700px) and (orientation: landscape) {
+  .new--contact-window {
+    justify-content: start;
+  }
+}
 @media only screen and (min-width: 260px) and (max-width: 600px) {
   .add-contact-window,
   .new--contact-window {
@@ -63,7 +68,7 @@
     width: 10%;
   }
   button#btn--edit {
-    margin-top: 3rem;
+    margin-top: 7.5rem;
   }
 }
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
@@ -81,21 +86,15 @@
     margin: 2rem 0;
   }
   button#btn--edit {
-    margin-top: 3rem;
+    margin-top: 7.5rem;
   }
 }
 
-/* @media only screen and (orientation: landscape) {
-  .add-contact-window,
+@media only screen and (min-width: 722px) and (max-height: 350px) and (orientation: landscape) {
   .new--contact-window {
-    width: 85%;
-    height: 70%;
-    max-width: 100%;
+    justify-content: start;
   }
-  .form-footer {
-    margin: 2rem 0;
-  }
-} */
+}
 
 @media only screen and (min-width: 260px) and (max-width: 500px) {
   .website.social {
@@ -131,6 +130,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
   button#btn--edit {
-    margin-top: 10rem;
+    margin-top: 20rem;
   }
 }

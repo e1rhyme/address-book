@@ -330,6 +330,7 @@ button {
 button#btn--edit {
   background: none;
   text-align: right;
+  margin-top: 2.5rem;
 }
 button:focus {
   outline: none;

@@ -81,43 +81,39 @@ class ContactsView extends View {
   }
   // Hide floating menu if visible and media width > 1021px
   _hideFloadtingMenu() {
-    this._mediaQuery.addEventListener("change", () => {
-      if (this._mediaQuery.matches === false) {
-        this._floatingMenu.classList.add("hidden");
-      }
-    });
+    if (!this._mediaQuery.matches) {
+      this._floatingMenu.classList.add("hidden");
+    }
   }
   // Show or hide sidebar
   _showMenu(state) {
-    this._mediaQuery.addEventListener("change", () => {
-      this._menu.addEventListener("click", (e) => {
-        e.stopImmediatePropagation();
+    this._menu.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
 
-        if (!this._mediaQuery.matches) {
-          if (state) {
-            this._sidebar.classList.add("hidden");
-            this._contactsContainer.style.gridColumn = "span 2";
-            state = false;
-          } else {
-            this._sidebar.classList.remove("hidden");
-            this._contactsContainer.style.gridColumn = "span 1";
-
-            state = true;
-          }
+      if (!this._mediaQuery.matches) {
+        if (state) {
+          this._sidebar.classList.add("hidden");
+          this._contactsContainer.style.gridColumn = "span 2";
+          state = false;
         } else {
-          this._floatingMenu.classList.remove("hidden");
+          this._sidebar.classList.remove("hidden");
+          this._contactsContainer.style.gridColumn = "span 1";
 
-          document.addEventListener("click", (e) => {
-            e.stopImmediatePropagation();
-            if (
-              !this._floatingMenu.contains(e.target) &&
-              !this._menu.contains(e.target)
-            ) {
-              this._floatingMenu.classList.add("hidden");
-            }
-          });
+          state = true;
         }
-      });
+      } else {
+        this._floatingMenu.classList.remove("hidden");
+
+        document.addEventListener("click", (e) => {
+          e.stopImmediatePropagation();
+          if (
+            !this._floatingMenu.contains(e.target) &&
+            !this._menu.contains(e.target)
+          ) {
+            this._floatingMenu.classList.add("hidden");
+          }
+        });
+      }
     });
   }
   // Set elements visiblity via toggle property
