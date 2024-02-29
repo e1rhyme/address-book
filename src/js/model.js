@@ -20,8 +20,6 @@ export const state = {
 export function loadAddressBook(handler) {
   const contacts = localStorage.getItem("myContacts");
 
-  // console.log(Object.keys(contacts));
-  // console.log(Object.keys(contacts).length === 0);
   if (!contacts || Object.keys(contacts).length === 0) return handler(false);
 
   // Call to retrieve current userID

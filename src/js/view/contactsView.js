@@ -13,6 +13,7 @@ class ContactsView extends View {
   _contactsContainer = document.querySelector(".contacts-container");
   _mediaQuery = window.matchMedia("(max-width: 1021px)");
   _floatingMenu = document.querySelector(".mobile-side-bar-container");
+
   // Call fnxs on page load
   constructor() {
     super();

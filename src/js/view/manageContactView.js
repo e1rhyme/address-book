@@ -107,7 +107,7 @@ class ManageContactView extends View {
 
       this._cancelDelete
         ? this._cancelDelete.addEventListener("click", () => {
-            target.classList.add("hidden");
+            target.style.display = "none";
           })
         : null;
 
@@ -170,6 +170,8 @@ class ManageContactView extends View {
         if (target.classList.contains("hidden")) return;
         else {
           target.style.display = "none";
+          // Make edit and delete icon container visible
+          document.querySelector(".edit-delete-icons").style.display = "flex";
         }
       });
     }

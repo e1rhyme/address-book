@@ -117,6 +117,9 @@
   .new--social-handles {
     grid-template-columns: repeat(3, 1fr);
   }
+  .header-contact-link {
+    display: none;
+  }
 }
 @media only screen and (min-width: 260px) and (max-width: 400px) {
   .new--personal-info-container {
@@ -126,9 +129,6 @@
   }
   .new--social-handles {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .header-contact-link {
-    display: none;
   }
   button#btn--edit {
     margin-top: 10rem;

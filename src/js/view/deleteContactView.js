@@ -52,6 +52,9 @@ class DeleteContactView extends View {
                     );
                     // Make confirm and cancel buttons visible
                     this._target.classList.remove("hidden");
+                    // Make edit and delete icon container hidden
+                    document.querySelector(".edit-delete-icons").style.display =
+                      "none";
                     // Set styling for confirm and cancel buttons
                     manageContactView._setButtonsElementStyle(
                       this._confirm,
