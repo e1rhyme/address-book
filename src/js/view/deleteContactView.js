@@ -62,7 +62,7 @@ class DeleteContactView extends View {
                       this._confirm,
                       this._cancel
                     );
-                    // Handles cancel delete aciton
+                    // Handles cancel delete action
                     manageContactView._cancleDeleteAction(
                       this._contactId,
                       this._target

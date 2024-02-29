@@ -106,7 +106,7 @@ class ManageContactView extends View {
   _contactsDeleteAll() {}
   // Cancel delete action
   _cancleDeleteAction(id, target) {
-    this._parentEl.addEventListener("click", (e) => {
+    this._parentEl.addEventListener("mouseover", (e) => {
       e.stopImmediatePropagation();
 
       this._cancelDelete = document.querySelector(`.cancel-btn-${id}`);
@@ -114,8 +114,9 @@ class ManageContactView extends View {
       this._cancelDelete
         ? this._cancelDelete.addEventListener("click", (e) => {
             e.stopImmediatePropagation();
-
             target.style.display = "none";
+            // Make edit and delete icon container visible
+            document.querySelector(".edit-delete-icons").style.display = "flex";
           })
         : null;
 
@@ -238,6 +239,7 @@ class ManageContactView extends View {
           return;
         else if (this._data[i][0] === targetEl.id) {
           number = this._data[i][1].phoneNumber;
+
           return handler(number);
         }
       }

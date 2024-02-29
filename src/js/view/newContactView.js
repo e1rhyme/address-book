@@ -12,10 +12,10 @@ class NewContactView extends View {
   _addressBook = document.querySelector(".address-book");
   _parentEl = document.querySelector(".new--contact-window");
   _addContactLink = document.querySelector(".add-contact-link");
-  _sideBar = document.querySelector(".mobile-add-contact-link");
   _floatingMenu = document.querySelector(".mobile-side-bar-container");
   _newContactContainer = document.querySelector(".new-contact-container");
   _mobileAddContactLink = document.querySelector(".mobile-add-contact-link");
+  // _btnCloseModal = document.querySelector(".btn--close-modal");
 
   constructor() {
     super();
@@ -31,6 +31,7 @@ class NewContactView extends View {
     this._newCloseOverlay();
     this._mobileCreateContact();
     this._profileImgContainer();
+    // this._cancelMobileCreateContact();
   }
 
   // Retrieve contacts object
@@ -56,7 +57,7 @@ class NewContactView extends View {
   }
   // Handler to close modal on click of X
   _closeModal() {
-    Elements.closeModal.addEventListener("click", () => {
+    Elements.closeModal.addEventListener("click", (e) => {
       e.stopImmediatePropagation();
 
       this._newContactContainer.classList.toggle("hidden");
@@ -188,7 +189,6 @@ class NewContactView extends View {
         if (this._mediaQuery.matches === true) {
           this._createContactAction();
           this._floatingMenu.classList.add("hidden");
-          // this._floatingMenu.style.display = "none";
         }
       });
     });
@@ -202,6 +202,18 @@ class NewContactView extends View {
     this._resetFormElements();
     manageContactView._expandLessShowLess();
   }
+  // _cancelMobileCreateContact() {
+  //   this._btnCloseModal.addEventListener("click", (e) => {
+  //     debugger;
+  //     e.stopImmediatePropagation();
+
+  //     this._newContactContainer.classList.add("hidden");
+
+  //     const sideBar = document.querySelector(".mobile-side-bar-container");
+
+  //     if (!sideBar.contains(".hidden")) sideBar.classList.add("hidden");
+  //   });
+  // }
   // Reset form elements
   _resetFormElements() {
     document.getElementById("contact-form").reset();
