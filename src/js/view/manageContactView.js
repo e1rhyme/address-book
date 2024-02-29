@@ -47,6 +47,8 @@ class ManageContactView extends View {
   _editContact(id, contact) {
     this._editBtnParent.addEventListener("mouseover", () => {
       this._editIcon.addEventListener("click", (e) => {
+        e.stopImmediatePropagation();
+
         const targetEl = e.target.closest("contact--profile-img");
 
         newContactView._newContactContainer.classList.remove("hidden");
@@ -77,7 +79,9 @@ class ManageContactView extends View {
             else {
               const identifier = this._targetEl.dataset["action"];
               identifier === "edit"
-                ? this._targetEl.addEventListener("click", () => {
+                ? this._targetEl.addEventListener("click", (e) => {
+                    e.stopImmediatePropagation();
+
                     newContactView._newContactContainer.classList.remove(
                       "hidden"
                     );
@@ -103,10 +107,14 @@ class ManageContactView extends View {
   // Cancel delete action
   _cancleDeleteAction(id, target) {
     this._parentEl.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       this._cancelDelete = document.querySelector(`.cancel-btn-${id}`);
 
       this._cancelDelete
-        ? this._cancelDelete.addEventListener("click", () => {
+        ? this._cancelDelete.addEventListener("click", (e) => {
+            e.stopImmediatePropagation();
+
             target.style.display = "none";
           })
         : null;
@@ -218,6 +226,8 @@ class ManageContactView extends View {
   // Listen to click event of select contact and retrieve phone number
   addHandlerGetNumber(handler, number) {
     this._contentEl.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       const targetEl = e.target.closest("tr");
 
       for (let i = 0; i < this._data.length; i++) {
@@ -236,6 +246,7 @@ class ManageContactView extends View {
   addHandlerUpdateContact(handler) {
     document.querySelector(".update__btn").addEventListener("click", (e) => {
       e.preventDefault();
+      e.stopImmediatePropagation();
 
       // Create an object of entered values
       const contactUpdate = {

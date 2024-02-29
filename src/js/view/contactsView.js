@@ -18,7 +18,7 @@ class ContactsView extends View {
   constructor() {
     super();
     this._hideFloadtingMenu();
-    this._menuVisibility(true);
+    this._showMenu(true);
     this._setElementsVisibility();
   }
 
@@ -88,10 +88,12 @@ class ContactsView extends View {
     });
   }
   // Show or hide sidebar
-  _menuVisibility(state) {
+  _showMenu(state) {
     this._mediaQuery.addEventListener("change", () => {
-      this._menu.addEventListener("click", () => {
-        if (this._mediaQuery.matches === false) {
+      this._menu.addEventListener("click", (e) => {
+        e.stopImmediatePropagation();
+
+        if (!this._mediaQuery.matches) {
           if (state) {
             this._sidebar.classList.add("hidden");
             this._contactsContainer.style.gridColumn = "span 2";
@@ -106,6 +108,7 @@ class ContactsView extends View {
           this._floatingMenu.classList.remove("hidden");
 
           document.addEventListener("click", (e) => {
+            e.stopImmediatePropagation();
             if (
               !this._floatingMenu.contains(e.target) &&
               !this._menu.contains(e.target)

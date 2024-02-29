@@ -34,7 +34,9 @@ class DeleteContactView extends View {
             else {
               this._datasetTarget = this._targetEl.dataset["action"];
               this._datasetTarget === "delete"
-                ? this._targetEl.addEventListener("click", () => {
+                ? this._targetEl.addEventListener("click", (e) => {
+                    e.stopImmediatePropagation();
+
                     this._target = document.querySelector(
                       `.delete-contact-container-${this._contactId}`
                     );
@@ -86,6 +88,8 @@ class DeleteContactView extends View {
   _deleteAllContactsCheck() {
     this._tableContainer
       ? this._tableContainer.addEventListener("click", (e) => {
+          e.stopImmediatePropagation();
+
           this._target = e.target.closest("input[type='checkbox']");
 
           this._chkboxes = document.querySelectorAll(".icon--checkbox");
@@ -112,7 +116,9 @@ class DeleteContactView extends View {
       : null;
   }
   _cancelDeleteAllContacts() {
-    document.querySelector(".cancel-btn").addEventListener("click", () => {
+    document.querySelector(".cancel-btn").addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       this._target.checked = false;
       this._chkboxes.forEach((chkbox) => {
         chkbox.checked = false;
@@ -128,11 +134,15 @@ class DeleteContactView extends View {
     // debugger;
     this._tableContainer
       ? this._tableContainer.addEventListener("click", (e) => {
+          e.stopImmediatePropagation();
+
           const confirmBtn = document.querySelector(".confirm-btn");
           const btnStatus = confirmBtn.dataset.status;
 
           btnStatus === "delete"
-            ? confirmBtn.addEventListener("click", () => {
+            ? confirmBtn.addEventListener("click", (e) => {
+                e.stopImmediatePropagation();
+
                 handler();
               })
             : null;

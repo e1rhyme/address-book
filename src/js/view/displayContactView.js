@@ -29,6 +29,8 @@ class DisplayContactView extends View {
   // Extract id of clicked element
   _getContactId(el) {
     el.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       const targetEl = e.target.closest("tr");
 
       const className = e.target.className;

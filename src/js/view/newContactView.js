@@ -44,7 +44,9 @@ class NewContactView extends View {
   }
   // Display add new contact modal
   _addContact() {
-    this._addRecordBtn.addEventListener("click", () => {
+    this._addRecordBtn.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       this._newContactContainer.classList.remove("hidden");
       document.querySelector(".upload__btn").classList.remove("hidden");
       document.querySelector(".update__btn").classList.add("hidden");
@@ -55,26 +57,34 @@ class NewContactView extends View {
   // Handler to close modal on click of X
   _closeModal() {
     Elements.closeModal.addEventListener("click", () => {
+      e.stopImmediatePropagation();
+
       this._newContactContainer.classList.toggle("hidden");
       this._resetFormElements();
     });
   }
   // Handler to close modal on click of overlay
   _closeOverlay() {
-    Elements.overlay.addEventListener("click", () => {
+    Elements.overlay.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       this._newContactContainer.classList.toggle("hidden");
       this._resetFormElements();
     });
   }
   _newCloseOverlay() {
-    this._newOverlay.addEventListener("click", () => {
+    this._newOverlay.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       this._newOverlay.classList.add("hidden");
       this._parentEl.classList.add("hidden");
     });
   }
   // Handlers to collapse/ expand name details
   _expandMore() {
-    Elements.expandMore.addEventListener("click", () => {
+    Elements.expandMore.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       Elements.prefixContainer.classList.toggle("extra");
       Elements.middleNameContainer.classList.toggle("extra");
       Elements.suffixContainer.classList.toggle("extra");
@@ -83,7 +93,9 @@ class NewContactView extends View {
     });
   }
   _expandLess() {
-    Elements.expandLess.addEventListener("click", () => {
+    Elements.expandLess.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       Elements.prefixContainer.classList.toggle("extra");
       Elements.middleNameContainer.classList.toggle("extra");
       Elements.suffixContainer.classList.toggle("extra");
@@ -93,14 +105,18 @@ class NewContactView extends View {
   }
   // Handlers to collapse/ expand social details
   _showMore() {
-    Elements.showMore.addEventListener("click", () => {
+    Elements.showMore.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       Elements.socialInfo.classList.toggle("extra");
       Elements.showMore.classList.toggle("hidden");
       Elements.showLess.classList.toggle("hidden");
     });
   }
   _showLess() {
-    Elements.showLess.addEventListener("click", () => {
+    Elements.showLess.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       Elements.socialInfo.classList.toggle("extra");
       Elements.showMore.classList.toggle("hidden");
       Elements.showLess.classList.toggle("hidden");
@@ -158,13 +174,17 @@ class NewContactView extends View {
   }
   // Create new user from address-book interface
   _createContact() {
-    this._addContactLink.addEventListener("click", () => {
+    this._addContactLink.addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+
       this._createContactAction();
     });
   }
   _mobileCreateContact() {
     this._mediaQuery.addEventListener("change", () => {
-      this._mobileAddContactLink.addEventListener("click", () => {
+      this._mobileAddContactLink.addEventListener("click", (e) => {
+        e.stopImmediatePropagation();
+
         if (this._mediaQuery.matches === true) {
           this._createContactAction();
           this._floatingMenu.classList.add("hidden");
@@ -201,6 +221,7 @@ class NewContactView extends View {
   addHandlerUploadContact(handler) {
     Elements.contactUpload.addEventListener("click", function (e) {
       e.preventDefault();
+      e.stopImmediatePropagation();
 
       // Create an object of entered values
       const newContact = {
